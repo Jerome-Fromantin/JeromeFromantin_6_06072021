@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8">
+    <title>Mimi Keel</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link rel="stylesheet" href="styles.css">
+  </head>
+
+  <body>
+    <header>
+      <a href="index.html">
+        <img src="Images/Logo.png" alt="Fisheye Home page" id="logo">
+      </a>
+    </header>
+
+    <main>
+      <section class="pres-photo" aria-label="Présentation du photographe">
+        <h1 id="photo_h1">Mimi Keel</h1>
+        <a href="Mimi-Keel.html" class="photo-link" aria-label="Mimi Keel">
+          <img src="Images/Mimi/Portrait_Nora_thumb.jpg" alt="" class="home-img">
+          <h2>Mimi Keel</h2>
+        </a>
+        <!-- Ces "aria-label" sont-ils vraiment utiles ? -->
+        <p lang="en" class="photo-lieu" aria-label="Lieu du photographe">London, UK</p>
+        <p class="photo-descr" aria-label="Description du photographe">Voir le beau dans le quotidien</p>
+        <p class="photo-prix" aria-label="Tarif du photographe">400€/jour</p>
+        <nav lang="en" id="barnav" aria-label="Photographe seul">
+          <a href="#" class="tag" aria-label="Tag"><span>#portrait</span></a>
+          <a href="#" class="tag" aria-label="Tag"><span>#events</span></a>
+          <a href="#" class="tag" aria-label="Tag"><span>#travel</span></a>
+          <a href="#" class="tag" aria-label="Tag"><span>#animals</span></a>
+        </nav>
+      </section>
+    </main>
+
+    <script src="scripts.js"></script>
+  </body>
+</html>
