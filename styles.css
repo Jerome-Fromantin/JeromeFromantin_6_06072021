@@ -1,0 +1,153 @@
+body {
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  justify-content: space-between;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 16px;
+  /*border: 1px orange solid;*/
+  margin: 0 40px 40px 40px;
+}
+
+header {
+  display: flex;
+  align-items: flex-start;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 70%;
+}
+
+#logo {
+  width: 270px;
+  margin-top: 20px;
+}
+
+/* Ensemble "Passer..." + nav. */
+#banner {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+#passer_contenu {
+  /*display: none;*/
+  /*visibility: hidden;*/
+  background: #D3573C;
+  font-weight: bold;
+  padding: 5px 10px;
+  border-radius: 5px;
+  margin: 5px auto;
+}
+
+/* Tags de navigation. */
+.barnav {
+  margin-top: 15px;
+}
+
+/* Chaque tag. */
+.tag {
+  color: #901C1C;
+  font-size: 12px;
+  text-decoration: none;
+  padding: 3px 6px;
+  border: 1px #bbb solid;
+  border-radius: 15px;
+}
+.tag:hover, .tag:focus {
+  border: 1px #901C1C solid;
+}
+
+/* "main" de la page d'accueil. A changer peut-être en id... */
+main {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+}
+
+h1 {
+  color: #901C1C;
+}
+
+/* h1 de la page d'accueil. */
+#home_h1 {
+  text-align: right;
+  margin: 0 20px 0 0;
+}
+
+/* h1 de chaque page de photographe. */
+#photo_h1 {
+  color: #D3573C;
+  font-size: 56px;
+  font-weight: normal;
+  text-align: left;
+  margin: 0 20px 0 0;
+}
+
+/* Ligne de 3 cartes-photos dans la page d'accueil. */
+.main-section {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-top: 50px;
+}
+
+/* Chaque carte-photo dans la page d'accueil. */
+article {
+  display: flex;
+  align-content: flex-start;
+  align-items: center;
+  flex-direction: column;
+  font-size: 9px;
+}
+
+/* Dans chaque carte, le lien regroupant la photo et le h2. */
+.photo-link {
+  text-align: center;
+  text-decoration: none;
+  padding: 5px;
+  border: 2px transparent solid;
+}
+.photo-link:hover, .photo-link:focus {
+  border: 2px #901C1C solid;
+}
+
+/* Dans chaque carte, la photo elle-même. */
+.home-img {
+  box-shadow: 0 4px 4px #bbb;
+  width: 180px;
+  border-radius: 90px;
+}
+
+/* Dans chaque carte, le h2 lui-même. */
+h2 {
+  color: #D3573C;
+  font-size: 32px;
+  font-weight: normal;
+  margin: 10px 0 0 0;
+}
+
+/* Dans chaque carte, la ligne du lieu. */
+.photo-lieu {
+  color: #901C1C;
+  font-size: 12px;
+  margin: 0;
+}
+
+/* Dans chaque carte, la ligne de la description. */
+.photo-descr {
+  font-weight: bold;
+  margin: 5px 0 0 0;
+}
+
+/* Dans chaque carte, la ligne du prix. */
+.photo-prix {
+  margin: 5px 0 0 0;
+}
+
+/* Dans chaque page de photographe, le bloc de présentation sur fond gris. */
+.pres-photo {
+  background: #FAFAFA;
+  margin: 5px 0 0 0;
+}
