@@ -3,7 +3,6 @@ Ce travail est réalisé dans le cadre de la formation "Développeur d'applications
 Ce projet 06 consiste en l'intégration de maquettes pour la réalisation d'un site de photographes
 respectant les WCAG (règles pour l'accessibilité du web).
 Du JavaScript est aussi utilisé pour le rendre fonctionnel.
-Cette description pourra être modifiée.
 
 Travail réalisé :
 - Début d'intégration (HTML et CSS) de la page d'accueil et de la 1ère page de photographe (sur 6),
@@ -11,7 +10,8 @@ Travail réalisé :
 - Création du repository sur GitHub,
 - Dépôt de certaines images du site,
 - Premier dépôt des fichiers HTML, CSS et JS,
-- Hébergement du travail sur Git Pages.
+- Hébergement du travail sur Git Pages,
+- Mise à jour des fichiers HTML et CSS.
 
 Travail à faire :
 - Fin d'intégration des pages commencées,
