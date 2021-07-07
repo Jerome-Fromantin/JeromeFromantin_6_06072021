@@ -1,3 +1,4 @@
+/***** PAGE D'ACCUEIL OU TOUTES LES PAGES *****/
 body {
   display: flex;
   align-items: flex-start;
@@ -54,38 +55,31 @@ header {
   border-radius: 15px;
 }
 .tag:hover, .tag:focus {
+  background: #901C1C;
+  color: white;
   border: 1px #901C1C solid;
 }
 
-/* "main" de la page d'accueil. A changer peut-être en id... */
-main {
+/* "main" de la page d'accueil. */
+#home_main {
   display: flex;
   flex-direction: column;
   justify-content: center;
   width: 100%;
 }
 
-h1 {
-  color: #901C1C;
-}
-
 /* h1 de la page d'accueil. */
 #home_h1 {
+  color: #901C1C;
   text-align: right;
   margin: 0 20px 0 0;
 }
 
-/* h1 de chaque page de photographe. */
-#photo_h1 {
-  color: #D3573C;
-  font-size: 56px;
-  font-weight: normal;
-  text-align: left;
-  margin: 0 20px 0 0;
-}
-
-/* Ligne de 3 cartes-photos dans la page d'accueil. */
-.main-section {
+/*
+Ligne de 3 cartes-photos dans la page d'accueil.
+Ligne de 3 cartes-photos dans chaque page de photographe.
+*/
+.main_section, .photo_photosLine {
   display: flex;
   align-items: center;
   flex-direction: row;
@@ -93,35 +87,44 @@ h1 {
   margin-top: 50px;
 }
 
-/* Chaque carte-photo dans la page d'accueil. */
-article {
+.photo_photosLine {
+  margin: 50px 50px 0 50px;
+}
+
+/*
+Chaque carte-photo dans la page d'accueil.
+Chaque carte-photo dans chaque page de photographe.
+*/
+.home_card, .photo_card {
   display: flex;
-  align-content: flex-start;
+  align-content: center;
   align-items: center;
   flex-direction: column;
   font-size: 9px;
 }
 
 /* Dans chaque carte, le lien regroupant la photo et le h2. */
-.photo-link {
+.home_photoLink {
   text-align: center;
   text-decoration: none;
   padding: 5px;
   border: 2px transparent solid;
 }
-.photo-link:hover, .photo-link:focus {
+.home_photoLink:hover, .home_photoLink:focus {
   border: 2px #901C1C solid;
 }
 
-/* Dans chaque carte, la photo elle-même. */
-.home-img {
+/* Chaque photo ronde. */
+/* Présente dans chaque carte de la page d'accueil
+et dans la présentation de chaque page de photographe. */
+.round_img {
   box-shadow: 0 4px 4px #bbb;
   width: 180px;
   border-radius: 90px;
 }
 
-/* Dans chaque carte, le h2 lui-même. */
-h2 {
+/* Dans chaque carte de la page d'accueil, le h2 lui-même. */
+.home_h2 {
   color: #D3573C;
   font-size: 32px;
   font-weight: normal;
@@ -129,25 +132,164 @@ h2 {
 }
 
 /* Dans chaque carte, la ligne du lieu. */
-.photo-lieu {
+.home_card_lieu {
   color: #901C1C;
   font-size: 12px;
   margin: 0;
 }
 
 /* Dans chaque carte, la ligne de la description. */
-.photo-descr {
+.home_card_descr {
   font-weight: bold;
   margin: 5px 0 0 0;
 }
 
 /* Dans chaque carte, la ligne du prix. */
-.photo-prix {
+.home_card_prix {
   margin: 5px 0 0 0;
 }
 
-/* Dans chaque page de photographe, le bloc de présentation sur fond gris. */
-.pres-photo {
+/***** PAGES DE PHOTOGRAPHES *****/
+/* "main" de chaque page. A changer peut-être en id... */
+main { /*#photo_main {*/
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+}
+
+/* Dans chaque page, le bloc de présentation sur fond gris. */
+#photo_pres, #photo_pres_text {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  justify-content: space-between;
   background: #FAFAFA;
-  margin: 5px 0 0 0;
+  margin: 30px 50px 0 50px;
+}
+
+/* Dans chaque présentation, le bloc textuel + le bouton de contact. */
+#photo_pres_text {
+  align-self: flex-start;
+  margin: 0;
+}
+
+/* Dans chaque présentation, le bloc textuel seul. */
+#photo_pres_leftText {
+  padding: 0;
+  margin: 0;
+}
+
+/* Dans chaque bloc textuel, le h1. */
+#photo_h1 {
+  color: #D3573C;
+  font-size: 56px;
+  font-weight: normal;
+  text-align: left;
+  margin: 60px 0 0 50px;
+}
+
+/* Dans chaque bloc textuel, la ligne du lieu. */
+#photo_pres_lieu {
+  color: #901C1C;
+  font-size: 20px;
+  margin: 0 0 0 50px;
+}
+
+/* Dans chaque bloc textuel, la ligne de la description. */
+#photo_pres_descr {
+  margin: 20px 0 0 50px;
+}
+
+/* Dans chaque bloc textuel, les tags de navigation. */
+#photo_pres_barnav {
+  margin: 20px 0 0 50px;
+}
+
+/* Chaque tag. */
+.photo_pres_tag {
+  color: #901C1C;
+  font-size: 19px;
+  text-decoration: none;
+  padding: 3px 6px;
+  border: 1px #bbb solid;
+  border-radius: 15px;
+}
+.photo_pres_tag:hover, .photo_pres_tag:focus {
+  background: #901C1C;
+  color: white;
+  border: 1px #901C1C solid;
+}
+
+/* Le lien englobant le bouton de contact. */
+#photo_contact_link {
+  background: #901C1C;
+  color: white;
+  font-size: 20px;
+  text-decoration: none;
+  padding: 20px 10px;
+  border-radius: 5px;
+  margin-top: -35px;
+}
+#photo_contact_link:hover, #photo_contact_link:focus {
+  background: #D3573C;
+  color: black;
+}
+
+/* L'image ronde. */
+#photo_round_img {
+  margin: 50px 40px;
+}
+
+/* "Trier par" et sa liste déroulante. */
+#liste_tris {
+  font-size: 20px;
+  margin: 5px 0 0 50px;
+}
+
+/* La liste déroulante de tris. */
+#menuTri {
+  background: #901C1C;
+  color: white;
+  font-size: 20px;
+  padding: 20px 10px;
+  border-radius: 5px;
+  margin-left: 15px;
+}
+
+/* Dans chaque carte, le lien incluant la photo. */
+.photo_photoLink {
+  font-size: 16px;
+  text-decoration: none;
+  border: 2px transparent solid;
+}
+.photo_photoLink:hover, .photo_photoLink:focus {
+  border: 2px #901C1C solid;
+}
+
+/* Chaque photo dans un lien. */
+.photo_img {
+  width: 300px;
+  border-radius: 5px;
+  margin-bottom: -4px;
+}
+
+/* Dans chaque carte, la ligne du titre et des likes. */
+.photo_card_titleLikes {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  justify-content: space-between;
+  color: #901C1C;
+  font-size: 22px;
+  width: 100%;
+  margin: 0;
+}
+
+
+
+/* A VOIR PLUS TARD. */
+/* En bas d'écran à droite, les likes et prix. */
+#photo_pres_prix {
+  margin: 5px 0 0 50px;
 }
