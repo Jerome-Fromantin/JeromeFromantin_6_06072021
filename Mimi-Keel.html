@@ -15,23 +15,77 @@
     </header>
 
     <main>
-      <section class="pres-photo" aria-label="Présentation du photographe">
-        <h1 id="photo_h1">Mimi Keel</h1>
-        <a href="Mimi-Keel.html" class="photo-link" aria-label="Mimi Keel">
-          <img src="Images/Mimi/Portrait_Nora_thumb.jpg" alt="" class="home-img">
-          <h2>Mimi Keel</h2>
-        </a>
-        <!-- Ces "aria-label" sont-ils vraiment utiles ? -->
-        <p lang="en" class="photo-lieu" aria-label="Lieu du photographe">London, UK</p>
-        <p class="photo-descr" aria-label="Description du photographe">Voir le beau dans le quotidien</p>
-        <p class="photo-prix" aria-label="Tarif du photographe">400€/jour</p>
-        <nav lang="en" id="barnav" aria-label="Photographe seul">
-          <a href="#" class="tag" aria-label="Tag"><span>#portrait</span></a>
-          <a href="#" class="tag" aria-label="Tag"><span>#events</span></a>
-          <a href="#" class="tag" aria-label="Tag"><span>#travel</span></a>
-          <a href="#" class="tag" aria-label="Tag"><span>#animals</span></a>
-        </nav>
+      <section id="photo_pres" aria-label="Présentation du photographe">
+        <section id="photo_pres_text">
+          <section id="photo_pres_leftText">
+            <h1 id="photo_h1">Mimi Keel</h1>
+            <!-- Ces "aria-label" sont-ils vraiment utiles ? -->
+            <p lang="en" id="photo_pres_lieu" aria-label="Lieu du photographe">London, UK</p>
+            <p id="photo_pres_descr" aria-label="Description du photographe">Voir le beau dans le quotidien</p>
+            <nav lang="en" id="photo_pres_barnav" aria-label="Catégories du photographe">
+              <a href="#" class="photo_pres_tag" aria-label="Tag"><span>#portrait</span></a>
+              <a href="#" class="photo_pres_tag" aria-label="Tag"><span>#events</span></a>
+              <a href="#" class="photo_pres_tag" aria-label="Tag"><span>#travel</span></a>
+              <a href="#" class="photo_pres_tag" aria-label="Tag"><span>#animals</span></a>
+            </nav>
+          </section>
+          <a href="contactMimi.html" id="photo_contact_link" aria-label="Contact Me">
+            <span>Contactez-moi</span>
+          </a>
+        </section>
+        <img
+        src="Images/Mimi/Portrait_Nora_thumb.jpg"
+        alt=""
+        class="round_img"
+        id="photo_round_img"
+        aria-label="Mimi Keel"
+        >
       </section>
+
+      <section id="liste_tris" aria-label="Liste déroulante de tris">
+        <span>Trier par</span>
+        <select id="menuTri">
+          <option>Popularité</option>
+          <option>Date</option>
+          <option>Titre</option>
+        </select>
+      </section>
+
+      <section class="photo_photosLine" aria-label="Ligne 1 de photos">
+        <article class="photo_card">
+          <a href="#" class="photo_photoLink" aria-label="Photographie">
+            <img src="Images/Mimi/Animals_Rainbow_sm.jpg"
+            alt="Lilac breasted roller, closeup view" class="photo_img">
+          </a>
+          <div class="photo_card_titleLikes">
+            <span class="title" aria-label="Titre de la photo">Arc-en-ciel</span>
+            <span class="likes" aria-label="Likes">12 :-)</span>
+          </div>
+        </article>
+        <article class="photo_card">
+          <a href="#" class="photo_photoLink" aria-label="Photographie">
+            <img src="Images/Mimi/Animals_Rainbow_sm.jpg"
+            alt="Lilac breasted roller, closeup view" class="photo_img">
+          </a>
+          <div class="photo_card_titleLikes">
+            <span class="title" aria-label="Titre de la photo">Arc-en-ciel</span>
+            <span class="likes" aria-label="Likes">12 :-)</span>
+          </div>
+        </article>
+        <article class="photo_card">
+          <a href="#" class="photo_photoLink" aria-label="Photographie">
+            <img src="Images/Mimi/Animals_Rainbow_sm.jpg"
+            alt="Lilac breasted roller, closeup view" class="photo_img">
+          </a>
+          <div class="photo_card_titleLikes">
+            <span class="title" aria-label="Titre de la photo">Arc-en-ciel</span>
+            <span class="likes" aria-label="Likes">12 :-)</span>
+          </div>
+        </article>
+      </section>
+
+      <!--<p id="photo_pres_prix" aria-label="Tarif du photographe">400€/jour</p>-->
+      <div style="height:600px"></div>
     </main>
 
     <script src="scripts.js"></script>
