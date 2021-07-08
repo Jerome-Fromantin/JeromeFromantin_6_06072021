@@ -88,7 +88,7 @@ Ligne de 3 cartes-photos dans chaque page de photographe.
 }
 
 .photo_photosLine {
-  margin: 50px 50px 0 50px;
+  margin: 20px 50px 0 50px;
 }
 
 /*
@@ -150,12 +150,13 @@ et dans la présentation de chaque page de photographe. */
 }
 
 /***** PAGES DE PHOTOGRAPHES *****/
-/* "main" de chaque page. A changer peut-être en id... */
-main { /*#photo_main {*/
+/* "main" de chaque page. */
+#photo_main {
   display: flex;
   flex-direction: column;
   justify-content: center;
   width: 100%;
+  padding-bottom: 40px;
 }
 
 /* Dans chaque page, le bloc de présentation sur fond gris. */
@@ -177,7 +178,7 @@ main { /*#photo_main {*/
 /* Dans chaque présentation, le bloc textuel seul. */
 #photo_pres_leftText {
   padding: 0;
-  margin: 0;
+  margin: 0 20px 0 0;
 }
 
 /* Dans chaque bloc textuel, le h1. */
@@ -241,10 +242,26 @@ main { /*#photo_main {*/
   margin: 50px 40px;
 }
 
+/* Bloc en bas à droite du nombre de likes et prix. */
+#likes_prix {
+  background: #D3573C;
+  position: fixed;
+  bottom: 0;
+  right: 30px;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  justify-content: space-between;
+  font-size: 24px;
+  width: 300px;
+  padding: 15px;
+  border-radius: 5px;
+}
+
 /* "Trier par" et sa liste déroulante. */
 #liste_tris {
   font-size: 20px;
-  margin: 5px 0 0 50px;
+  margin: 5px 0 30px 50px;
 }
 
 /* La liste déroulante de tris. */
@@ -267,7 +284,7 @@ main { /*#photo_main {*/
   border: 2px #901C1C solid;
 }
 
-/* Chaque photo dans un lien. */
+/* Chaque photo dans le lien. */
 .photo_img {
   width: 300px;
   border-radius: 5px;
@@ -281,9 +298,23 @@ main { /*#photo_main {*/
   flex-direction: row;
   justify-content: space-between;
   color: #901C1C;
-  font-size: 22px;
+  font-size: 24px;
   width: 100%;
-  margin: 0;
+  margin: 5px 0 0 0;
+}
+
+.title {
+  border: 1px white solid;
+}
+
+.likes {
+  display: flex;
+  align-items: center;
+}
+
+/* Dans chaque carte, l'icône "coeur". */
+.icone {
+  width: 24px;
 }
 
 
