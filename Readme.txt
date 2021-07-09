@@ -11,7 +11,10 @@ Travail réalisé :
 - Dépôt de certaines images du site,
 - Premier dépôt des fichiers HTML, CSS et JS,
 - Hébergement du travail sur Git Pages,
-- Mise à jour des fichiers HTML et CSS.
+- Mise à jour des fichiers HTML et CSS,
+- Ajout d'une page par défaut de photographe pour remplissage dynamique à venir,
+- Ajout d'un fichier JSON,
+- Début de mise en place du JavaScript.
 
 Travail à faire :
 - Fin d'intégration des pages commencées,
