@@ -8,28 +8,34 @@
   </head>
 
   <body>
-    <header>
-      <a href="index.html">
-        <img src="Images/Logo.png" alt="Fisheye Home page" id="logo">
-      </a>
-      <section id="banner" aria-label="Page top">
-        <!-- Cet "aria-label" est-il vraiment utile ? -->
-        <span id="passer_contenu" aria-label="Passer au contenu">Passer au contenu</span>
-        <nav lang="en" class="barnav" aria-label="Photographer categories">
-          <a href="#" class="tag" aria-label="Tag"><span>#Portrait</span></a>
-          <a href="#" class="tag" aria-label="Tag"><span>#Art</span></a>
-          <a href="#" class="tag" aria-label="Tag"><span>#Fashion</span></a>
-          <a href="#" class="tag" aria-label="Tag"><span>#Architecture</span></a>
-          <a href="#" class="tag" aria-label="Tag"><span>#Travel</span></a>
-          <a href="#" class="tag" aria-label="Tag"><span>#Sport</span></a>
-          <a href="#" class="tag" aria-label="Tag"><span>#Animals</span></a>
-          <a href="#" class="tag" aria-label="Tag"><span>#Events</span></a>
-        </nav>
-      </section>
-    </header>
-
     <main id="home_main">
+      <header id="home_header">
+        <a href="index.html">
+          <img src="Images/Logo.png" alt="Fisheye Home page" id="logo">
+        </a>
+        <section id="banner" aria-label="Page top">
+          <!-- Cet "aria-label" est-il vraiment utile ? -->
+          <span id="passer_contenu" aria-label="Passer au contenu">Passer au contenu</span>
+          <nav lang="en" class="barnav" aria-label="Photographer categories">
+            <a href="#" class="tag" aria-label="Tag"><span>#Portrait</span></a>
+            <a href="#" class="tag" aria-label="Tag"><span>#Art</span></a>
+            <a href="#" class="tag" aria-label="Tag"><span>#Fashion</span></a>
+            <a href="#" class="tag" aria-label="Tag"><span>#Architecture</span></a>
+            <a href="#" class="tag" aria-label="Tag"><span>#Travel</span></a>
+            <a href="#" class="tag" aria-label="Tag"><span>#Sport</span></a>
+            <a href="#" class="tag" aria-label="Tag"><span>#Animals</span></a>
+            <a href="#" class="tag" aria-label="Tag"><span>#Events</span></a>
+          </nav>
+        </section>
+      </header>
+
       <h1 id="home_h1">Nos photographes</h1>
+
+      <!-- Utilisation de l'objet "location" avec le JS. -->
+      <!--<button type="button" onclick="getURL();">Get Page URL</button>-->
+      <!--<input type="button" value="Load new document" onclick="newDoc()">-->
+      <!-- Voir les fonctions en fin de fichier JS. -->
+
       <section class="main_section" aria-label="Ligne 1 des photographes">
         <article class="home_card">
           <a href="Mimi-Keel.html" class="home_photoLink" aria-label="Mimi Keel">
@@ -62,7 +68,7 @@
           </nav>
         </article>
         <article class="home_card">
-          <a href="Photo3.html" class="home_photoLink" aria-label="Tracy Galindo">
+          <a href="photographer-page.html" class="home_photoLink" aria-label="Tracy Galindo">
             <img src="Images/ID_Photos/TracyGalindo.jpg" alt="" class="round_img">
             <h2 class="home_h2">Tracy Galindo</h2>
           </a>
@@ -79,7 +85,7 @@
       </section>
       <section class="main_section" aria-label="Ligne 2 des photographes">
         <article class="home_card">
-          <a href="Photo4.html" class="home_photoLink" aria-label="Nabeel Bradford">
+          <a href="photographer-page.html" class="home_photoLink" aria-label="Nabeel Bradford">
             <img src="Images/ID_Photos/NabeelBradford.jpg" alt="" class="round_img">
             <h2 class="home_h2">Nabeel Bradford</h2>
           </a>
@@ -93,7 +99,7 @@
           </nav>
         </article>
         <article class="home_card">
-          <a href="Photo5.html" class="home_photoLink" aria-label="Rhode Dubois">
+          <a href="photographer-page.html" class="home_photoLink" aria-label="Rhode Dubois">
             <img src="Images/ID_Photos/RhodeDubois.jpg" alt="" class="round_img">
             <h2 class="home_h2">Rhode Dubois</h2>
           </a>
@@ -109,7 +115,7 @@
           </nav>
         </article>
         <article class="home_card">
-          <a href="Photo6.html" class="home_photoLink" aria-label="Marcel Nikolic">
+          <a href="photographer-page.html" class="home_photoLink" aria-label="Marcel Nikolic">
             <img src="Images/ID_Photos/MarcelNikolic.jpg" alt="" class="round_img">
             <h2 class="home_h2">Marcel Nikolic</h2>
           </a>

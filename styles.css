@@ -1,16 +1,24 @@
 /***** PAGE D'ACCUEIL OU TOUTES LES PAGES *****/
 body {
-  display: flex;
-  align-items: flex-start;
-  flex-direction: column;
-  justify-content: space-between;
   font-family: Arial, Helvetica, sans-serif;
   font-size: 16px;
-  /*border: 1px orange solid;*/
   margin: 0 40px 40px 40px;
 }
 
-header {
+/* "main" de la page d'accueil. */
+#home_main {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+}
+
+/* Header de la page d'accueil. */
+#home_header {
+  position: absolute;
+  top: 0;
+  left: 0;
   display: flex;
   align-items: flex-start;
   flex-direction: row;
@@ -60,19 +68,13 @@ header {
   border: 1px #901C1C solid;
 }
 
-/* "main" de la page d'accueil. */
-#home_main {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  width: 100%;
-}
-
 /* h1 de la page d'accueil. */
 #home_h1 {
   color: #901C1C;
+  font-size: 32px;
+  font-weight: normal;
   text-align: right;
-  margin: 0 20px 0 0;
+  margin: 44px 20px 50px 0;
 }
 
 /*
@@ -150,6 +152,15 @@ et dans la présentation de chaque page de photographe. */
 }
 
 /***** PAGES DE PHOTOGRAPHES *****/
+/* Header de chaque page. */
+#photo_header {
+  display: flex;
+  align-items: flex-start;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 70%;
+}
+
 /* "main" de chaque page. */
 #photo_main {
   display: flex;
@@ -303,10 +314,12 @@ et dans la présentation de chaque page de photographe. */
   margin: 5px 0 0 0;
 }
 
+/* Le titre. */
 .title {
   border: 1px white solid;
 }
 
+/* Les likes. */
 .likes {
   display: flex;
   align-items: center;
