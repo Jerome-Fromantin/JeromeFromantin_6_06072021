@@ -1,26 +1,10 @@
-let requestURL = "FishEyeData.json";
+let {photographers} = await fetch("FishEyeData.json").then((res)=>res.json())
+console.log(photographers)
 
-fetch(requestURL, {/*
-  headers: {
-    'Content-Type': 'application/json',
-    'charset': 'utf-8'
-  },*/
-  mode: "no-cors"
-})
-  .then(function (reponse) {
-    console.log(reponse);
-    return reponse.json();
-  })
-  .then(function(value) {
-    let maListe = value.content;
-    console.log(value.content);
-    console.log(maListe);
-  })
-  .catch(function(err) {
-    console.log("Tu te goures !", err)
-  })
+let testrecup = document.getElementById("dyn_photo_h1");
+testrecup.innerHTML = photographers[0].name;
 
-/* Fonctions à venir pour pages dynamiques. */
+/* Fonctions à venir pour pages dynamiques. 
 function getURL() {
   alert("The URL of this page is : " + window.location.href);
 }
@@ -30,8 +14,8 @@ function newDoc() {
 }
 
 function getName() {
-  alert("Le nom du photographe est : " + photographers.name);
-}
+  alert("Le nom du photographe est : " + photographers[0].name);
+}*/
 
 /* Query parameters */
 /*
