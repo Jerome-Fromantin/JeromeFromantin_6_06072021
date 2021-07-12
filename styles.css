@@ -1,3 +1,5 @@
+/* Les id ou classes dont le nom débute par "dyn" concernent
+des contenus remplis dynamiquement.*/
 /***** PAGE D'ACCUEIL OU TOUTES LES PAGES *****/
 body {
   font-family: Arial, Helvetica, sans-serif;
@@ -38,6 +40,11 @@ body {
   justify-content: center;
 }
 
+/* Ensemble des tags du haut en version mobile. */
+#banner_mobile {
+  display: none;
+}
+
 #passer_contenu {
   /*display: none;*/
   /*visibility: hidden;*/
@@ -49,7 +56,7 @@ body {
 }
 
 /* Tags de navigation. */
-.barnav {
+.barnav, .dyn_barnav {
   margin-top: 15px;
 }
 
@@ -106,27 +113,27 @@ Chaque carte-photo dans chaque page de photographe.
 }
 
 /* Dans chaque carte, le lien regroupant la photo et le h2. */
-.home_photoLink {
+.dyn_home_photoLink {
   text-align: center;
   text-decoration: none;
   padding: 5px;
   border: 2px transparent solid;
 }
-.home_photoLink:hover, .home_photoLink:focus {
+.dyn_home_photoLink:hover, .dyn_home_photoLink:focus {
   border: 2px #901C1C solid;
 }
 
 /* Chaque photo ronde. */
 /* Présente dans chaque carte de la page d'accueil
 et dans la présentation de chaque page de photographe. */
-.round_img {
+.dyn_round_img {
   box-shadow: 0 4px 4px #bbb;
   width: 180px;
   border-radius: 90px;
 }
 
 /* Dans chaque carte de la page d'accueil, le h2 lui-même. */
-.home_h2 {
+.dyn_home_h2 {
   color: #D3573C;
   font-size: 32px;
   font-weight: normal;
@@ -134,20 +141,20 @@ et dans la présentation de chaque page de photographe. */
 }
 
 /* Dans chaque carte, la ligne du lieu. */
-.home_card_lieu {
+.dyn_home_card_lieu {
   color: #901C1C;
   font-size: 12px;
   margin: 0;
 }
 
 /* Dans chaque carte, la ligne de la description. */
-.home_card_descr {
+.dyn_home_card_descr {
   font-weight: bold;
   margin: 5px 0 0 0;
 }
 
 /* Dans chaque carte, la ligne du prix. */
-.home_card_prix {
+.dyn_home_card_prix {
   margin: 5px 0 0 0;
 }
 
@@ -193,7 +200,7 @@ et dans la présentation de chaque page de photographe. */
 }
 
 /* Dans chaque bloc textuel, le h1. */
-#photo_h1 {
+#dyn_photo_h1 {
   color: #D3573C;
   font-size: 56px;
   font-weight: normal;
@@ -202,19 +209,19 @@ et dans la présentation de chaque page de photographe. */
 }
 
 /* Dans chaque bloc textuel, la ligne du lieu. */
-#photo_pres_lieu {
+#dyn_photo_pres_lieu {
   color: #901C1C;
   font-size: 20px;
   margin: 0 0 0 50px;
 }
 
 /* Dans chaque bloc textuel, la ligne de la description. */
-#photo_pres_descr {
+#dyn_photo_pres_descr {
   margin: 20px 0 0 50px;
 }
 
 /* Dans chaque bloc textuel, les tags de navigation. */
-#photo_pres_barnav {
+#dyn_photo_pres_barnav {
   margin: 20px 0 0 50px;
 }
 
@@ -234,7 +241,7 @@ et dans la présentation de chaque page de photographe. */
 }
 
 /* Le lien englobant le bouton de contact. */
-#photo_contact_link {
+#dyn_photo_contact_link {
   background: #901C1C;
   color: white;
   font-size: 20px;
@@ -243,13 +250,13 @@ et dans la présentation de chaque page de photographe. */
   border-radius: 5px;
   margin-top: -35px;
 }
-#photo_contact_link:hover, #photo_contact_link:focus {
+#dyn_photo_contact_link:hover, #dyn_photo_contact_link:focus {
   background: #D3573C;
   color: black;
 }
 
 /* L'image ronde. */
-#photo_round_img {
+#dyn_photo_round_img {
   margin: 50px 40px;
 }
 
@@ -268,6 +275,15 @@ et dans la présentation de chaque page de photographe. */
   padding: 15px;
   border-radius: 5px;
 }
+
+/* Les likes. Utilisé aussi pour chaque carte-photo. */
+.dyn_likes {
+  display: flex;
+  align-items: center;
+}
+
+/* Le prix du photographe. */
+/*.dyn_prix {}*/
 
 /* "Trier par" et sa liste déroulante. */
 #liste_tris {
@@ -296,7 +312,7 @@ et dans la présentation de chaque page de photographe. */
 }
 
 /* Chaque photo dans le lien. */
-.photo_img {
+.dyn_photo_img {
   width: 300px;
   border-radius: 5px;
   margin-bottom: -4px;
@@ -315,14 +331,8 @@ et dans la présentation de chaque page de photographe. */
 }
 
 /* Le titre. */
-.title {
+.dyn_title {
   border: 1px white solid;
-}
-
-/* Les likes. */
-.likes {
-  display: flex;
-  align-items: center;
 }
 
 /* Dans chaque carte, l'icône "coeur". */
@@ -330,10 +340,47 @@ et dans la présentation de chaque page de photographe. */
   width: 24px;
 }
 
+/* Toutes les media queries pour mobiles. */
+@media all and (max-width: 600px) {
+  #logo {
+    width: 240px;
+    margin: 20px 0 0 -70px;
+  }
 
+  #home_h1 {
+    font-size: 14px;
+    margin: 44px -20px 50px 0;
+  }
 
-/* A VOIR PLUS TARD. */
-/* En bas d'écran à droite, les likes et prix. */
-#photo_pres_prix {
-  margin: 5px 0 0 50px;
+  #banner {
+    display: none;
+  }
+
+  #banner_mobile {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .barnav_mobile {
+    line-height: 24px;
+    text-align: center;
+    margin-top: 0;
+  }
+
+  .main_section {
+    flex-direction: column;
+    padding-top: 10px;
+    margin-top: 0;
+  }
+  
+  #Nabeel {
+    margin-top: -10px;
+  }
+  
+  .home_card, .photo_card {
+    margin-top: 30px;
+  }
 }
+
+
