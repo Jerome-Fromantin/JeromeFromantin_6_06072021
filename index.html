@@ -51,20 +51,20 @@
 
       <section class="main_section" aria-label="Ligne 1 des photographes">
         <article class="home_card">
-          <!-- URL dynamique. -->
+          <!-- URL et données dynamiques. -->
           <a href="photographer-page.html?photographers[0].name=Mimi Keel" class="dyn_home_photoLink" aria-label="Mimi Keel">
-            <img src="Images/ID_Photos/MimiKeel.jpg" alt="" class="dyn_round_img">
-            <h2 class="dyn_home_h2">Mimi Keel</h2>
+            <img src="" alt="" class="dyn_round_img" id="dyn_round_img_1">
+            <h2 class="dyn_home_h2" id="dyn_home_h2_1"></h2>
           </a>
           <!-- Ces "aria-label" sont-ils vraiment utiles ? -->
-          <p lang="en" class="dyn_home_card_lieu" aria-label="Lieu du photographe">London, UK</p>
-          <p class="dyn_home_card_descr" aria-label="Description du photographe">Voir le beau dans le quotidien</p>
-          <p class="dyn_home_card_prix" aria-label="Tarif du photographe">400€/jour</p>
-          <nav lang="en" class="dyn_barnav" aria-label="Catégories du photographe">
-            <a href="#" class="tag" aria-label="Tag"><span>#portrait</span></a>
-            <a href="#" class="tag" aria-label="Tag"><span>#events</span></a>
-            <a href="#" class="tag" aria-label="Tag"><span>#travel</span></a>
-            <a href="#" class="tag" aria-label="Tag"><span>#animals</span></a>
+          <p lang="en" class="dyn_home_card_lieu" id="dyn_home_card_lieu_1" aria-label="Lieu du photographe"></p>
+          <p class="dyn_home_card_descr" id="dyn_home_card_descr_1" aria-label="Description du photographe"></p>
+          <p class="dyn_home_card_prix" id="dyn_home_card_prix_1" aria-label="Tarif du photographe"></p>
+          <nav lang="en" class="barnav" aria-label="Catégories du photographe">
+            <a href="#" class="tag" id="tag_1_1" aria-label="Tag"><span></span></a>
+            <a href="#" class="tag" id="tag_1_2" aria-label="Tag"><span></span></a>
+            <a href="#" class="tag" id="tag_1_3" aria-label="Tag"><span></span></a>
+            <a href="#" class="tag" id="tag_1_4" aria-label="Tag"><span></span></a>
           </nav>
         </article>
         <article class="home_card">
@@ -75,10 +75,10 @@
           <!-- Ces "aria-label" sont-ils vraiment utiles ? -->
           <p lang="en" class="dyn_home_card_lieu" aria-label="Lieu du photographe">Paris, France</p>
           <p class="dyn_home_card_descr" aria-label="Description du photographe">Travaille sur des compositions complexes</p>
-          <p class="dyn_home_card_prix" aria-label="Tarif du photographe">250€/jour</p>
-          <nav lang="en" class="dyn_barnav" aria-label="Catégories du photographe">
-            <a href="#" class="tag" aria-label="Tag"><span>#sports</span></a>
-            <a href="#" class="tag" aria-label="Tag"><span>#architecture</span></a>
+          <p class="dyn_home_card_prix" id="dyn_home_card_prix_2" aria-label="Tarif du photographe"></p>
+          <nav lang="en" class="barnav" aria-label="Catégories du photographe">
+            <a href="#" class="tag" id="tag_2_1" aria-label="Tag"><span></span></a>
+            <a href="#" class="tag" id="tag_2_2" aria-label="Tag"><span></span></a>
           </nav>
         </article>
         <article class="home_card">
@@ -90,7 +90,7 @@
           <p lang="en" class="dyn_home_card_lieu" aria-label="Lieu du photographe">Montreal, Canada</p>
           <p class="dyn_home_card_descr" aria-label="Description du photographe">Photographe freelance</p>
           <p class="dyn_home_card_prix" aria-label="Tarif du photographe">500€/jour</p>
-          <nav lang="en" class="dyn_barnav" aria-label="Catégories du photographe">
+          <nav lang="en" class="barnav" aria-label="Catégories du photographe">
             <a href="#" class="tag" aria-label="Tag"><span>#art</span></a>
             <a href="#" class="tag" aria-label="Tag"><span>#fashion</span></a>
             <a href="#" class="tag" aria-label="Tag"><span>#events</span></a>
@@ -107,7 +107,7 @@
           <p lang="en" class="dyn_home_card_lieu" aria-label="Lieu du photographe">Mexico City, Mexico</p>
           <p class="dyn_home_card_descr" aria-label="Description du photographe">Je vais toujours de l'avant</p>
           <p class="dyn_home_card_prix" aria-label="Tarif du photographe">350€/jour</p>
-          <nav lang="en" class="dyn_barnav" aria-label="Catégories du photographe">
+          <nav lang="en" class="barnav" aria-label="Catégories du photographe">
             <a href="#" class="tag" aria-label="Tag"><span>#travel</span></a>
             <a href="#" class="tag" aria-label="Tag"><span>#portraits</span></a>
           </nav>
@@ -121,7 +121,7 @@
           <p lang="en" class="dyn_home_card_lieu" aria-label="Lieu du photographe">Barcelona, Spain</p>
           <p class="dyn_home_card_descr" aria-label="Description du photographe">Créatrice de souvenirs</p>
           <p class="dyn_home_card_prix" aria-label="Tarif du photographe">375€/jour</p>
-          <nav lang="en" class="dyn_barnav" aria-label="Catégories du photographe">
+          <nav lang="en" class="barnav" aria-label="Catégories du photographe">
             <a href="#" class="tag" aria-label="Tag"><span>#sport</span></a>
             <a href="#" class="tag" aria-label="Tag"><span>#fashion</span></a>
             <a href="#" class="tag" aria-label="Tag"><span>#events</span></a>
@@ -137,7 +137,7 @@
           <p lang="en" class="dyn_home_card_lieu" aria-label="Lieu du photographe">Berlin, Germany</p>
           <p class="dyn_home_card_descr" aria-label="Description du photographe">Toujours à la recherche de LA photo</p>
           <p class="dyn_home_card_prix" aria-label="Tarif du photographe">300€/jour</p>
-          <nav lang="en" class="dyn_barnav" aria-label="Catégories du photographe">
+          <nav lang="en" class="barnav" aria-label="Catégories du photographe">
             <a href="#" class="tag" aria-label="Tag"><span>#travel</span></a>
             <a href="#" class="tag" aria-label="Tag"><span>#architecture</span></a>
           </nav>

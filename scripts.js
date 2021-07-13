@@ -1,8 +1,34 @@
 let {photographers} = await fetch("FishEyeData.json").then((res)=>res.json())
 console.log(photographers)
 
-let testrecup = document.getElementById("dyn_photo_h1");
-testrecup.innerHTML = photographers[0].name;
+let round_img_1 = document.getElementById("dyn_round_img_1");
+round_img_1.src = "Images/ID_Photos/" + photographers[0].portrait;
+let home_h2_1 = document.getElementById("dyn_home_h2_1");
+home_h2_1.innerHTML = photographers[0].name;
+let home_card_lieu_1 = document.getElementById("dyn_home_card_lieu_1");
+home_card_lieu_1.innerHTML = photographers[0].city + ", " + photographers[0].country;
+let home_card_descr_1 = document.getElementById("dyn_home_card_descr_1");
+home_card_descr_1.innerHTML = photographers[0].tagline;
+let home_card_prix_1 = document.getElementById("dyn_home_card_prix_1");
+home_card_prix_1.innerHTML = photographers[0].price + "€/jour";
+let home_tag_1_1 = document.getElementById("tag_1_1");
+home_tag_1_1.innerHTML = "#" + photographers[0].tags[0];
+let home_tag_1_2 = document.getElementById("tag_1_2");
+home_tag_1_2.innerHTML = "#" + photographers[0].tags[1];
+let home_tag_1_3 = document.getElementById("tag_1_3");
+home_tag_1_3.innerHTML = "#" + photographers[0].tags[2];
+let home_tag_1_4 = document.getElementById("tag_1_4");
+home_tag_1_4.innerHTML = "#" + photographers[0].tags[3];
+
+let home_card_prix_2 = document.getElementById("dyn_home_card_prix_2");
+home_card_prix_2.innerHTML = photographers[1].price + "€/jour";
+let home_tag_2_1 = document.getElementById("tag_2_1");
+home_tag_2_1.innerHTML = "#" + photographers[1].tags[0];
+let home_tag_2_2 = document.getElementById("tag_2_2");
+home_tag_2_2.innerHTML = "#" + photographers[1].tags[1];
+
+let photo_h1 = document.getElementById("dyn_photo_h1");
+photo_h1.innerHTML = photographers[0].name;
 
 /* Fonctions à venir pour pages dynamiques. 
 function getURL() {
