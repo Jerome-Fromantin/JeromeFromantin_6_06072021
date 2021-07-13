@@ -85,15 +85,15 @@ body {
 }
 
 /*
-Ligne de 3 cartes-photos dans la page d'accueil.
+Section des 6 cartes-photos dans la page d'accueil.
 Ligne de 3 cartes-photos dans chaque page de photographe.
 */
 .main_section, .photo_photosLine {
   display: flex;
   align-items: center;
   flex-direction: row;
+  flex-wrap: wrap;
   justify-content: space-between;
-  margin-top: 50px;
 }
 
 .photo_photosLine {
@@ -110,6 +110,8 @@ Chaque carte-photo dans chaque page de photographe.
   align-items: center;
   flex-direction: column;
   font-size: 9px;
+  width: 33%;
+  margin-top: 50px;
 }
 
 /* Dans chaque carte, le lien regroupant la photo et le h2. */
@@ -140,6 +142,11 @@ et dans la présentation de chaque page de photographe. */
   margin: 10px 0 0 0;
 }
 
+/* Dans chaque carte, la div qui rassemble les 3 lignes de description. */
+.dyn_home_card_descr {
+  text-align: center;
+}
+
 /* Dans chaque carte, la ligne du lieu. */
 .dyn_home_card_lieu {
   color: #901C1C;
@@ -147,8 +154,8 @@ et dans la présentation de chaque page de photographe. */
   margin: 0;
 }
 
-/* Dans chaque carte, la ligne de la description. */
-.dyn_home_card_descr {
+/* Dans chaque carte, la ligne du slogan. */
+.dyn_home_card_slogan {
   font-weight: bold;
   margin: 5px 0 0 0;
 }
@@ -216,7 +223,7 @@ et dans la présentation de chaque page de photographe. */
 }
 
 /* Dans chaque bloc textuel, la ligne de la description. */
-#dyn_photo_pres_descr {
+#dyn_photo_pres_slogan {
   margin: 20px 0 0 50px;
 }
 
@@ -379,6 +386,7 @@ et dans la présentation de chaque page de photographe. */
   }
   
   .home_card, .photo_card {
+    width: 100%;
     margin-top: 30px;
   }
 }
