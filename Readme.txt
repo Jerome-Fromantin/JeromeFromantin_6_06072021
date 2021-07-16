@@ -19,7 +19,9 @@ Travail réalisé :
 - Mise en place des fonctions dynamiques en JavaScript pour la page d'accueil et la page de photographe,
 - Mise en place des données dynamiques de la page d'accueil,
 - Début de mise en place des données dynamiques pour la page de photographe,
-- Ajout de données dynamiques pour la page de photographe (bloc de présentation).
+- Ajout de données dynamiques pour la page de photographe (bloc de présentation),
+- Ajout de données dynamiques pour la page de photographe (bloc de photos) (Non terminé),
+- Ajout d'images de photographes.
 
 Travail à faire :
 - Fin d'intégration des pages commencées,
