@@ -120,6 +120,7 @@ Chaque carte-photo dans chaque page de photographe.
   text-decoration: none;
   padding: 5px;
   border: 2px transparent solid;
+  border-radius: 5px;
 }
 .dyn_home_photoLink:hover, .dyn_home_photoLink:focus {
   border: 2px #901C1C solid;
@@ -287,6 +288,7 @@ et dans la présentation de chaque page de photographe. */
 .dyn_likes {
   display: flex;
   align-items: center;
+  margin-right: 45px;
 }
 
 /* Le prix du photographe. */
@@ -308,13 +310,26 @@ et dans la présentation de chaque page de photographe. */
   margin-left: 15px;
 }
 
+.photo_photosLine {
+  margin: 0;
+}
+
+/*
+.photo_card {
+  border: 1px red solid;
+}
+*/
+
 /* Dans chaque carte, le lien incluant la photo. */
-.photo_photoLink {
+.photo_photoLink, .dyn_photo_photoLink {
   font-size: 16px;
   text-decoration: none;
   border: 2px transparent solid;
+  border-radius: 5px;
+  margin: 0;
 }
-.photo_photoLink:hover, .photo_photoLink:focus {
+.photo_photoLink:hover, .photo_photoLink:focus,
+.dyn_photo_photoLink:hover, .dyn_photo_photoLink:focus {
   border: 2px #901C1C solid;
 }
 
@@ -339,7 +354,7 @@ et dans la présentation de chaque page de photographe. */
 
 /* Le titre. */
 .dyn_title {
-  border: 1px white solid;
+  margin-left: 45px;
 }
 
 /* Dans chaque carte, l'icône "coeur". */

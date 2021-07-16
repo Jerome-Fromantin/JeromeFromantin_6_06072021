@@ -1,9 +1,8 @@
-// Récupération des données du fichier JSON.
+// Récupération des données "photographes" du fichier JSON.
 let {photographers} = await fetch("FishEyeData.json").then((res)=>res.json())
 console.log(photographers)
 
 // PAGE D'ACCUEIL
-
 // Chaque carte de la page d'accueil : Récupère dynamiquement l'image et le nom pour le lien.
 function homePhotoLink(portrait, name, id) {
   let link = document.createElement("a");
