@@ -90,7 +90,7 @@ Ligne de 3 cartes-photos dans chaque page de photographe.
 */
 .main_section, .photo_photosLine {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: space-between;
@@ -269,7 +269,7 @@ et dans la présentation de chaque page de photographe. */
 }
 
 /* Bloc en bas à droite du nombre de likes et prix. */
-#likes_prix {
+#likes_prix, #likes_prix2 {
   background: #D3573C;
   position: fixed;
   bottom: 0;
@@ -359,7 +359,13 @@ et dans la présentation de chaque page de photographe. */
 
 /* Dans chaque carte, l'icône "coeur". */
 .icone {
+  cursor: pointer;
   width: 24px;
+}
+
+/* En bas à droite, l'icône "coeur noir". */
+#icone {
+  cursor: auto;
 }
 
 /* Toutes les media queries pour mobiles. */
