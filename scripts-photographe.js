@@ -18,7 +18,9 @@ let photographerCountry = photographer.country;
 let photographerTagline = photographer.tagline;
 let photographerTags = photographer.tags;
 let photographerPortrait = photographer.portrait;
+let photographerPrice = photographer.price;
 
+// PARTIE PRESENTATION DU PHOTOGRAPHE
 // Partie gauche de la présentation : Récupère dynamiquement le nom pour le h1.
 function photoH1(photographerName) {
   let title = document.createElement("h1");
@@ -118,6 +120,7 @@ function showPresent() {
 
 showPresent();
 
+// PARTIE GALERIE DE PHOTOGRAPHIES
 // Récupération des données "médias" du fichier JSON.
 let {media} = await fetch("FishEyeData.json").then((res)=>res.json())
 console.log(media);
@@ -129,21 +132,14 @@ function filterPictures(data) {
 let pictures = media.filter(filterPictures);
 console.log(pictures);
 
-let mediaImage = pictures[0].image;
-let mediaLikes = pictures[0].likes;
-let mediaTitle = pictures[0].title;
-console.log(mediaImage);
-console.log(mediaLikes);
-console.log(mediaTitle);
-
 // Chaque carte de la page de photographe : Récupère dynamiquement l'image pour le lien.
-function photoPhotoLink(photographerName, mediaImage) {
+function photoPhotoLink(photographerId, image) {
   let photoLink = document.createElement("a");
   photoLink.href = "#";
   photoLink.className = "dyn_photo_photoLink";
   photoLink.setAttribute("aria-label", "Photographie");
   let photoLinkImg = document.createElement("img");
-  photoLinkImg.src = "Images/" + photographerName + "/" + mediaImage;
+  photoLinkImg.src = "Images/" + photographerId + "/" + image;
   photoLinkImg.className = "dyn_photo_img";
   photoLink.setAttribute("lang", "en");
   photoLink.setAttribute("alt", "Value");
@@ -152,24 +148,25 @@ function photoPhotoLink(photographerName, mediaImage) {
 }
 
 // Chaque carte de la page de photographe : Récupère dynamiquement les données pour la ligne de description.
-function photoCardDescr(mediaTitle, mediaLikes) {
+function photoCardDescr(title, likes) {
   let description = document.createElement("div");
   description.className = "photo_card_titleLikes";
   description.setAttribute("lang", "en");
   let descriptionTitle = document.createElement("span");
-  descriptionTitle.innerText = mediaTitle;
+  descriptionTitle.innerText = title;
   descriptionTitle.className = "dyn_title";
   descriptionTitle.setAttribute("aria-label", "Titre de la photo");
   let descriptionLikes = document.createElement("span");
   descriptionLikes.className = "dyn_likes";
   descriptionLikes.setAttribute("aria-label", "Likes de la photo");
   let descriptionLikesNumber = document.createElement("span");
-  descriptionLikesNumber.innerText = mediaLikes;
+  descriptionLikesNumber.innerText = likes;
   descriptionLikesNumber.setAttribute("aria-label", "Nombre de likes");
   let descriptionLikesIcon = document.createElement("img");
   descriptionLikesIcon.src = "Images/Icone-coeur.png";
   descriptionLikesIcon.className = "icone";
   descriptionLikes.setAttribute("alt", "Likes");
+  descriptionLikes.setAttribute("type", "input"); // type "input" ou type "button" ?
   description.appendChild(descriptionTitle);
   descriptionLikes.appendChild(descriptionLikesNumber);
   descriptionLikes.appendChild(descriptionLikesIcon);
@@ -178,11 +175,11 @@ function photoCardDescr(mediaTitle, mediaLikes) {
 }
 
 // Organise en carte toutes les données médias précédemment récupérées.
-function fillArticle() {
+function fillArticle(picture) {
   let fullArticle = document.createElement("article");
   fullArticle.className = "photo_card";
-  let link = photoPhotoLink(photographerName, mediaImage);
-  let descr = photoCardDescr(mediaTitle, mediaLikes);
+  let link = photoPhotoLink(picture.photographerId, picture.image);
+  let descr = photoCardDescr(picture.title, picture.likes);
   fullArticle.appendChild(link);
   fullArticle.appendChild(descr);
   return fullArticle;
@@ -196,3 +193,42 @@ function showPhotos() {
     section.appendChild(article);
   }
 }
+
+showPhotos();
+
+// PARTIE "LIKES ET PRIX" EN BAS A DROITE
+// Likes et prix : Récupère dynamiquement le nombre total de likes et le prix du photographe.
+function bottomRight(/*totalLikes, */photographerPrice) {
+  let bottomRightDiv = document.createElement("div");
+  bottomRightDiv.id = "likes_prix2";                                     // A MODIFIER !!
+  let bottomRightLikes = document.createElement("span");
+  bottomRightLikes.className = "dyn_likes";
+  bottomRightLikes.setAttribute("aria-label", "Total des likes");
+  let bottomRightLikesNumber = document.createElement("span");
+  bottomRightLikesNumber.innerText = "340";                          // VARIABLE "totalLikes" A DEFINIR !!
+  console.log(bottomRightLikesNumber.innerText);
+  bottomRightLikesNumber.setAttribute("aria-label", "Nombre total des likes");
+  let bottomRightLikesIcon = document.createElement("img");
+  bottomRightLikesIcon.src = "Images/Icone-coeur-noir.png";
+  bottomRightLikesIcon.className = "icone";
+  bottomRightLikesIcon.id = "icone";
+  bottomRightLikesIcon.setAttribute("alt", "Likes");
+  let bottomRightPrice = document.createElement("span");
+  bottomRightPrice.innerText = photographerPrice + "€ / jour";
+  bottomRightPrice.className = "dyn_prix";
+  bottomRightPrice.setAttribute("aria-label", "Prix du photographe");
+  bottomRightLikes.appendChild(bottomRightLikesNumber);
+  bottomRightLikes.appendChild(bottomRightLikesIcon);
+  bottomRightDiv.appendChild(bottomRightLikes);
+  bottomRightDiv.appendChild(bottomRightPrice);
+  return bottomRightDiv;
+}
+
+// Montre la section remplie dynamiquement.
+function showLikesNPrice() {
+  let section = document.querySelector("#likes_prix");
+  let likesNPrice = bottomRight(/*totalLikes, */photographerPrice);
+  section.appendChild(likesNPrice);
+}
+
+showLikesNPrice();
