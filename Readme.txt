@@ -16,11 +16,10 @@ Travail réalisé :
 - Ajout d'un fichier JSON,
 - Début de mise en place du JavaScript,
 - Mise en place de la version mobile de la page d'accueil,
-- Mise en place des fonctions dynamiques en JavaScript pour la page d'accueil et la page de photographe,
+- Mise en place des 1ères fonctions dynamiques en JavaScript pour la page d'accueil et la page de photographe,
 - Mise en place des données dynamiques de la page d'accueil,
-- Début de mise en place des données dynamiques pour la page de photographe,
-- Ajout de données dynamiques pour la page de photographe (bloc de présentation),
-- Ajout de données dynamiques pour la page de photographe (bloc de photos) (Non terminé),
+- Mise en place des données dynamiques de la page de photographe (présentation et galerie),
+- Début de mise en place des données dynamiques de la partie "Likes et prix" en bas à droite,
 - Ajout d'images de photographes.
 
 Travail à faire :
