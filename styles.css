@@ -60,7 +60,7 @@ body {
   margin-top: 15px;
 }
 
-/* Chaque tag. */
+/* Chaque tag. En id, chaque tag de carte. */
 .tag {
   color: #901C1C;
   font-size: 12px;
@@ -68,6 +68,9 @@ body {
   padding: 3px 6px;
   border: 1px #bbb solid;
   border-radius: 15px;
+}
+#tag {
+  margin: 0 2px;
 }
 .tag:hover, .tag:focus {
   background: #901C1C;
@@ -241,6 +244,7 @@ et dans la présentation de chaque page de photographe. */
   padding: 3px 6px;
   border: 1px #bbb solid;
   border-radius: 15px;
+  margin: 0 2px;
 }
 .photo_pres_tag:hover, .photo_pres_tag:focus {
   background: #901C1C;
@@ -371,8 +375,8 @@ et dans la présentation de chaque page de photographe. */
 /* Toutes les media queries pour mobiles. */
 @media all and (max-width: 600px) {
   #logo {
-    width: 240px;
-    margin: 20px 0 0 -70px;
+    width: 230px;
+    margin: 20px 0 0 -60px;
   }
 
   #home_h1 {
@@ -402,14 +406,26 @@ et dans la présentation de chaque page de photographe. */
     margin-top: 0;
   }
   
-  #Nabeel {
-    margin-top: -10px;
-  }
-  
   .home_card, .photo_card {
     width: 100%;
     margin-top: 30px;
   }
+
+  #photo_pres, #photo_pres_text {
+    display: flex;                   /* A SUPPRIMER ? */
+    align-items: center;             /* A SUPPRIMER ? */
+    flex-direction: row;             /* A SUPPRIMER ? */
+    justify-content: space-between;  /* A SUPPRIMER ? */
+    background: white;
+    margin: 30px 50px 0 50px;        /* A SUPPRIMER ? */
+  }
+
+  #likes_prix {
+    display: none;
+  }
+
+  #dyn_photo_h1 {
+    font-size: 36px;
+    margin: -30px 0 0 -120px;
+  }
 }
-
-

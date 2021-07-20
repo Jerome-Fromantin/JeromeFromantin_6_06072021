@@ -1,0 +1,25 @@
+{
+  "name": "projet06",
+  "version": "1.0.0",
+  "description": "Ce travail est r�alis� dans le cadre de la formation \"D�veloppeur d'applications front-end\" d'OpenClassrooms.",
+  "main": "scripts-accueil.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "webpack --mode=development",
+    "prod": "webpack --mode=production"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Jerome-Fromantin/JeromeFromantin_6_06072021.git"
+  },
+  "author": "Jérôme Fromantin",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Jerome-Fromantin/JeromeFromantin_6_06072021/issues"
+  },
+  "homepage": "https://github.com/Jerome-Fromantin/JeromeFromantin_6_06072021#readme",
+  "devDependencies": {
+    "webpack": "^5.45.1",
+    "webpack-cli": "^4.7.2"
+  }
+}

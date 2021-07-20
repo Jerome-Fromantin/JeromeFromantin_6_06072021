@@ -1,6 +1,6 @@
 // Récupération des données "photographes" du fichier JSON.
-let {photographers} = await fetch("FishEyeData.json").then((res)=>res.json())
-console.log(photographers)
+import {getPhotographers} from "./services";
+//console.log(photographers)
 
 // PAGE D'ACCUEIL
 // Chaque carte de la page d'accueil : Récupère dynamiquement l'image et le nom pour le lien.
@@ -53,6 +53,7 @@ function homeCardTags(tags) {
     let tagGroupLink = document.createElement("a");
     tagGroupLink.href = "#";
     tagGroupLink.className = "tag";
+    tagGroupLink.id = "tag";
     tagGroupLink.setAttribute("aria-label", tag);
     let tagGroupSpan = document.createElement("span");
     tagGroupSpan.innerText = "#" + tag;
@@ -76,7 +77,8 @@ function fillArticle(photographer) {
 }
 
 // Montre toutes les cartes remplies dynamiquement.
-function show() {
+async function show() {
+  let photographers = await getPhotographers();
   let section = document.querySelector(".main_section");
   for (let photographer of photographers) {
     let article = fillArticle(photographer);

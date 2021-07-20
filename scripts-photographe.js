@@ -1,6 +1,6 @@
 // Récupération des données "photographes" du fichier JSON.
-let {photographers} = await fetch("FishEyeData.json").then((res)=>res.json())
-console.log(photographers);
+import {getMediasByPhotographers, getPhotographer, getPhotographers} from "./services";
+//console.log(photographers);
 
 // PAGE DE PHOTOGRAPHE
 // Récupération de l'id du photographe concerné.
@@ -11,6 +11,7 @@ let thePhotographerId = param.get("id");
 function findPhotographer(data) {
   return data.id == thePhotographerId;
 }
+/*
 let photographer = photographers.find(findPhotographer);
 let photographerName = photographer.name;
 let photographerCity = photographer.city;
@@ -19,6 +20,7 @@ let photographerTagline = photographer.tagline;
 let photographerTags = photographer.tags;
 let photographerPortrait = photographer.portrait;
 let photographerPrice = photographer.price;
+*/
 
 // PARTIE PRESENTATION DU PHOTOGRAPHE
 // Partie gauche de la présentation : Récupère dynamiquement le nom pour le h1.
@@ -92,12 +94,13 @@ function contactButton(photographerId) {
 }
 
 // Montre la partie gauche de la présentation (texte et bouton) remplie dynamiquement.
-function showLeftPart() {
+function showLeftPart(photographer) {
   let sectionleft = document.querySelector("#photo_pres_text");
-  let leftPart = fillLeftPart(photographerName, photographerCity, photographerCountry, photographerTagline, photographerTags);
+  let leftPart = fillLeftPart(photographer.name, photographer.city, photographer.country, photographer.tagline, photographer.tags);
   let contact = contactButton(thePhotographerId);
   sectionleft.appendChild(leftPart);
   sectionleft.appendChild(contact);
+  showLikesNPrice(photographer.price);
 }
 
 // Partie droite de la présentation : Récupère dynamiquement le nom de l'image.
@@ -111,26 +114,27 @@ function photoImg(photographerPortrait, photographerName) {
 }
 
 // Montre la présentation entière remplie dynamiquement.
-function showPresent() {
+async function showPresent(id) {
+  let photographer = await getPhotographer(id);
   let presentation = document.querySelector("#photo_pres");
-  showLeftPart();
-  let imgPart = photoImg(photographerPortrait, photographerName);
+  showLeftPart(photographer);
+  let imgPart = photoImg(photographer.portrait, photographer.name);
   presentation.appendChild(imgPart);
 }
 
-showPresent();
+showPresent(thePhotographerId);
 
 // PARTIE GALERIE DE PHOTOGRAPHIES
 // Récupération des données "médias" du fichier JSON.
-let {media} = await fetch("FishEyeData.json").then((res)=>res.json())
-console.log(media);
+//let {media} = await fetch("FishEyeData.json").then((res)=>res.json())
+//console.log(media);
 
 // Récupération par filtration des médias du photographe concerné.
 function filterPictures(data) {
   return data.photographerId == thePhotographerId;
 }
-let pictures = media.filter(filterPictures);
-console.log(pictures);
+//let pictures = media.filter(filterPictures);
+//console.log(pictures);
 
 // Chaque carte de la page de photographe : Récupère dynamiquement l'image pour le lien.
 function photoPhotoLink(photographerId, image) {
@@ -186,7 +190,8 @@ function fillArticle(picture) {
 }
 
 // Montre toutes les cartes remplies dynamiquement.
-function showPhotos() {
+async function showPhotos(id) {
+  let pictures = await getMediasByPhotographers(id);
   let section = document.querySelector(".photo_photosLine");
   for (let picture of pictures) {
     let article = fillArticle(picture);
@@ -194,7 +199,7 @@ function showPhotos() {
   }
 }
 
-showPhotos();
+showPhotos(thePhotographerId);
 
 // PARTIE "LIKES ET PRIX" EN BAS A DROITE
 // Likes et prix : Récupère dynamiquement le nombre total de likes et le prix du photographe.
@@ -225,10 +230,8 @@ function bottomRight(/*totalLikes, */photographerPrice) {
 }
 
 // Montre la section remplie dynamiquement.
-function showLikesNPrice() {
+function showLikesNPrice(price) {
   let section = document.querySelector("#likes_prix");
-  let likesNPrice = bottomRight(/*totalLikes, */photographerPrice);
+  let likesNPrice = bottomRight(/*totalLikes, */price);
   section.appendChild(likesNPrice);
 }
-
-showLikesNPrice();
