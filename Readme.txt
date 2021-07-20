@@ -20,7 +20,8 @@ Travail réalisé :
 - Mise en place des données dynamiques de la page d'accueil,
 - Mise en place des données dynamiques de la page de photographe (présentation et galerie),
 - Début de mise en place des données dynamiques de la partie "Likes et prix" en bas à droite,
-- Ajout d'images de photographes.
+- Ajout d'images de photographes,
+- Installation de WebPack et mise en place de fonctions asynchrones.
 
 Travail à faire :
 - Fin d'intégration des pages commencées,
