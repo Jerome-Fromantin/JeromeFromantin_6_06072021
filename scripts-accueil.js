@@ -1,6 +1,5 @@
 // Récupération des données "photographes" du fichier JSON.
 import {getPhotographers} from "./services";
-//console.log(photographers)
 
 // PAGE D'ACCUEIL
 // Chaque carte de la page d'accueil : Récupère dynamiquement l'image et le nom pour le lien.

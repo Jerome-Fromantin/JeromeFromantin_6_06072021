@@ -273,7 +273,7 @@ et dans la présentation de chaque page de photographe. */
 }
 
 /* Bloc en bas à droite du nombre de likes et prix. */
-#likes_prix, #likes_prix2 {
+#likes_prix, #likes_prix_child {
   background: #D3573C;
   position: fixed;
   bottom: 0;

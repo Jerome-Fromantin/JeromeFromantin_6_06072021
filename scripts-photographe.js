@@ -1,26 +1,10 @@
 // Récupération des données "photographes" du fichier JSON.
-import {getMediasByPhotographers, getPhotographer, getPhotographers} from "./services";
-//console.log(photographers);
+import {getMediasByPhotographers, getPhotographer} from "./services";
 
 // PAGE DE PHOTOGRAPHE
 // Récupération de l'id du photographe concerné.
 let param = new URLSearchParams(window.location.search);
 let thePhotographerId = param.get("id");
-
-// A partir de l'id, récupération des données du photographe concerné.
-function findPhotographer(data) {
-  return data.id == thePhotographerId;
-}
-/*
-let photographer = photographers.find(findPhotographer);
-let photographerName = photographer.name;
-let photographerCity = photographer.city;
-let photographerCountry = photographer.country;
-let photographerTagline = photographer.tagline;
-let photographerTags = photographer.tags;
-let photographerPortrait = photographer.portrait;
-let photographerPrice = photographer.price;
-*/
 
 // PARTIE PRESENTATION DU PHOTOGRAPHE
 // Partie gauche de la présentation : Récupère dynamiquement le nom pour le h1.
@@ -34,7 +18,6 @@ function photoH1(photographerName) {
 // Partie gauche de la présentation : Récupère dynamiquement les données pour les 2 lignes de description.
 function photoDescr(photographerCity, photographerCountry, photographerTagline) {
   let description = document.createElement("div");
-  description.className = "dyn_photo_pres_descr"; // Classe inutilisée.
   let descriptionPlace = document.createElement("p");
   descriptionPlace.innerText = photographerCity + ", " + photographerCountry;
   descriptionPlace.id = "dyn_photo_pres_lieu";
@@ -100,7 +83,7 @@ function showLeftPart(photographer) {
   let contact = contactButton(thePhotographerId);
   sectionleft.appendChild(leftPart);
   sectionleft.appendChild(contact);
-  showLikesNPrice(photographer.price);
+  showLikesNPrice(/*totalLikes, */photographer.price);
 }
 
 // Partie droite de la présentation : Récupère dynamiquement le nom de l'image.
@@ -125,17 +108,6 @@ async function showPresent(id) {
 showPresent(thePhotographerId);
 
 // PARTIE GALERIE DE PHOTOGRAPHIES
-// Récupération des données "médias" du fichier JSON.
-//let {media} = await fetch("FishEyeData.json").then((res)=>res.json())
-//console.log(media);
-
-// Récupération par filtration des médias du photographe concerné.
-function filterPictures(data) {
-  return data.photographerId == thePhotographerId;
-}
-//let pictures = media.filter(filterPictures);
-//console.log(pictures);
-
 // Chaque carte de la page de photographe : Récupère dynamiquement l'image pour le lien.
 function photoPhotoLink(photographerId, image) {
   let photoLink = document.createElement("a");
@@ -205,12 +177,12 @@ showPhotos(thePhotographerId);
 // Likes et prix : Récupère dynamiquement le nombre total de likes et le prix du photographe.
 function bottomRight(/*totalLikes, */photographerPrice) {
   let bottomRightDiv = document.createElement("div");
-  bottomRightDiv.id = "likes_prix2";                                     // A MODIFIER !!
+  bottomRightDiv.id = "likes_prix_child";
   let bottomRightLikes = document.createElement("span");
   bottomRightLikes.className = "dyn_likes";
   bottomRightLikes.setAttribute("aria-label", "Total des likes");
   let bottomRightLikesNumber = document.createElement("span");
-  bottomRightLikesNumber.innerText = "340";                          // VARIABLE "totalLikes" A DEFINIR !!
+  bottomRightLikesNumber.innerText = "680";                // VARIABLE "totalLikes" A DEFINIR !!
   console.log(bottomRightLikesNumber.innerText);
   bottomRightLikesNumber.setAttribute("aria-label", "Nombre total des likes");
   let bottomRightLikesIcon = document.createElement("img");
@@ -230,7 +202,7 @@ function bottomRight(/*totalLikes, */photographerPrice) {
 }
 
 // Montre la section remplie dynamiquement.
-function showLikesNPrice(price) {
+function showLikesNPrice(/*totalLikes, */price) {
   let section = document.querySelector("#likes_prix");
   let likesNPrice = bottomRight(/*totalLikes, */price);
   section.appendChild(likesNPrice);

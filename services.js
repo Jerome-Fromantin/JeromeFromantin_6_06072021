@@ -5,7 +5,7 @@ export const getPhotographers = async() => {
 
 export const getPhotographer = async(id) => {
     let photographers = await getPhotographers();
-    let photographer = photographers.find(photog => photog.id == id);
+    let photographer = photographers.find(data => data.id == id);
     return photographer;
 }
 

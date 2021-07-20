@@ -1,7 +1,7 @@
 {
   "name": "projet06",
   "version": "1.0.0",
-  "description": "Ce travail est r�alis� dans le cadre de la formation \"D�veloppeur d'applications front-end\" d'OpenClassrooms.",
+  "description": "Ce travail est réalisé dans le cadre de la formation \"Développeur d'applications front-end\" d'OpenClassrooms.",
   "main": "scripts-accueil.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
