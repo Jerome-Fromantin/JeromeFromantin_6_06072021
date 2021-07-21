@@ -109,7 +109,7 @@ showPresent(thePhotographerId);
 
 // PARTIE GALERIE DE PHOTOGRAPHIES
 // Chaque carte de la page de photographe : Récupère dynamiquement l'image pour le lien.
-function photoPhotoLink(photographerId, image) {
+function photoPhotoLink(photographerId, image, description) {
   let photoLink = document.createElement("a");
   photoLink.href = "#";
   photoLink.className = "dyn_photo_photoLink";
@@ -118,7 +118,7 @@ function photoPhotoLink(photographerId, image) {
   photoLinkImg.src = "Images/" + photographerId + "/" + image;
   photoLinkImg.className = "dyn_photo_img";
   photoLink.setAttribute("lang", "en");
-  photoLink.setAttribute("alt", "Value");
+  photoLink.setAttribute("alt", description);
   photoLink.appendChild(photoLinkImg);
   return photoLink;
 }
@@ -154,7 +154,7 @@ function photoCardDescr(title, likes) {
 function fillArticle(picture) {
   let fullArticle = document.createElement("article");
   fullArticle.className = "photo_card";
-  let link = photoPhotoLink(picture.photographerId, picture.image);
+  let link = photoPhotoLink(picture.photographerId, picture.image, picture.description);
   let descr = photoCardDescr(picture.title, picture.likes);
   fullArticle.appendChild(link);
   fullArticle.appendChild(descr);
@@ -179,7 +179,7 @@ function bottomRight(/*totalLikes, */photographerPrice) {
   let bottomRightDiv = document.createElement("div");
   bottomRightDiv.id = "likes_prix_child";
   let bottomRightLikes = document.createElement("span");
-  bottomRightLikes.className = "dyn_likes";
+  bottomRightLikes.id = "dyn_likes";
   bottomRightLikes.setAttribute("aria-label", "Total des likes");
   let bottomRightLikesNumber = document.createElement("span");
   bottomRightLikesNumber.innerText = "680";                // VARIABLE "totalLikes" A DEFINIR !!
@@ -207,3 +207,37 @@ function showLikesNPrice(/*totalLikes, */price) {
   let likesNPrice = bottomRight(/*totalLikes, */price);
   section.appendChild(likesNPrice);
 }
+
+
+// POUR PLUS TARD !!
+/*
+Image Modal (Advanced)
+
+This is an example to demonstrate how CSS and JavaScript can work together.
+
+First, use CSS to create a modal window (dialog box), and hide it by default.
+
+Then, use a JavaScript to show the modal window and to display the image inside the modal, when a user clicks on the image:
+Northern Lights, Norway (alt de l'image)
+Example
+// Get the modal
+var modal = document.getElementById('myModal');
+
+// Get the image and insert it inside the modal - use its "alt" text as a caption
+var img = document.getElementById('myImg');
+var modalImg = document.getElementById("img01");
+var captionText = document.getElementById("caption");
+img.onclick = function(){
+  modal.style.display = "block";
+  modalImg.src = this.src;
+  captionText.innerHTML = this.alt;
+}
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+  modal.style.display = "none";
+} 
+*/
