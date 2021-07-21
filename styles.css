@@ -289,14 +289,11 @@ et dans la présentation de chaque page de photographe. */
 }
 
 /* Les likes. Utilisé aussi pour chaque carte-photo. */
-.dyn_likes {
+#dyn_likes, .dyn_likes {
   display: flex;
   align-items: center;
   margin-right: 45px;
 }
-
-/* Le prix du photographe. */
-/*.dyn_prix {}*/
 
 /* "Trier par" et sa liste déroulante. */
 #liste_tris {
@@ -318,21 +315,14 @@ et dans la présentation de chaque page de photographe. */
   margin: 0;
 }
 
-/*
-.photo_card {
-  border: 1px red solid;
-}
-*/
-
 /* Dans chaque carte, le lien incluant la photo. */
-.photo_photoLink, .dyn_photo_photoLink {
+.dyn_photo_photoLink {
   font-size: 16px;
   text-decoration: none;
   border: 2px transparent solid;
   border-radius: 5px;
   margin: 0;
 }
-.photo_photoLink:hover, .photo_photoLink:focus,
 .dyn_photo_photoLink:hover, .dyn_photo_photoLink:focus {
   border: 2px #901C1C solid;
 }
@@ -412,12 +402,13 @@ et dans la présentation de chaque page de photographe. */
   }
 
   #photo_pres, #photo_pres_text {
-    display: flex;                   /* A SUPPRIMER ? */
-    align-items: center;             /* A SUPPRIMER ? */
-    flex-direction: row;             /* A SUPPRIMER ? */
-    justify-content: space-between;  /* A SUPPRIMER ? */
+    align-items: flex-start;
     background: white;
-    margin: 30px 50px 0 50px;        /* A SUPPRIMER ? */
+    margin: 20px 0 0 -20px;
+  }
+
+  #photo_pres_text {
+    margin: 0;
   }
 
   #likes_prix {
@@ -426,6 +417,70 @@ et dans la présentation de chaque page de photographe. */
 
   #dyn_photo_h1 {
     font-size: 36px;
-    margin: -30px 0 0 -120px;
+    padding: 0;
+    margin: 0 0 0 -5px;
+  }
+
+  #dyn_photo_pres_lieu {
+    margin: 0 0 0 -3px;
+  }
+
+  #dyn_photo_pres_slogan {
+    font-size: 14px;
+    margin: 4px 0 0 -2px;
+  }
+
+  #dyn_photo_pres_barnav {
+    margin: 10px -40px 0 -4px;
+  }
+
+  .photo_pres_tag {
+    font-size: 14px;
+  }
+  
+  #dyn_photo_contact_link {
+    display: none;
+  }
+
+  #dyn_photo_round_img {
+    width: 100px;
+    border-radius: 50px;
+    margin: 0 0 0 -20px;
+  }
+
+  .dyn_photo_photoLink {
+    display: flex;
+    align-items: center;
+    height: 190px;
+    overflow: hidden;
+  }
+
+  .dyn_photo_img {
+    width: 335px;
+  }
+
+  .photo_card_titleLikes {
+    font-size: 16px;
+    margin: 5px 0 0 0;
+  }
+
+  .dyn_title {
+    margin-left: -20px;
+  }
+  
+  .dyn_likes {
+    display: flex;
+    align-items: flex-start;
+    margin-right: -20px;
+  }
+
+  .icone {
+    width: 16px;
+  }
+
+  /* Inclure d'autres règles */
+
+  #liste_tris {
+    display: none;
   }
 }
