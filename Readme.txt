@@ -17,11 +17,11 @@ Travail réalisé :
 - Début de mise en place du JavaScript,
 - Mise en place de la version mobile de la page d'accueil,
 - Mise en place des 1ères fonctions dynamiques en JavaScript pour la page d'accueil et la page de photographe,
-- Mise en place des données dynamiques de la page d'accueil,
-- Mise en place des données dynamiques de la page de photographe (présentation et galerie),
-- Début de mise en place des données dynamiques de la partie "Likes et prix" en bas à droite,
+- Mise en place des données dynamiques de la page d'accueil et de la page photographe (presque terminé),
 - Ajout d'images de photographes,
-- Installation de WebPack et mise en place de fonctions asynchrones.
+- Installation de WebPack et mise en place de fonctions asynchrones,
+- Mise en place presque complète de la version mobile de la page de photographe,
+- Ajout d'un champ "description" dans les medias du fichier JSON.
 
 Travail à faire :
 - Fin d'intégration des pages commencées,
