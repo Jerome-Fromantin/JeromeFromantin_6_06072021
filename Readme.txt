@@ -20,8 +20,8 @@ Travail réalisé :
 - Mise en place des données dynamiques de la page d'accueil et de la page photographe (presque terminé),
 - Ajout d'images de photographes,
 - Installation de WebPack et mise en place de fonctions asynchrones,
-- Mise en place presque complète de la version mobile de la page de photographe,
-- Ajout d'un champ "description" dans les medias du fichier JSON.
+- Ajout d'un champ "description" dans les medias du fichier JSON,
+- Mise en place de la version mobile de la page de photographe.
 
 Travail à faire :
 - Fin d'intégration des pages commencées,
