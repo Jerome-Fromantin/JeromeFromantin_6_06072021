@@ -252,8 +252,8 @@ et dans la présentation de chaque page de photographe. */
   border: 1px #901C1C solid;
 }
 
-/* Le lien englobant le bouton de contact. */
-#dyn_photo_contact_link {
+/* Le lien englobant le bouton de contact, en version desktop et en version mobile. */
+#dyn_photo_contact_link, #dyn_photo_contact_link_mobile {
   background: #901C1C;
   color: white;
   font-size: 20px;
@@ -262,9 +262,15 @@ et dans la présentation de chaque page de photographe. */
   border-radius: 5px;
   margin-top: -35px;
 }
-#dyn_photo_contact_link:hover, #dyn_photo_contact_link:focus {
+#dyn_photo_contact_link:hover, #dyn_photo_contact_link:focus,
+#dyn_photo_contact_link_mobile:hover, #dyn_photo_contact_link_mobile:focus {
   background: #D3573C;
   color: black;
+}
+
+/* Le lien englobant le bouton de contact en version mobile. */
+#dyn_photo_contact_link_mobile {
+  display: none;
 }
 
 /* L'image ronde. */
@@ -362,7 +368,7 @@ et dans la présentation de chaque page de photographe. */
   cursor: auto;
 }
 
-/* Toutes les media queries pour mobiles. */
+/***** TOUTES LES MEDIA QUERIES POUR MOBILES *****/
 @media all and (max-width: 600px) {
   #logo {
     width: 230px;
@@ -440,6 +446,16 @@ et dans la présentation de chaque page de photographe. */
   
   #dyn_photo_contact_link {
     display: none;
+  }
+
+  #dyn_photo_contact_link_mobile {
+    display: block;
+    position: fixed;
+    bottom: 35px;
+    left: 30%;
+    width: 40%;
+    text-align: center;
+    padding: 5px 10px;
   }
 
   #dyn_photo_round_img {

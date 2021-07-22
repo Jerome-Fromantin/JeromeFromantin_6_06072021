@@ -83,6 +83,7 @@ function showLeftPart(photographer) {
   let contact = contactButton(thePhotographerId);
   sectionleft.appendChild(leftPart);
   sectionleft.appendChild(contact);
+  showMobileContact(photographer.id);
   showLikesNPrice(/*totalLikes, */photographer.price);
 }
 
@@ -172,6 +173,28 @@ async function showPhotos(id) {
 }
 
 showPhotos(thePhotographerId);
+
+
+// BOUTON DE CONTACT EN BAS EN VERSION MOBILE
+// Récupère dynamiquement le lien de contact pour le bouton en version mobile.
+function mobileContactButton(photographerId) {
+  let buttonLink = document.createElement("a");
+  buttonLink.href = "contact.html?id=" + photographerId;
+  buttonLink.id = "dyn_photo_contact_link_mobile";
+  buttonLink.setAttribute("aria-label", "Contact Me");
+  let buttonSpan = document.createElement("span");
+  buttonSpan.innerText = "Contactez-moi";
+  buttonLink.appendChild(buttonSpan);
+  return buttonLink;
+}
+
+// Montre la section remplie dynamiquement.
+function showMobileContact(id) {
+  let section = document.querySelector("#mobile_contact_parent");
+  let mobileContact = mobileContactButton(id);
+  section.appendChild(mobileContact);
+}
+
 
 // PARTIE "LIKES ET PRIX" EN BAS A DROITE
 // Likes et prix : Récupère dynamiquement le nombre total de likes et le prix du photographe.
