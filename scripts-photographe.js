@@ -84,7 +84,7 @@ function showLeftPart(photographer) {
   sectionleft.appendChild(leftPart);
   sectionleft.appendChild(contact);
   showMobileContact(photographer.id);
-  showLikesNPrice(/*totalLikes, */photographer.price);
+  showLikesNPrice(/*totalLikes, */thePhotographerId, photographer.price);
 }
 
 // Partie droite de la présentation : Récupère dynamiquement le nom de l'image.
@@ -148,8 +148,15 @@ function photoCardDescr(title, likes) {
   descriptionLikes.appendChild(descriptionLikesNumber);
   descriptionLikes.appendChild(descriptionLikesIcon);
   description.appendChild(descriptionLikes);
+  //console.log(likes);                                                           // A SUPPRIMER !!
   return description;
 }
+
+//let likes = picture.likes;                                                           // A SUPPRIMER !!
+//console.log([{likes}]);                                                           // A SUPPRIMER !!
+//let valeurInitiale = 0;
+//let somme = picture.likes.reduce((accumulateur, valeurCourante) => accumulateur + valeurCourante.x, valeurInitiale);
+//console.log(somme);
 
 // Organise en carte toutes les données médias précédemment récupérées.
 function fillArticle(picture) {
@@ -159,12 +166,14 @@ function fillArticle(picture) {
   let descr = photoCardDescr(picture.title, picture.likes);
   fullArticle.appendChild(link);
   fullArticle.appendChild(descr);
+  //console.log(picture.likes);                                                            // A SUPPRIMER !!
   return fullArticle;
 }
 
 // Montre toutes les cartes remplies dynamiquement.
 async function showPhotos(id) {
   let pictures = await getMediasByPhotographers(id);
+  console.log(pictures);                                                           // A SUPPRIMER !!
   let section = document.querySelector(".photo_photosLine");
   for (let picture of pictures) {
     let article = fillArticle(picture);
@@ -173,7 +182,6 @@ async function showPhotos(id) {
 }
 
 showPhotos(thePhotographerId);
-
 
 // BOUTON DE CONTACT EN BAS EN VERSION MOBILE
 // Récupère dynamiquement le lien de contact pour le bouton en version mobile.
@@ -195,18 +203,29 @@ function showMobileContact(id) {
   section.appendChild(mobileContact);
 }
 
-
 // PARTIE "LIKES ET PRIX" EN BAS A DROITE
 // Likes et prix : Récupère dynamiquement le nombre total de likes et le prix du photographe.
-function bottomRight(/*totalLikes, */photographerPrice) {
+function bottomRight(/*totalLikes, */id, photographerPrice) {
+  //let pictures = await getMediasByPhotographers(id);
+  //console.log(pictures);                                                           // A SUPPRIMER !!
+  //let likes = picture.likes;                                                           // A SUPPRIMER !!
+  //console.log([{likes}]);                                                           // A SUPPRIMER !!
+  //console.log(photographerPrice);                                                     // A SUPPRIMER !!
+  //console.log(likes);                                                     // A SUPPRIMER !!
+  
   let bottomRightDiv = document.createElement("div");
   bottomRightDiv.id = "likes_prix_child";
   let bottomRightLikes = document.createElement("span");
   bottomRightLikes.id = "dyn_likes";
   bottomRightLikes.setAttribute("aria-label", "Total des likes");
   let bottomRightLikesNumber = document.createElement("span");
-  bottomRightLikesNumber.innerText = "680";                // VARIABLE "totalLikes" A DEFINIR !!
-  console.log(bottomRightLikesNumber.innerText);
+  bottomRightLikesNumber.innerText = "680*";                                        // VARIABLE "totalLikes" A DEFINIR !!
+  console.log(bottomRightLikesNumber.innerText);                                    // A SUPPRIMER !!
+  //console.log(id);                                                                // A SUPPRIMER !!
+  //let pictures = getMediasByPhotographers(id);
+  //console.log(pictures);                                                           // A SUPPRIMER !!
+  //let likes = pictures[0].likes;
+  //console.log([pictures.likes]);                                                                // A SUPPRIMER !!
   bottomRightLikesNumber.setAttribute("aria-label", "Nombre total des likes");
   let bottomRightLikesIcon = document.createElement("img");
   bottomRightLikesIcon.src = "Images/Icone-coeur-noir.png";
@@ -225,10 +244,18 @@ function bottomRight(/*totalLikes, */photographerPrice) {
 }
 
 // Montre la section remplie dynamiquement.
-function showLikesNPrice(/*totalLikes, */price) {
+async function showLikesNPrice(/*totalLikes, */id, price) {
+  let pictures = await getMediasByPhotographers(id);
+  console.log(pictures);                                                           // A SUPPRIMER !!
   let section = document.querySelector("#likes_prix");
-  let likesNPrice = bottomRight(/*totalLikes, */price);
-  section.appendChild(likesNPrice);
+  for (let picture of pictures) {
+    let likesNPrice = bottomRight(picture.likes, /*totalLikes, */price, id);
+    console.log(picture.likes);                                                           // A SUPPRIMER !!
+    //let valeurInitiale = 0;
+    //let somme = picture.reduce((accumulateur, valeurCourante) => accumulateur + valeurCourante.likes, valeurInitiale);
+    //console.log(somme);
+    section.appendChild(likesNPrice);
+  }
 }
 
 
