@@ -368,6 +368,101 @@ et dans la présentation de chaque page de photographe. */
   cursor: auto;
 }
 
+/***** FENETRE LIGHTBOX-MODAL *****/
+/* Fenêtre entière. */
+#lightbox_section {
+  display: none;
+}
+/* "main" de la fenêtre. */
+#lightbox_main {
+  position: relative;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  justify-content: center;
+  margin: 20px auto -40px auto;
+}
+
+/* Icônes "précédent", "suivant" et "fermeture". */
+.lightbox-icons {
+  padding: 0;
+  margin: 20px;
+}
+
+/* Bloc image et titre. */
+#lightbox-imgAndTitle {
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+/* Image seulement. */
+#lightbox-img {
+  max-height: 90vh;
+  max-width: 80vw;
+}
+
+/* Titre seulement. */
+#lightbox-parag {
+  color: #901C1C;
+  font-size: 28px;
+  margin: 10px 0 10px 0;
+}
+
+/* Bouton de fermeture. */
+#lightbox-close {
+  cursor: pointer;
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+/***** FENETRE FORM-MODAL *****/
+/* Fenêtre entière. */
+#form_section {
+  display: block;
+}
+
+/* "main" du formulaire. */
+#form_main {
+  background: #D3573C;
+  width: 600px;
+  height: 1500px;
+  border-radius: 5px;
+  margin: 0 auto 80px auto;
+}
+
+/* h1 du formulaire. */
+#form_h1 {
+  font-weight: normal;
+  font-size: 60px;
+  padding: 15px 0 0 30px;
+}
+
+/* Chaque div (label et champ) du formulaire. */
+.form_div {
+  font-weight: 100;
+  font-size: 32px;
+  margin-left: 30px;
+}
+
+/* Chaque label du formulaire. */
+/*label {
+  border: 1px black solid
+}*/
+
+/* Chaque input du formulaire. */
+input {
+  height: 50px;
+  width: 540px;
+}
+
+/* Zone de message du formulaire. */
+textarea {
+  width: 540px;
+}
+
 /***** TOUTES LES MEDIA QUERIES POUR MOBILES *****/
 @media all and (max-width: 600px) {
   #logo {
@@ -494,9 +589,25 @@ et dans la présentation de chaque page de photographe. */
     width: 16px;
   }
 
-  /* Inclure d'autres règles */
-
   #liste_tris {
     display: none;
   }
+
+  #lightbox_main {
+    margin: 20px -40px 80px -40px;
+  }
+
+  .lightbox-icons {
+    margin: 12px;
+  }
+  
+  .lightbox-icon {
+    width: 12px;
+  }
+  
+  #lightbox-close {
+    margin: 5px 10px 0 0;
+  }
+  
+  /* Inclure d'autres règles */
 }

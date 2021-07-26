@@ -35,6 +35,46 @@
       <section class="photo_photosLine" aria-label="Galerie de photos"></section>
     </main>
 
+    <section id="lightbox_section">
+      <section id="lightbox_main">
+        <a href="#" class="lightbox-icons" aria-label="previous image">
+          <img src="Images/Icone-fleche-gauche.png" class="lightbox-icon" alt="Previous icon">
+        </a>
+        <section id="lightbox-imgAndTitle" aria-label="">
+          <img src="Images/243/Animals_Rainbow_big.jpg" alt="Oiseau arc-en-ciel" id="lightbox-img">
+          <p id="lightbox-parag">Arc-en-ciel</p>
+        </section>
+        <a href="#" class="lightbox-icons" aria-label="next image">
+          <img src="Images/Icone-fleche-droite.png" class="lightbox-icon" alt="Next icon">
+        </a>
+        <span class="lightbox-icons" id="lightbox-close" aria-label="close dialog">
+          <img src="Images/Icone-croix.png" class="lightbox-icon" alt="Close button">
+        </span>
+      </section>
+    </section>
+
+    <section id="form_section">
+      <form id="form_main">
+        <h1 id="form_h1">Contactez-moi<br>Mimi Keel</h1>
+        <div class="form_div">
+          <label for="prenom">Prénom</label><br>
+          <input type="text" id="prenom">
+        </div>
+        <div class="form_div">
+          <label for="nom">Nom</label><br>
+          <input type="text" id="nom">
+        </div>
+        <div class="form_div">
+          <label for="email">Email</label><br>
+          <input type="email" id="email">
+        </div>
+        <div class="form_div">
+          <label for="message">Votre message</label><br>
+          <textarea id="message" rows="5"></textarea>
+        </div>
+      </form>
+    </section>
+
     <script type="module" src="dist/photographe.js"></script>
   </body>
 </html>
