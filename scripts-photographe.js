@@ -112,7 +112,7 @@ showPresent(thePhotographerId);
 // Chaque carte de la page de photographe : Récupère dynamiquement l'image pour le lien.
 function photoPhotoLink(photographerId, image, description) {
   let photoLink = document.createElement("a");
-  photoLink.href = "#";
+  //photoLink.href = "";
   photoLink.className = "dyn_photo_photoLink";
   photoLink.setAttribute("aria-label", "Photographie");
   let photoLinkImg = document.createElement("img");
@@ -148,15 +148,8 @@ function photoCardDescr(title, likes) {
   descriptionLikes.appendChild(descriptionLikesNumber);
   descriptionLikes.appendChild(descriptionLikesIcon);
   description.appendChild(descriptionLikes);
-  //console.log(likes);                                                           // A SUPPRIMER !!
   return description;
 }
-
-//let likes = picture.likes;                                                           // A SUPPRIMER !!
-//console.log([{likes}]);                                                           // A SUPPRIMER !!
-//let valeurInitiale = 0;
-//let somme = picture.likes.reduce((accumulateur, valeurCourante) => accumulateur + valeurCourante.x, valeurInitiale);
-//console.log(somme);
 
 // Organise en carte toutes les données médias précédemment récupérées.
 function fillArticle(picture) {
@@ -166,14 +159,12 @@ function fillArticle(picture) {
   let descr = photoCardDescr(picture.title, picture.likes);
   fullArticle.appendChild(link);
   fullArticle.appendChild(descr);
-  //console.log(picture.likes);                                                            // A SUPPRIMER !!
   return fullArticle;
 }
 
 // Montre toutes les cartes remplies dynamiquement.
 async function showPhotos(id) {
   let pictures = await getMediasByPhotographers(id);
-  console.log(pictures);                                                           // A SUPPRIMER !!
   let section = document.querySelector(".photo_photosLine");
   for (let picture of pictures) {
     let article = fillArticle(picture);
@@ -206,26 +197,19 @@ function showMobileContact(id) {
 // PARTIE "LIKES ET PRIX" EN BAS A DROITE
 // Likes et prix : Récupère dynamiquement le nombre total de likes et le prix du photographe.
 function bottomRight(/*totalLikes, */id, photographerPrice) {
-  //let pictures = await getMediasByPhotographers(id);
-  //console.log(pictures);                                                           // A SUPPRIMER !!
-  //let likes = picture.likes;                                                           // A SUPPRIMER !!
-  //console.log([{likes}]);                                                           // A SUPPRIMER !!
-  //console.log(photographerPrice);                                                     // A SUPPRIMER !!
-  //console.log(likes);                                                     // A SUPPRIMER !!
-  
   let bottomRightDiv = document.createElement("div");
   bottomRightDiv.id = "likes_prix_child";
   let bottomRightLikes = document.createElement("span");
   bottomRightLikes.id = "dyn_likes";
   bottomRightLikes.setAttribute("aria-label", "Total des likes");
   let bottomRightLikesNumber = document.createElement("span");
-  bottomRightLikesNumber.innerText = "680*";                                        // VARIABLE "totalLikes" A DEFINIR !!
-  console.log(bottomRightLikesNumber.innerText);                                    // A SUPPRIMER !!
-  //console.log(id);                                                                // A SUPPRIMER !!
+  bottomRightLikesNumber.innerText = "680*";                                     // VARIABLE "totalLikes" A DEFINIR !!
+  //console.log(bottomRightLikesNumber.innerText);                                 // A SUPPRIMER !!
+  //console.log(id);                                                             // A SUPPRIMER !!
   //let pictures = getMediasByPhotographers(id);
-  //console.log(pictures);                                                           // A SUPPRIMER !!
+  //console.log(pictures);                                                       // A SUPPRIMER !!
   //let likes = pictures[0].likes;
-  //console.log([pictures.likes]);                                                                // A SUPPRIMER !!
+  //console.log([pictures.likes]);                                               // A SUPPRIMER !!
   bottomRightLikesNumber.setAttribute("aria-label", "Nombre total des likes");
   let bottomRightLikesIcon = document.createElement("img");
   bottomRightLikesIcon.src = "Images/Icone-coeur-noir.png";
@@ -246,11 +230,11 @@ function bottomRight(/*totalLikes, */id, photographerPrice) {
 // Montre la section remplie dynamiquement.
 async function showLikesNPrice(/*totalLikes, */id, price) {
   let pictures = await getMediasByPhotographers(id);
-  console.log(pictures);                                                           // A SUPPRIMER !!
+  console.log(pictures);                                                             // A SUPPRIMER !!
   let section = document.querySelector("#likes_prix");
   for (let picture of pictures) {
     let likesNPrice = bottomRight(picture.likes, /*totalLikes, */price, id);
-    console.log(picture.likes);                                                           // A SUPPRIMER !!
+    //console.log(picture.likes);                                                    // A SUPPRIMER !!
     //let valeurInitiale = 0;
     //let somme = picture.reduce((accumulateur, valeurCourante) => accumulateur + valeurCourante.likes, valeurInitiale);
     //console.log(somme);
@@ -258,36 +242,28 @@ async function showLikesNPrice(/*totalLikes, */id, price) {
   }
 }
 
-
-// POUR PLUS TARD !!
+// FENETRE LIGHTBOX-MODAL
 /*
-Image Modal (Advanced)
+Fenêtre modale créée : photographer-page.html, ligne 38 à 54.
+Fenêtre cachée par défaut : styles.css, ligne 374.
+*/
+// Récupère la section "lightbox-modal".
+let modal = document.getElementById("lightbox_section");
 
-This is an example to demonstrate how CSS and JavaScript can work together.
-
-First, use CSS to create a modal window (dialog box), and hide it by default.
-
-Then, use a JavaScript to show the modal window and to display the image inside the modal, when a user clicks on the image:
-Northern Lights, Norway (alt de l'image)
-Example
-// Get the modal
-var modal = document.getElementById('myModal');
-
-// Get the image and insert it inside the modal - use its "alt" text as a caption
-var img = document.getElementById('myImg');
-var modalImg = document.getElementById("img01");
-var captionText = document.getElementById("caption");
-img.onclick = function(){
+// Récupère l'image de la galerie et l'insère dans le modal.
+let galleryImg = document.getElementsByClassName("dyn_photo_img");
+console.log(galleryImg); // HTMLCollection
+let lightboxImg = document.getElementById("lightbox-img");
+console.log(lightboxImg);
+galleryImg.onclick = function() {
   modal.style.display = "block";
-  modalImg.src = this.src;
-  captionText.innerHTML = this.alt;
+  lightboxImg.src = this.src;
 }
 
-// Get the <span> element that closes the modal
-var span = document.getElementsByClassName("close")[0];
+// Récupère le "span" qui ferme le modal.
+let span = document.getElementById("lightbox-close");
 
-// When the user clicks on <span> (x), close the modal
+// Au clic, ferme le modal.
 span.onclick = function() {
   modal.style.display = "none";
-} 
-*/
+}
