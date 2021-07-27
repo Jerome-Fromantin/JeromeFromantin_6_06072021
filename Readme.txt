@@ -23,7 +23,8 @@ Travail réalisé :
 - Ajout d'un champ "description" dans les medias du fichier JSON,
 - Mise en place de la version mobile de la page de photographe,
 - Mise en place de la lightbox en statique (desktop et mobile),
-- Début de mise en place du formulaire de contact (desktop).
+- Début de mise en place du formulaire de contact (desktop),
+- Début de mise en place du pattern factory (page d'accueil).
 
 Travail à faire :
 - Fin d'intégration des pages commencées,
