@@ -170,6 +170,11 @@ et dans la présentation de chaque page de photographe. */
 }
 
 /***** PAGES DE PHOTOGRAPHES *****/
+/* Body de chaque page. */
+#photo_body {
+  position: relative;
+}
+
 /* Header de chaque page. */
 #photo_header {
   display: flex;
@@ -371,7 +376,7 @@ et dans la présentation de chaque page de photographe. */
 /***** FENETRE LIGHTBOX-MODAL *****/
 /* Fenêtre entière. */
 #lightbox_section {
-  display: block;
+  display: none;
 }
 /* "main" de la fenêtre. */
 #lightbox_main {
@@ -421,14 +426,18 @@ et dans la présentation de chaque page de photographe. */
 /***** FENETRE FORM-MODAL *****/
 /* Fenêtre entière. */
 #form_section {
-  display: block;
+  position: absolute;
+  top: 10px;
+  left: 25%;
+  width: 50%;
+  display: none;
+  margin: 0;
 }
 
 /* "main" du formulaire. */
 #form_main {
   position: relative;
   background: #D3573C;
-  width: 600px;
   height: 1000px;
   border-radius: 5px;
   margin: 0 auto 80px auto;
@@ -438,14 +447,14 @@ et dans la présentation de chaque page de photographe. */
 #form_h1 {
   font-weight: normal;
   font-size: 60px;
-  padding: 15px 0 0 30px;
+  padding: 15px 0 0 2%;
 }
 
 /* Chaque div (label et champ) du formulaire. */
 .form_div {
   font-weight: 100;
   font-size: 32px;
-  margin-left: 30px;
+  margin: 0 2%;
 }
 
 /* Chaque label du formulaire. */
@@ -456,12 +465,12 @@ et dans la présentation de chaque page de photographe. */
 /* Chaque champ du formulaire. */
 input {
   height: 50px;
-  width: 540px;
+  width: 99%;
 }
 
 /* Zone de message du formulaire. */
 textarea {
-  width: 540px;
+  width: 99%;
 }
 
 /* Bouton "Envoyer" du formulaire. */

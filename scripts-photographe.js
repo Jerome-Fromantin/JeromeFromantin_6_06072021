@@ -6,6 +6,14 @@ import {getMediasByPhotographers, getPhotographer} from "./services";
 let param = new URLSearchParams(window.location.search);
 let thePhotographerId = param.get("id");
 
+let modal = document.getElementById("lightbox_section");
+let lightboxImg = document.getElementById("lightbox-img");
+let formModal = document.getElementById("form_section");
+let photoHTML = document.getElementById("photo_html");
+let photoHeader = document.getElementById("photo_header");
+let photoMain = document.getElementById("photo_main");
+let photoPres = document.getElementById("photo_pres");
+
 // PARTIE PRESENTATION DU PHOTOGRAPHE
 // Partie gauche de la présentation : Récupère dynamiquement le nom pour le h1.
 function photoH1(photographerName) {
@@ -65,11 +73,19 @@ function fillLeftPart(photographerName, photographerCity, photographerCountry, p
 }
 
 // Partie gauche de la présentation : Récupère dynamiquement le lien de contact pour le bouton.
-function contactButton(photographerId) {
+function contactButton() {
   let buttonLink = document.createElement("a");
-  buttonLink.href = "";                              // "contact.html?id=" + photographerId;
+  buttonLink.href = "#";
   buttonLink.id = "dyn_photo_contact_link";
   buttonLink.setAttribute("aria-label", "Contact Me");
+  buttonLink.onclick = function(event) {
+    event.preventDefault();
+    formModal.style.display = "block";
+    //photoHTML.style.background = "RGBa(0, 0, 0, 0.5)";
+    //photoHeader.style.background = "RGBa(0, 0, 0, 0.5)";
+    //photoMain.style.background = "RGBa(0, 0, 0, 0.5)";
+    //photoPres.style.background = "RGBa(0, 0, 0, 0.5)";
+  }
   let buttonSpan = document.createElement("span");
   buttonSpan.innerText = "Contactez-moi";
   buttonLink.appendChild(buttonSpan);
@@ -80,7 +96,7 @@ function contactButton(photographerId) {
 function showLeftPart(photographer) {
   let sectionleft = document.querySelector("#photo_pres_text");
   let leftPart = fillLeftPart(photographer.name, photographer.city, photographer.country, photographer.tagline, photographer.tags);
-  let contact = contactButton(thePhotographerId);
+  let contact = contactButton();
   sectionleft.appendChild(leftPart);
   sectionleft.appendChild(contact);
   showMobileContact(photographer.id);
@@ -112,12 +128,16 @@ showPresent(thePhotographerId);
 // Chaque carte de la page de photographe : Récupère dynamiquement l'image pour le lien.
 function photoPhotoLink(photographerId, image, description) {
   let photoLink = document.createElement("a");
-  //photoLink.href = "";
   photoLink.className = "dyn_photo_photoLink";
   photoLink.setAttribute("aria-label", "Photographie");
   let photoLinkImg = document.createElement("img");
   photoLinkImg.src = "Images/" + photographerId + "/" + image;
   photoLinkImg.className = "dyn_photo_img";
+  photoLinkImg.onclick = function(event) {
+    event.preventDefault();
+    modal.style.display = "block";
+    lightboxImg.src = this.src;
+  }
   photoLink.setAttribute("lang", "en");
   photoLink.setAttribute("alt", description);
   photoLink.appendChild(photoLinkImg);
@@ -203,13 +223,8 @@ function bottomRight(/*totalLikes, */id, photographerPrice) {
   bottomRightLikes.id = "dyn_likes";
   bottomRightLikes.setAttribute("aria-label", "Total des likes");
   let bottomRightLikesNumber = document.createElement("span");
+  bottomRightLikesNumber.id = "dyn_likes_number";
   bottomRightLikesNumber.innerText = "680*";                                     // VARIABLE "totalLikes" A DEFINIR !!
-  //console.log(bottomRightLikesNumber.innerText);                                 // A SUPPRIMER !!
-  //console.log(id);                                                             // A SUPPRIMER !!
-  //let pictures = getMediasByPhotographers(id);
-  //console.log(pictures);                                                       // A SUPPRIMER !!
-  //let likes = pictures[0].likes;
-  //console.log([pictures.likes]);                                               // A SUPPRIMER !!
   bottomRightLikesNumber.setAttribute("aria-label", "Nombre total des likes");
   let bottomRightLikesIcon = document.createElement("img");
   bottomRightLikesIcon.src = "Images/Icone-coeur-noir.png";
@@ -234,12 +249,12 @@ async function showLikesNPrice(/*totalLikes, */id, price) {
   let section = document.querySelector("#likes_prix");
   for (let picture of pictures) {
     let likesNPrice = bottomRight(picture.likes, /*totalLikes, */price, id);
-    //console.log(picture.likes);                                                    // A SUPPRIMER !!
-    //let valeurInitiale = 0;
-    //let somme = picture.reduce((accumulateur, valeurCourante) => accumulateur + valeurCourante.likes, valeurInitiale);
-    //console.log(somme);
+    //console.log(picture.likes);                                                 //    A SUPPRIMER !!
     section.appendChild(likesNPrice);
   }
+  let valeurInitiale = 0;
+  let somme = pictures.reduce((accumulateur, valeurCourante) => accumulateur + valeurCourante.likes, valeurInitiale);
+  console.log("somme :", somme);                                                //    A SUPPRIMER !!
 }
 
 // FENETRE LIGHTBOX-MODAL
@@ -248,9 +263,10 @@ Fenêtre modale créée : photographer-page.html, ligne 38 à 54.
 Fenêtre (qui sera) cachée par défaut : styles.css, ligne 374.
 */
 // Récupère la section "lightbox-modal".
-let modal = document.getElementById("lightbox_section");
+//let modal = document.getElementById("lightbox_section");
 
 // Récupère l'image de la galerie et l'insère dans le modal.
+/*
 let galleryImg = document.getElementsByClassName("dyn_photo_img");
 console.log(galleryImg); // HTMLCollection
 let lightboxImg = document.getElementById("lightbox-img");
@@ -259,6 +275,7 @@ galleryImg.onclick = function() {
   modal.style.display = "block";
   lightboxImg.src = this.src;
 }
+*/
 
 // Récupère le "span" qui ferme le modal.
 let span = document.getElementById("lightbox_close");
@@ -269,19 +286,17 @@ span.onclick = function() {
 }
 
 // FENETRE FORM-MODAL
-/*
-Fenêtre modale créée : photographer-page.html, ligne 56 à 80.
-Fenêtre (qui sera) cachée par défaut : styles.css, ligne 424.
-*/
 // A MODIFIER !!
 // Récupère la section "form-modal".
-let formModal = document.getElementById("form_section");
+//let formModal = document.getElementById("form_section");
 
 // Récupère le bouton de contact à cliquer.
-let buttonSpan = document.getElementById("dyn_photo_contact_link");
+//let buttonSpan = document.getElementById("dyn_photo_contact_link");
+/*
 buttonSpan.onclick = function() {
   formModal.style.display = "block";
 }
+*/
 
 // Récupère le "span" qui ferme le modal.
 let formSpan = document.getElementById("form_close");
@@ -289,4 +304,8 @@ let formSpan = document.getElementById("form_close");
 // Au clic, ferme le modal.
 formSpan.onclick = function() {
   formModal.style.display = "none";
+  //photoHTML.style.background = "inherit";
+  //photoHeader.style.background = "inherit";
+  //photoMain.style.background = "inherit";
+  //photoPres.style.background = "inherit";
 }

@@ -2,76 +2,19 @@
 import {getPhotographers} from "./services";
 
 // PAGE D'ACCUEIL
-// Chaque carte de la page d'accueil : Récupère dynamiquement l'image et le nom pour le lien.
-function homePhotoLink(portrait, name, id) {
-  let link = document.createElement("a");
-  link.href = "photographer-page.html?id=" + id;
-  link.className = "dyn_home_photoLink";
-  link.setAttribute("aria-label", name);
-  let linkImg = document.createElement("img");
-  linkImg.src = "Images/ID_Photos/" + portrait;
-  linkImg.className = "dyn_round_img";
-  let linkH2 = document.createElement("h2");
-  linkH2.innerText = name;
-  linkH2.className = "dyn_home_h2";
-  link.appendChild(linkImg);
-  link.appendChild(linkH2);
-  return link;
-}
-
-// Chaque carte de la page d'accueil : Récupère dynamiquement les données pour les 3 lignes de description.
-function homeCardDescr(city, country, tagline, price) {
-  let description = document.createElement("div");
-  description.className = "dyn_home_card_descr";
-  let descriptionPlace = document.createElement("p");
-  descriptionPlace.innerText = city + ", " + country;
-  descriptionPlace.className = "dyn_home_card_lieu";
-  descriptionPlace.setAttribute("lang", "en");
-  descriptionPlace.setAttribute("aria-label", city + ", " + country);
-  let descriptionSlogan = document.createElement("p");
-  descriptionSlogan.innerText = tagline;
-  descriptionSlogan.className = "dyn_home_card_slogan";
-  descriptionSlogan.setAttribute("aria-label", tagline);
-  let descriptionPrix = document.createElement("p");
-  descriptionPrix.innerText = price + "€/jour";
-  descriptionPrix.className = "dyn_home_card_prix";
-  descriptionPrix.setAttribute("aria-label", price);
-  description.appendChild(descriptionPlace);
-  description.appendChild(descriptionSlogan);
-  description.appendChild(descriptionPrix);
-  return description;
-}
-
-// Chaque carte de la page d'accueil : Récupère dynamiquement les données pour les tags.
-function homeCardTags(tags) {
-  let tagGroup = document.createElement("nav");
-  tagGroup.className = "barnav";
-  tagGroup.setAttribute("lang", "en");
-  tagGroup.setAttribute("aria-label", "Catégories du photographe");
-  for (let tag of tags) {
-    let tagGroupLink = document.createElement("a");
-    tagGroupLink.href = "#";
-    tagGroupLink.className = "tag";
-    tagGroupLink.id = "tag";
-    tagGroupLink.setAttribute("aria-label", tag);
-    let tagGroupSpan = document.createElement("span");
-    tagGroupSpan.innerText = "#" + tag;
-    tagGroupLink.appendChild(tagGroupSpan);
-    tagGroup.appendChild(tagGroupLink);
-  }
-  return tagGroup;
-}
+// Récupération des données dynamiques pour chaque carte de la page d'accueil.
+import {ArticlePartFactory} from "./articlePartFactory";
 
 // Organise en carte toutes les données précédemment récupérées.
 function fillArticle(photographer) {
   let fullArticle = document.createElement("article");
   fullArticle.className = "home_card";
-  let link = homePhotoLink(photographer.portrait, photographer.name, photographer.id)
-  let descr = homeCardDescr(photographer.city, photographer.country, photographer.tagline, photographer.price)
-  let tags = homeCardTags(photographer.tags);
-  fullArticle.appendChild(link);
-  fullArticle.appendChild(descr);
-  fullArticle.appendChild(tags);
+  let link = new ArticlePartFactory("link", photographer);
+  let descr = new ArticlePartFactory("descr", photographer);
+  let tags = new ArticlePartFactory("tags", photographer);
+  fullArticle.appendChild(link.toHTML());
+  fullArticle.appendChild(descr.toHTML());
+  fullArticle.appendChild(tags.toHTML());
   return fullArticle;
 }
 
