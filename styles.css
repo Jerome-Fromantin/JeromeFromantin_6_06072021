@@ -371,7 +371,7 @@ et dans la présentation de chaque page de photographe. */
 /***** FENETRE LIGHTBOX-MODAL *****/
 /* Fenêtre entière. */
 #lightbox_section {
-  display: none;
+  display: block;
 }
 /* "main" de la fenêtre. */
 #lightbox_main {
@@ -411,7 +411,7 @@ et dans la présentation de chaque page de photographe. */
 }
 
 /* Bouton de fermeture. */
-#lightbox-close {
+#lightbox_close {
   cursor: pointer;
   position: absolute;
   top: 0;
@@ -426,9 +426,10 @@ et dans la présentation de chaque page de photographe. */
 
 /* "main" du formulaire. */
 #form_main {
+  position: relative;
   background: #D3573C;
   width: 600px;
-  height: 1500px;
+  height: 1000px;
   border-radius: 5px;
   margin: 0 auto 80px auto;
 }
@@ -452,7 +453,7 @@ et dans la présentation de chaque page de photographe. */
   border: 1px black solid
 }*/
 
-/* Chaque input du formulaire. */
+/* Chaque champ du formulaire. */
 input {
   height: 50px;
   width: 540px;
@@ -461,6 +462,24 @@ input {
 /* Zone de message du formulaire. */
 textarea {
   width: 540px;
+}
+
+/* Bouton "Envoyer" du formulaire. */
+#form_submit {
+  background: #901C1C;
+  color: white;
+  font-size: 16px;
+  padding: 10px 20px;
+  border-radius: 5px;
+  margin: 30px;
+}
+
+/* Bouton de fermeture du formulaire. */
+#form_close {
+  cursor: pointer;
+  position: absolute;
+  top: 30px;
+  right: 30px;
 }
 
 /***** TOUTES LES MEDIA QUERIES POUR MOBILES *****/

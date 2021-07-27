@@ -67,7 +67,7 @@ function fillLeftPart(photographerName, photographerCity, photographerCountry, p
 // Partie gauche de la présentation : Récupère dynamiquement le lien de contact pour le bouton.
 function contactButton(photographerId) {
   let buttonLink = document.createElement("a");
-  buttonLink.href = "contact.html?id=" + photographerId;
+  buttonLink.href = "";                              // "contact.html?id=" + photographerId;
   buttonLink.id = "dyn_photo_contact_link";
   buttonLink.setAttribute("aria-label", "Contact Me");
   let buttonSpan = document.createElement("span");
@@ -245,7 +245,7 @@ async function showLikesNPrice(/*totalLikes, */id, price) {
 // FENETRE LIGHTBOX-MODAL
 /*
 Fenêtre modale créée : photographer-page.html, ligne 38 à 54.
-Fenêtre cachée par défaut : styles.css, ligne 374.
+Fenêtre (qui sera) cachée par défaut : styles.css, ligne 374.
 */
 // Récupère la section "lightbox-modal".
 let modal = document.getElementById("lightbox_section");
@@ -261,9 +261,32 @@ galleryImg.onclick = function() {
 }
 
 // Récupère le "span" qui ferme le modal.
-let span = document.getElementById("lightbox-close");
+let span = document.getElementById("lightbox_close");
 
 // Au clic, ferme le modal.
 span.onclick = function() {
   modal.style.display = "none";
+}
+
+// FENETRE FORM-MODAL
+/*
+Fenêtre modale créée : photographer-page.html, ligne 56 à 80.
+Fenêtre (qui sera) cachée par défaut : styles.css, ligne 424.
+*/
+// A MODIFIER !!
+// Récupère la section "form-modal".
+let formModal = document.getElementById("form_section");
+
+// Récupère le bouton de contact à cliquer.
+let buttonSpan = document.getElementById("dyn_photo_contact_link");
+buttonSpan.onclick = function() {
+  formModal.style.display = "block";
+}
+
+// Récupère le "span" qui ferme le modal.
+let formSpan = document.getElementById("form_close");
+
+// Au clic, ferme le modal.
+formSpan.onclick = function() {
+  formModal.style.display = "none";
 }
