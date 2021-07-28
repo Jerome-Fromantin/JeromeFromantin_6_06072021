@@ -2,17 +2,9 @@
 import {getMediasByPhotographers, getPhotographer} from "./services";
 
 // PAGE DE PHOTOGRAPHE
-// Récupération de l'id du photographe concerné.
+// Récupère dynamiquement l'id du photographe concerné.
 let param = new URLSearchParams(window.location.search);
 let thePhotographerId = param.get("id");
-
-let modal = document.getElementById("lightbox_section");
-let lightboxImg = document.getElementById("lightbox-img");
-let formModal = document.getElementById("form_section");
-let photoHTML = document.getElementById("photo_html");
-let photoHeader = document.getElementById("photo_header");
-let photoMain = document.getElementById("photo_main");
-let photoPres = document.getElementById("photo_pres");
 
 // PARTIE PRESENTATION DU PHOTOGRAPHE
 // Partie gauche de la présentation : Récupère dynamiquement le nom pour le h1.
@@ -72,7 +64,10 @@ function fillLeftPart(photographerName, photographerCity, photographerCountry, p
   return leftPart;
 }
 
-// Partie gauche de la présentation : Récupère dynamiquement le lien de contact pour le bouton.
+// Récupère le formulaire caché pour la fonction suivante.
+let formModal = document.getElementById("form_section");
+
+// Partie gauche de la présentation : Le bouton de contact ouvre le formulaire.
 function contactButton() {
   let buttonLink = document.createElement("a");
   buttonLink.href = "#";
@@ -81,10 +76,6 @@ function contactButton() {
   buttonLink.onclick = function(event) {
     event.preventDefault();
     formModal.style.display = "block";
-    //photoHTML.style.background = "RGBa(0, 0, 0, 0.5)";
-    //photoHeader.style.background = "RGBa(0, 0, 0, 0.5)";
-    //photoMain.style.background = "RGBa(0, 0, 0, 0.5)";
-    //photoPres.style.background = "RGBa(0, 0, 0, 0.5)";
   }
   let buttonSpan = document.createElement("span");
   buttonSpan.innerText = "Contactez-moi";
@@ -125,7 +116,11 @@ async function showPresent(id) {
 showPresent(thePhotographerId);
 
 // PARTIE GALERIE DE PHOTOGRAPHIES
-// Chaque carte de la page de photographe : Récupère dynamiquement l'image pour le lien.
+// Récupère la lightbox cachée pour la fonction suivante.
+let modal = document.getElementById("lightbox_section");
+let lightboxImg = document.getElementById("lightbox-img");
+
+// Chaque carte de la page de photographe : Récupère dynamiquement l'image pour le lien, qui ouvre la lightbox.
 function photoPhotoLink(photographerId, image, description) {
   let photoLink = document.createElement("a");
   photoLink.className = "dyn_photo_photoLink";
@@ -198,9 +193,13 @@ showPhotos(thePhotographerId);
 // Récupère dynamiquement le lien de contact pour le bouton en version mobile.
 function mobileContactButton(photographerId) {
   let buttonLink = document.createElement("a");
-  buttonLink.href = "contact.html?id=" + photographerId;
+  buttonLink.href = "#";
   buttonLink.id = "dyn_photo_contact_link_mobile";
   buttonLink.setAttribute("aria-label", "Contact Me");
+  buttonLink.onclick = function(event) {
+    event.preventDefault();
+    formModal.style.display = "block";
+  }
   let buttonSpan = document.createElement("span");
   buttonSpan.innerText = "Contactez-moi";
   buttonLink.appendChild(buttonSpan);
@@ -258,54 +257,34 @@ async function showLikesNPrice(/*totalLikes, */id, price) {
 }
 
 // FENETRE LIGHTBOX-MODAL
-/*
-Fenêtre modale créée : photographer-page.html, ligne 38 à 54.
-Fenêtre (qui sera) cachée par défaut : styles.css, ligne 374.
-*/
-// Récupère la section "lightbox-modal".
-//let modal = document.getElementById("lightbox_section");
-
-// Récupère l'image de la galerie et l'insère dans le modal.
-/*
-let galleryImg = document.getElementsByClassName("dyn_photo_img");
-console.log(galleryImg); // HTMLCollection
-let lightboxImg = document.getElementById("lightbox-img");
-console.log(lightboxImg);
-galleryImg.onclick = function() {
-  modal.style.display = "block";
-  lightboxImg.src = this.src;
-}
-*/
-
-// Récupère le "span" qui ferme le modal.
+// Récupère le "span" qui ferme la lightbox.
 let span = document.getElementById("lightbox_close");
 
-// Au clic, ferme le modal.
+// Au clic, ferme la lightbox.
 span.onclick = function() {
   modal.style.display = "none";
 }
 
 // FENETRE FORM-MODAL
-// A MODIFIER !!
-// Récupère la section "form-modal".
-//let formModal = document.getElementById("form_section");
-
-// Récupère le bouton de contact à cliquer.
-//let buttonSpan = document.getElementById("dyn_photo_contact_link");
-/*
-buttonSpan.onclick = function() {
-  formModal.style.display = "block";
-}
-*/
-
-// Récupère le "span" qui ferme le modal.
+// Récupère le "span" qui ferme le formulaire.
 let formSpan = document.getElementById("form_close");
 
-// Au clic, ferme le modal.
+// Au clic, ferme le formulaire.
 formSpan.onclick = function() {
   formModal.style.display = "none";
-  //photoHTML.style.background = "inherit";
-  //photoHeader.style.background = "inherit";
-  //photoMain.style.background = "inherit";
-  //photoPres.style.background = "inherit";
+}
+
+// Récupère le "span" qui envoie les données.
+let submitButton = document.getElementById("submit_button");
+
+// Au clic, envoie les contenus dans la console.
+let firstName = document.getElementById("prenom");
+let lastName = document.getElementById("nom");
+let eMail = document.getElementById("email");
+let mess = document.getElementById("message");
+submitButton.onclick = function() {
+  console.log(firstName.value);
+  console.log(lastName.value);
+  console.log(eMail.value);
+  console.log(mess.value);
 }
