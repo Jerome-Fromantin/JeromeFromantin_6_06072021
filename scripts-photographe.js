@@ -120,8 +120,13 @@ showPresent(thePhotographerId);
 let modal = document.getElementById("lightbox_section");
 let lightboxImg = document.getElementById("lightbox-img");
 
-// Chaque carte de la page de photographe : Récupère dynamiquement l'image pour le lien, qui ouvre la lightbox.
-function photoPhotoLink(photographerId, image, description) {
+// Récupère le header et le "main" à cacher pour la fonction suivante.
+let photoHeader = document.getElementById("photo_header");
+let photoMain = document.getElementById("photo_main");
+
+// Chaque carte de la page de photographe : Récupère dynamiquement l'image pour le lien.
+// Ceci ferme le header et le "main" et ouvre la lightbox.
+function photoPhotoLink(photographerId, image, title, description) {
   let photoLink = document.createElement("a");
   photoLink.className = "dyn_photo_photoLink";
   photoLink.setAttribute("aria-label", "Photographie");
@@ -130,6 +135,8 @@ function photoPhotoLink(photographerId, image, description) {
   photoLinkImg.className = "dyn_photo_img";
   photoLinkImg.onclick = function(event) {
     event.preventDefault();
+    photoHeader.style.display = "none";
+    photoMain.style.display = "none";
     modal.style.display = "block";
     lightboxImg.src = this.src;
   }
@@ -170,7 +177,7 @@ function photoCardDescr(title, likes) {
 function fillArticle(picture) {
   let fullArticle = document.createElement("article");
   fullArticle.className = "photo_card";
-  let link = photoPhotoLink(picture.photographerId, picture.image, picture.description);
+  let link = photoPhotoLink(picture.photographerId, picture.image, picture.title, picture.description);
   let descr = photoCardDescr(picture.title, picture.likes);
   fullArticle.appendChild(link);
   fullArticle.appendChild(descr);
@@ -257,12 +264,88 @@ async function showLikesNPrice(/*totalLikes, */id, price) {
 }
 
 // FENETRE LIGHTBOX-MODAL
+// Crée dynamiquement la lightbox pour chaque image.
+function createLightbox(photographerId, image, title, description) {
+  let lightboxMain = document.createElement("section");
+  lightboxMain.id = "lightbox_main";
+  lightboxMain.setAttribute("aria-label", "All the lightbox");
+
+  let lightPrevLink = document.createElement("a");
+  lightPrevLink.href = "#";
+  lightPrevLink.className = "lightbox-icons";
+  lightPrevLink.setAttribute("aria-label", "Previous image");
+
+  let lightPrevIcon = document.createElement("img");
+  lightPrevIcon.src = "Images/Icone-fleche-gauche.png";
+  lightPrevIcon.className = "lightbox-icon";
+  lightPrevIcon.setAttribute("alt", "Previous icon");
+
+  let lightImgAndTitle = document.createElement("section");
+  lightImgAndTitle.id = "lightbox-imgAndTitle";
+  lightImgAndTitle.setAttribute("aria-label", "Media and title");
+
+  let lightboxMedia = document.createElement("img");
+  //lightboxMedia.src = "Images/" + photographerId + "/" + image;
+  lightboxMedia.id = "lightbox-img";
+  lightboxMedia.setAttribute("alt", description);
+
+  let lightboxTitle = document.createElement("p");
+  lightboxTitle.id = "lightbox-parag";
+  lightboxTitle.innerHTML = title;
+
+  let lightNextLink = document.createElement("a");
+  lightNextLink.href = "#";
+  lightNextLink.className = "lightbox-icons";
+  lightNextLink.setAttribute("aria-label", "Next image");
+
+  let lightNextIcon = document.createElement("img");
+  lightNextIcon.src = "Images/Icone-fleche-droite.png";
+  lightNextIcon.className = "lightbox-icon";
+  lightNextIcon.setAttribute("alt", "Next icon");
+
+  let lightboxClose = document.createElement("span");
+  lightboxClose.className = "lightbox-icons";
+  lightboxClose.id = "lightbox_close";
+  lightboxClose.setAttribute("aria-label", "Close dialog");
+
+  let lightCloseIcon = document.createElement("img");
+  lightCloseIcon.src = "Images/Icone-croix.png";
+  lightCloseIcon.className = "lightbox-icon";
+  lightCloseIcon.setAttribute("alt", "Close button");
+
+  lightPrevLink.appendChild(lightPrevIcon);
+  lightImgAndTitle.appendChild(lightboxMedia);
+  lightImgAndTitle.appendChild(lightboxTitle);
+  lightNextLink.appendChild(lightNextIcon);
+  lightboxClose.appendChild(lightCloseIcon);
+  lightboxMain.appendChild(lightPrevLink);
+  lightboxMain.appendChild(lightImgAndTitle);
+  lightboxMain.appendChild(lightNextLink);
+  lightboxMain.appendChild(lightboxClose);
+  return lightboxMain;
+}
+
+// Montre la lightbox remplie dynamiquement.
+/*async */function showLightbox(photographerId, image, title, description) {
+  //let pictures = await getMediasByPhotographers(id);
+  //console.log(pictures);
+  let section = document.querySelector("#lightbox_section");
+  //for (let picture of pictures) {
+    let main = createLightbox(photographerId, image, title, description);
+    section.appendChild(main);
+  //}
+}
+
+showLightbox(thePhotographerId);
+
 // Récupère le "span" qui ferme la lightbox.
 let span = document.getElementById("lightbox_close");
 
-// Au clic, ferme la lightbox.
+// Au clic, ferme la lightbox et réouvre le header et le "main".
 span.onclick = function() {
   modal.style.display = "none";
+  photoHeader.style.display = "block";
+  photoMain.style.display = "block";
 }
 
 // FENETRE FORM-MODAL
