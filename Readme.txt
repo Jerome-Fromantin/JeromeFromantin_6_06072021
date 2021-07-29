@@ -24,7 +24,8 @@ Travail réalisé :
 - Mise en place de la version mobile de la page de photographe,
 - Mise en place de la lightbox en statique (desktop et mobile),
 - Début de mise en place du pattern factory (page d'accueil),
-- Mise en place du formulaire de contact (desktop et mobile).
+- Mise en place du formulaire de contact (desktop et mobile),
+- Début de mise en place de la lightbox dynamique.
 
 Travail à faire :
 - Fin d'intégration des pages commencées,
