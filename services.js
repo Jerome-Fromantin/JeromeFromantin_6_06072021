@@ -15,6 +15,14 @@ export const getMediasByPhotographers = async(id) => {
     return medias;
 }
 
+// TEST !!
+export const getPhotographersByTags = async(tags) => {
+    let {photographers} = await getAll();
+    let photographersByTags = photographers.filter(data => data.tags == tags);
+    return photographersByTags;
+}
+// FIN TEST !!
+
 async function getAll() {
     let data = await fetch("FishEyeData.json").then((res)=>res.json());
     return data;

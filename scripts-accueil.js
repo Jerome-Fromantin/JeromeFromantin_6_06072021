@@ -1,5 +1,6 @@
 // Récupération des données "photographes" du fichier JSON.
 import {getPhotographers} from "./services";
+import {getPhotographersByTags} from "./services";
 
 // PAGE D'ACCUEIL
 // Récupération des données dynamiques pour chaque carte de la page d'accueil.
@@ -29,6 +30,23 @@ async function show() {
 }
 
 show();
+
+// Montre toutes les cartes remplies dynamiquement en fonction des tags.
+async function showByTags() {
+  let photographers = await getPhotographersByTags();
+  console.log(photographers);                              // Donne un tableau vide...
+  let section = document.querySelector(".main_section");
+  let tags = document.querySelectorAll(".barnavTag");
+  tags.onclick = function(event) {
+    event.preventDefault();
+    for (let photographer of photographers) {
+      let article = fillArticle(photographer);
+      section.appendChild(article);
+    }
+  }
+}
+
+showByTags();
 
 /* Fonctions à venir pour pages dynamiques. 
 function getURL() {
