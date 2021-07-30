@@ -11,7 +11,6 @@ Travail réalisé :
 - Dépôt de certaines images du site,
 - Premier dépôt des fichiers HTML, CSS et JS,
 - Hébergement du travail sur Git Pages,
-- Mise à jour des fichiers HTML et CSS,
 - Ajout d'une page par défaut de photographe pour remplissage dynamique à venir,
 - Ajout d'un fichier JSON,
 - Début de mise en place du JavaScript,
@@ -25,7 +24,9 @@ Travail réalisé :
 - Mise en place de la lightbox en statique (desktop et mobile),
 - Début de mise en place du pattern factory (page d'accueil),
 - Mise en place du formulaire de contact (desktop et mobile),
-- Début de mise en place de la lightbox dynamique.
+- Début de mise en place de la lightbox dynamique,
+- Modification des images (création d'un dossier "Thumbnails"),
+- Tentative de mise en place du tri par tags.
 
 Travail à faire :
 - Fin d'intégration des pages commencées,
