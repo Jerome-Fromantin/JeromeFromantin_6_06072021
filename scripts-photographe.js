@@ -119,26 +119,34 @@ showPresent(thePhotographerId);
 // Récupère la lightbox cachée pour la fonction suivante.
 let modal = document.getElementById("lightbox_section");
 let lightboxImg = document.getElementById("lightbox-img");
+let lightboxParag = document.getElementById("lightbox-parag");
 
 // Récupère le header et le "main" à cacher pour la fonction suivante.
 let photoHeader = document.getElementById("photo_header");
 let photoMain = document.getElementById("photo_main");
 
 // Chaque carte de la page de photographe : Récupère dynamiquement l'image pour le lien.
-// Ceci ferme le header et le "main" et ouvre la lightbox.
-function photoPhotoLink(photographerId, image, title, description) {
+// Cliquer sur l'image ferme le header et le "main" et ouvre la lightbox.
+function photoPhotoLink(photographerId, image, title, description, video) {
   let photoLink = document.createElement("a");
   photoLink.className = "dyn_photo_photoLink";
   photoLink.setAttribute("aria-label", "Photographie");
   let photoLinkImg = document.createElement("img");
-  photoLinkImg.src = "Images/" + photographerId + "/" + image;
+  photoLinkImg.src = "Images/Thumbnails/" + photographerId + "/" + image;
   photoLinkImg.className = "dyn_photo_img";
   photoLinkImg.onclick = function(event) {
     event.preventDefault();
     photoHeader.style.display = "none";
     photoMain.style.display = "none";
     modal.style.display = "block";
-    lightboxImg.src = this.src;
+    //console.log(video);                                                             // A SUPPRIMER !!
+    //if (video) {
+      //lightboxImg.src = "Images/" + photographerId + "/" + video;
+    //}
+    //else {
+      lightboxImg.src = "Images/" + photographerId + "/" + image;
+    //}
+    lightboxParag.innerText = title;
   }
   photoLink.setAttribute("lang", "en");
   photoLink.setAttribute("alt", description);
@@ -263,9 +271,11 @@ async function showLikesNPrice(/*totalLikes, */id, price) {
   console.log("somme :", somme);                                                //    A SUPPRIMER !!
 }
 
+
 // FENETRE LIGHTBOX-MODAL
+/*
 // Crée dynamiquement la lightbox pour chaque image.
-function createLightbox(photographerId, image, title, description) {
+function createLightbox(photographerId, mediaImage, title, description) {
   let lightboxMain = document.createElement("section");
   lightboxMain.id = "lightbox_main";
   lightboxMain.setAttribute("aria-label", "All the lightbox");
@@ -285,7 +295,7 @@ function createLightbox(photographerId, image, title, description) {
   lightImgAndTitle.setAttribute("aria-label", "Media and title");
 
   let lightboxMedia = document.createElement("img");
-  //lightboxMedia.src = "Images/" + photographerId + "/" + image;
+  lightboxMedia.src = "Images/" + photographerId + "/" + mediaImage;
   lightboxMedia.id = "lightbox-img";
   lightboxMedia.setAttribute("alt", description);
 
@@ -326,17 +336,18 @@ function createLightbox(photographerId, image, title, description) {
 }
 
 // Montre la lightbox remplie dynamiquement.
-/*async */function showLightbox(photographerId, image, title, description) {
-  //let pictures = await getMediasByPhotographers(id);
-  //console.log(pictures);
+async function showLightbox(id, image, title, description) {
+  let pictures = await getMediasByPhotographers(id);
+  console.log(pictures);
   let section = document.querySelector("#lightbox_section");
   //for (let picture of pictures) {
-    let main = createLightbox(photographerId, image, title, description);
+    let main = createLightbox(id, image, title, description);
     section.appendChild(main);
   //}
 }
 
 showLightbox(thePhotographerId);
+*/
 
 // Récupère le "span" qui ferme la lightbox.
 let span = document.getElementById("lightbox_close");
