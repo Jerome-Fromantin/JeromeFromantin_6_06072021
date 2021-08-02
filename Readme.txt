@@ -22,11 +22,12 @@ Travail réalisé :
 - Ajout d'un champ "description" dans les medias du fichier JSON,
 - Mise en place de la version mobile de la page de photographe,
 - Mise en place de la lightbox en statique (desktop et mobile),
-- Début de mise en place du pattern factory (page d'accueil),
+- Mise en place du pattern factory (page d'accueil),
 - Mise en place du formulaire de contact (desktop et mobile),
 - Début de mise en place de la lightbox dynamique,
 - Modification des images (création d'un dossier "Thumbnails"),
-- Tentative de mise en place du tri par tags.
+- Tentative de mise en place du tri par tags,
+- Début de mise en place du pattern factory pour les médias de photographes.
 
 Travail à faire :
 - Fin d'intégration des pages commencées,
