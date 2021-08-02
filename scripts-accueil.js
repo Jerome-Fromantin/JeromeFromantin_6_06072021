@@ -1,6 +1,5 @@
 // Récupération des données "photographes" du fichier JSON.
-import {getPhotographers} from "./services";
-import {getPhotographersByTags} from "./services";
+import {getPhotographers, getPhotographersByTags} from "./services";
 
 // PAGE D'ACCUEIL
 // Récupération des données dynamiques pour chaque carte de la page d'accueil.

@@ -9,6 +9,16 @@ export const getPhotographer = async(id) => {
     return photographer;
 }
 
+// TEST !!
+export const getPhotographersByTags = async(tags) => {
+    let photographers = await getPhotographers();
+    console.log(photographers[4].tags[3]);   // Résultat correct, "animals"     // SUPPRIMER
+    let photographersByTags = photographers.filter(data => data.tags == tags);
+    console.log(photographersByTags);   // Résultat incorrect, tableau vide     // SUPPRIMER
+    return photographersByTags;
+}
+// FIN TEST !!
+
 export const getMediasByPhotographers = async(id) => {
     let {media} = await getAll();
     let medias = media.filter(data => data.photographerId == id);
@@ -16,10 +26,12 @@ export const getMediasByPhotographers = async(id) => {
 }
 
 // TEST !!
-export const getPhotographersByTags = async(tags) => {
-    let {photographers} = await getAll();
-    let photographersByTags = photographers.filter(data => data.tags == tags);
-    return photographersByTags;
+export const getOneMediaByMediaId = async(id) => {
+    let medias = await getMediasByPhotographers(id);
+    //console.log(medias);                                                  // SUPPRIMER
+    let oneMedia = medias.find(data => data.id == id);
+    //console.log(oneMedia);                                                  // SUPPRIMER
+    return oneMedia;
 }
 // FIN TEST !!
 
