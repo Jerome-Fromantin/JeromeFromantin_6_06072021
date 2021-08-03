@@ -97,7 +97,7 @@ function showLeftPart(photographer) {
   sectionleft.appendChild(leftPart);
   sectionleft.appendChild(contact);
   showMobileContact(photographer.id);
-  showLikesNPrice(/*totalLikes, */thePhotographerId, photographer.price);
+  showLikesNPrice(photographer.id, photographer.price);
 }
 
 // Partie droite de la présentation : Récupère dynamiquement le nom de l'image.
@@ -210,6 +210,63 @@ async function showPhotos(id) {
 
 showPhotos(thePhotographerId);
 
+// LISTE DEROULANTE DE TRIS (POPULARITE, DATE, TITRE)
+// Récupère les 3 options de la liste déroulante pour les 3 fonctions suivantes.
+let triLikes = document.getElementById("tri_likes");
+let triDate = document.getElementById("tri_date");
+let triTitre = document.getElementById("tri_titre");
+
+// Montre toutes les cartes remplies dynamiquement triées par popularité.
+async function showPhotosByLikes(id) {
+  let pictures = await getMediasByPhotographers(id);
+  triLikes.onclick = function(event) {
+    event.preventDefault();
+    pictures.sort((a, b) => a.likes - b.likes);
+    let section = document.querySelector(".photo_photosLine");
+    section.innerHTML = "";
+    for (let picture of pictures) {
+      let article = fillArticle(picture);
+      section.appendChild(article);
+    }
+  }
+}
+
+showPhotosByLikes(thePhotographerId);
+
+// Montre toutes les cartes remplies dynamiquement triées par date.
+async function showPhotosByDate(id) {
+  let pictures = await getMediasByPhotographers(id);
+  triDate.onclick = function(event) {
+    event.preventDefault();
+    pictures.sort((a, b) => a.date > b.date);
+    let section = document.querySelector(".photo_photosLine");
+    section.innerHTML = "";
+    for (let picture of pictures) {
+      let article = fillArticle(picture);
+      section.appendChild(article);
+    }
+  }
+}
+
+showPhotosByDate(thePhotographerId);
+
+// Montre toutes les cartes remplies dynamiquement triées par titre.
+async function showPhotosByTitle(id) {
+  let pictures = await getMediasByPhotographers(id);
+  triTitre.onclick = function(event) {
+    event.preventDefault();
+    pictures.sort((a, b) => a.title > b.title);
+    let section = document.querySelector(".photo_photosLine");
+    section.innerHTML = "";
+    for (let picture of pictures) {
+      let article = fillArticle(picture);
+      section.appendChild(article);
+    }
+  }
+}
+
+showPhotosByTitle(thePhotographerId);
+
 // BOUTON DE CONTACT EN BAS EN VERSION MOBILE
 // Récupère dynamiquement le lien de contact pour le bouton en version mobile.
 function mobileContactButton(photographerId) {
@@ -236,7 +293,11 @@ function showMobileContact(id) {
 
 // PARTIE "LIKES ET PRIX" EN BAS A DROITE
 // Likes et prix : Récupère dynamiquement le nombre total de likes et le prix du photographe.
-function bottomRight(/*totalLikes, */id, photographerPrice) {
+async function bottomRight(id, photographerPrice) {
+  let pictures = await getMediasByPhotographers(id);
+  let valeurInitiale = 0;
+  let totalLikes = pictures.reduce((accumulateur, valeurCourante) => accumulateur + valeurCourante.likes, valeurInitiale);
+
   let bottomRightDiv = document.createElement("div");
   bottomRightDiv.id = "likes_prix_child";
   let bottomRightLikes = document.createElement("span");
@@ -244,7 +305,7 @@ function bottomRight(/*totalLikes, */id, photographerPrice) {
   bottomRightLikes.setAttribute("aria-label", "Total des likes");
   let bottomRightLikesNumber = document.createElement("span");
   bottomRightLikesNumber.id = "dyn_likes_number";
-  bottomRightLikesNumber.innerText = "680*";                                     // VARIABLE "totalLikes" A DEFINIR !!
+  bottomRightLikesNumber.innerText = totalLikes;
   bottomRightLikesNumber.setAttribute("aria-label", "Nombre total des likes");
   let bottomRightLikesIcon = document.createElement("img");
   bottomRightLikesIcon.src = "Images/Icone-coeur-noir.png";
@@ -263,20 +324,11 @@ function bottomRight(/*totalLikes, */id, photographerPrice) {
 }
 
 // Montre la section remplie dynamiquement.
-async function showLikesNPrice(/*totalLikes, */id, price) {
-  let pictures = await getMediasByPhotographers(id);
-  console.log(pictures);                                                             // A SUPPRIMER !!
+async function showLikesNPrice(id, photographerPrice) {
   let section = document.querySelector("#likes_prix");
-  for (let picture of pictures) {
-    let likesNPrice = bottomRight(picture.likes, /*totalLikes, */price, id);
-    //console.log(picture.likes);                                                 //    A SUPPRIMER !!
-    section.appendChild(likesNPrice);
-  }
-  let valeurInitiale = 0;
-  let somme = pictures.reduce((accumulateur, valeurCourante) => accumulateur + valeurCourante.likes, valeurInitiale);
-  console.log("somme :", somme);                                                //    A SUPPRIMER !!
+  let likesNPrice = await bottomRight(id, photographerPrice);
+  section.appendChild(likesNPrice);
 }
-
 
 // FENETRE LIGHTBOX-MODAL
 
@@ -346,7 +398,7 @@ async function showLikesNPrice(/*totalLikes, */id, price) {
 // Montre la lightbox remplie dynamiquement.
 async function showLightbox(id) {
   let oneMedia = await getOneMediaByMediaId(id);
-  console.log(oneMedia);                                                   //    A SUPPRIMER !!
+  //console.log(oneMedia);                                                   //    A SUPPRIMER !!
   let section = document.querySelector("#lightbox_section");
   //createLightbox(oneMedia);
   //for (let media of medias) {

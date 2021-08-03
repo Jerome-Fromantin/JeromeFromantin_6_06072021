@@ -19,7 +19,7 @@ function fillArticle(photographer) {
 }
 
 // Montre toutes les cartes remplies dynamiquement.
-async function show() {
+async function showPhotographers() {
   let photographers = await getPhotographers();
   let section = document.querySelector(".main_section");
   for (let photographer of photographers) {
@@ -28,7 +28,7 @@ async function show() {
   }
 }
 
-show();
+showPhotographers();
 
 // Montre toutes les cartes remplies dynamiquement en fonction des tags.
 async function showByTags() {

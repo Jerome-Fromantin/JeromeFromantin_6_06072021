@@ -1,3 +1,4 @@
+// Cette classe utilise 2 instances d'autres classes afin de construire la lightbox pour chaque média.
 export class MediaFactory {
     constructor (type, data) {
         if (!data) {
@@ -14,6 +15,7 @@ export class MediaFactory {
     }
 }
 
+// Cette classe concerne les médias "image".
 class LightboxPic {
     picture = null;
     constructor (data) {
@@ -31,6 +33,7 @@ class LightboxPic {
     }
 }
 
+// Cette classe concerne les médias "vidéo".
 class LightboxVid {
     movie = null;
     constructor (data) {

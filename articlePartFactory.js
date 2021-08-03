@@ -1,3 +1,5 @@
+// Cette classe utilise 3 instances d'autres classes afin de construire un article.
+// Chacun de ces articles est une carte de photographe dans la page d'accueil.
 export class ArticlePartFactory {
     constructor (type, data) {
         if (!data) {
@@ -16,6 +18,7 @@ export class ArticlePartFactory {
     }
 }
 
+// Cette classe construit le lien contenant l'image et le nom.
 class ArticleLink {
     link = null;
     constructor (data) {
@@ -44,6 +47,7 @@ class ArticleLink {
     }
 }
 
+// Cette classe construit la div contenant la description.
 class ArticleDescr {
     descr = null;
     constructor (data) {
@@ -78,6 +82,7 @@ class ArticleDescr {
     }
 }
 
+// Cette classe construit la div contenant les tags.
 class ArticleTags {
     tags = null;
     constructor (data) {
