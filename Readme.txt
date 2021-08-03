@@ -27,7 +27,8 @@ Travail réalisé :
 - Début de mise en place de la lightbox dynamique,
 - Modification des images (création d'un dossier "Thumbnails"),
 - Tentative de mise en place du tri par tags,
-- Début de mise en place du pattern factory pour les médias de photographes.
+- Début de mise en place du pattern factory pour les médias de photographes,
+- Mise en place du compteur de likes et du tri du menu déroulant.
 
 Travail à faire :
 - Fin d'intégration des pages commencées,
