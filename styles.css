@@ -28,9 +28,21 @@ body {
   width: 70%;
 }
 
+/* Lien entourant le logo en haut à gauche. */
+#logo_link {
+  width: 270px;
+  border: 2px transparent solid;
+  border-radius: 5px;
+  margin-top: 20px;
+}
+#logo_link:hover, #logo_link:focus {
+  outline: none;
+  border: 2px #901C1C solid;
+}
+
+/* Logo. */
 #logo {
   width: 270px;
-  margin-top: 20px;
 }
 
 /* Ensemble "Passer..." + nav. */
@@ -89,9 +101,9 @@ body {
 
 /*
 Section des 6 cartes-photos dans la page d'accueil.
-Ligne de 3 cartes-photos dans chaque page de photographe.
+Section de la galerie dans chaque page de photographe.
 */
-.main_section, .photo_photosLine {
+.main_section, .photo_gallery {
   display: flex;
   align-items: flex-start;
   flex-direction: row;
@@ -99,7 +111,7 @@ Ligne de 3 cartes-photos dans chaque page de photographe.
   justify-content: space-between;
 }
 
-.photo_photosLine {
+.photo_gallery {
   margin: 20px 50px 0 50px;
 }
 
@@ -151,20 +163,20 @@ et dans la présentation de chaque page de photographe. */
   text-align: center;
 }
 
-/* Dans chaque carte, la ligne du lieu. */
+/* Ligne du lieu. */
 .dyn_home_card_lieu {
   color: #901C1C;
   font-size: 12px;
   margin: 0;
 }
 
-/* Dans chaque carte, la ligne du slogan. */
+/* Ligne du slogan. */
 .dyn_home_card_slogan {
   font-weight: bold;
   margin: 5px 0 0 0;
 }
 
-/* Dans chaque carte, la ligne du prix. */
+/* Ligne du prix. */
 .dyn_home_card_prix {
   margin: 5px 0 0 0;
 }
@@ -175,7 +187,7 @@ et dans la présentation de chaque page de photographe. */
   position: relative;
 }
 
-/* Header de chaque page. */
+/* Header. */
 #photo_header {
   display: flex;
   align-items: flex-start;
@@ -184,7 +196,7 @@ et dans la présentation de chaque page de photographe. */
   width: 70%;
 }
 
-/* "main" de chaque page. */
+/* "main". */
 #photo_main {
   display: flex;
   flex-direction: column;
@@ -193,7 +205,7 @@ et dans la présentation de chaque page de photographe. */
   padding-bottom: 40px;
 }
 
-/* Dans chaque page, le bloc de présentation sur fond gris. */
+/* Bloc de présentation sur fond gris. */
 #photo_pres, #photo_pres_text {
   display: flex;
   align-items: center;
@@ -209,7 +221,7 @@ et dans la présentation de chaque page de photographe. */
   margin: 0;
 }
 
-/* Dans chaque présentation, le bloc textuel seul. */
+/* Bloc textuel seul. */
 #photo_pres_leftText {
   padding: 0;
   margin: 0 20px 0 0;
@@ -231,12 +243,12 @@ et dans la présentation de chaque page de photographe. */
   margin: 0 0 0 50px;
 }
 
-/* Dans chaque bloc textuel, la ligne de la description. */
+/* Ligne du slogan. */
 #dyn_photo_pres_slogan {
   margin: 20px 0 0 50px;
 }
 
-/* Dans chaque bloc textuel, les tags de navigation. */
+/* Tags de navigation. */
 #dyn_photo_pres_barnav {
   margin: 20px 0 0 50px;
 }
@@ -257,7 +269,7 @@ et dans la présentation de chaque page de photographe. */
   border: 1px #901C1C solid;
 }
 
-/* Le lien englobant le bouton de contact, en version desktop et en version mobile. */
+/* Lien englobant le bouton de contact, en version desktop et en version mobile. */
 #dyn_photo_contact_link, #dyn_photo_contact_link_mobile {
   background: #901C1C;
   color: white;
@@ -273,12 +285,12 @@ et dans la présentation de chaque page de photographe. */
   color: black;
 }
 
-/* Le lien englobant le bouton de contact en version mobile. */
+/* Lien englobant le bouton de contact en version mobile. */
 #dyn_photo_contact_link_mobile {
   display: none;
 }
 
-/* L'image ronde. */
+/* Image ronde. */
 #dyn_photo_round_img {
   margin: 50px 40px;
 }
@@ -299,11 +311,16 @@ et dans la présentation de chaque page de photographe. */
   border-radius: 5px;
 }
 
-/* Les likes. Utilisé aussi pour chaque carte-photo. */
+/* Likes du bloc et de chaque carte-photo. */
 #dyn_likes, .dyn_likes {
   display: flex;
   align-items: center;
   margin-right: 45px;
+}
+
+/* Icône "coeur noir" du bloc. */
+#icone {
+  cursor: auto;
 }
 
 /* "Trier par" et sa liste déroulante. */
@@ -312,7 +329,7 @@ et dans la présentation de chaque page de photographe. */
   margin: 5px 0 30px 50px;
 }
 
-/* La liste déroulante de tris. */
+/* Liste déroulante de tris. */
 #menuTri {
   background: #901C1C;
   color: white;
@@ -322,14 +339,14 @@ et dans la présentation de chaque page de photographe. */
   margin-left: 15px;
 }
 
-.photo_photosLine {
+/* Section des médias. */
+.photo_gallery {
   margin: 0;
 }
 
 /* Dans chaque carte, le lien incluant la photo. */
 .dyn_photo_photoLink {
   cursor: pointer;
-  /*position: relative;*/
   width: 300px;
   height: 256px;
   overflow: hidden;
@@ -345,7 +362,6 @@ et dans la présentation de chaque page de photographe. */
 
 /* Chaque photo dans le lien. */
 .dyn_photo_img {
-  /*position: absolute;*/
   width: 100%;
   height: 100%;
   border-radius: 5px;
@@ -364,20 +380,15 @@ et dans la présentation de chaque page de photographe. */
   margin: 5px 0 0 0;
 }
 
-/* Le titre. */
+/* Titre seul. */
 .dyn_title {
   margin-left: 45px;
 }
 
-/* Dans chaque carte, l'icône "coeur". */
+/* Icône "coeur" cliquable. */
 .icone {
   cursor: pointer;
   width: 24px;
-}
-
-/* En bas à droite, l'icône "coeur noir". */
-#icone {
-  cursor: auto;
 }
 
 /***** FENETRE LIGHTBOX-MODAL *****/
@@ -404,8 +415,15 @@ et dans la présentation de chaque page de photographe. */
 /* Icônes "précédent", "suivant" et "fermeture". */
 .lightbox-icons {
   padding: 0;
+  border: 2px transparent solid;
+  border-radius: 5px;
   margin: 20px;
 }
+.lightbox-icons:hover, .lightbox-icons:focus {
+  outline: none;
+  border: 2px #901C1C solid;
+}
+
 
 /* Bloc image et titre. */
 #lightbox-imgAndTitle {
@@ -415,13 +433,13 @@ et dans la présentation de chaque page de photographe. */
   justify-content: flex-start;
 }
 
-/* Image seulement. */
+/* Image seule. */
 #lightbox-img {
   max-height: 88vh;
   max-width: 80vw;
 }
 
-/* Titre seulement. */
+/* Titre seul. */
 #lightbox-parag {
   color: #901C1C;
   font-size: 28px;
@@ -466,7 +484,7 @@ et dans la présentation de chaque page de photographe. */
   padding: 15px 0 0 2%;
 }
 
-/* Chaque div (label et champ). */
+/* Chaque div (label et input). */
 .form_div {
   font-weight: 100;
   font-size: 32px;
@@ -611,12 +629,13 @@ input {
   .dyn_photo_photoLink {
     display: flex;
     align-items: center;
+    width: 335px;
     height: 190px;
-    overflow: hidden;
   }
 
   .dyn_photo_img {
     width: 335px;
+    height: auto;
   }
 
   .photo_card_titleLikes {

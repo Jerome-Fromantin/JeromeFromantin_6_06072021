@@ -9,7 +9,7 @@
 
   <body id="photo_body">
     <header id="photo_header">
-      <a href="index.html">
+      <a href="index.html" id="logo_link">
         <img src="Images/Logo.png" alt="Fisheye Home page" id="logo">
       </a>
     </header>
@@ -32,28 +32,10 @@
         </select>
       </section>
 
-      <section class="photo_photosLine" aria-label="Galerie de photos"></section>
+      <section class="photo_gallery" aria-label="Galerie de photos"></section>
     </main>
 
-    <section id="lightbox_section">
-      <!-- Mettre en commentaire -->
-      <section id="lightbox_main">
-        <a href="#" class="lightbox-icons" aria-label="Previous image">
-          <img src="Images/Icone-fleche-gauche.png" alt="Previous icon" class="lightbox-icon">
-        </a>
-        <section id="lightbox-imgAndTitle" aria-label="">
-          <img src="" alt="" id="lightbox-img">
-          <p id="lightbox-parag"></p>
-        </section>
-        <a href="#" class="lightbox-icons" aria-label="Next image">
-          <img src="Images/Icone-fleche-droite.png" alt="Next icon" class="lightbox-icon">
-        </a>
-        <span class="lightbox-icons" id="lightbox_close" aria-label="Close dialog">
-          <img src="Images/Icone-croix.png" alt="Close button" class="lightbox-icon">
-        </span>
-      </section>
-      <!-- Fin commentaire -->
-    </section>
+    <section id="lightbox_section"></section>
 
     <section id="form_section" aria-labelledby="form_h1">
       <form id="form_main" action="" method="POST">
