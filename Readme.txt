@@ -16,7 +16,7 @@ Travail réalisé :
 - Début de mise en place du JavaScript,
 - Mise en place de la version mobile de la page d'accueil,
 - Mise en place des 1ères fonctions dynamiques en JavaScript pour la page d'accueil et la page de photographe,
-- Mise en place des données dynamiques de la page d'accueil et de la page photographe (presque terminé),
+- Mise en place des données dynamiques de la page d'accueil et de la page photographe,
 - Ajout d'images de photographes,
 - Installation de WebPack et mise en place de fonctions asynchrones,
 - Ajout d'un champ "description" dans les medias du fichier JSON,
@@ -24,14 +24,12 @@ Travail réalisé :
 - Mise en place de la lightbox en statique (desktop et mobile),
 - Mise en place du pattern factory (page d'accueil),
 - Mise en place du formulaire de contact (desktop et mobile),
-- Début de mise en place de la lightbox dynamique,
 - Modification des images (création d'un dossier "Thumbnails"),
-- Tentative de mise en place du tri par tags,
-- Début de mise en place du pattern factory pour les médias de photographes,
-- Mise en place du compteur de likes et du tri du menu déroulant.
+- Mise en place du tri du menu déroulant,
+- Mise en place du compteur de likes avec incrémentation,
+- Mise en place de la lightbox dynamique avec navigation dans les médias.
 
 Travail à faire :
-- Fin d'intégration des pages commencées,
-- Intégration des autres pages,
-- Ajout de JavaScript,
-- Et plein d'autres choses...
+- Mise en place du pattern factory pour les médias de photographes,
+- Mise en place du tri par tags,
+- Et d'autres choses...
