@@ -27,7 +27,9 @@ Travail réalisé :
 - Modification des images (création d'un dossier "Thumbnails"),
 - Mise en place du tri du menu déroulant,
 - Mise en place du compteur de likes avec incrémentation,
-- Mise en place de la lightbox dynamique avec navigation dans les médias.
+- Mise en place de la lightbox dynamique avec navigation dans les médias,
+- Mise en place de l'accessibilité au clavier de la lightbox,
+- Amélioration d'apparence en version mobile.
 
 Travail à faire :
 - Mise en place du pattern factory pour les médias de photographes,
