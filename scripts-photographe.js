@@ -339,13 +339,20 @@ function createLightbox(id, image, title, description, index) {
   lightPrevLink.href = "#";
   lightPrevLink.className = "lightbox-icons";
   lightPrevLink.setAttribute("aria-label", "Previous image");
+  lightPrevLink.addEventListener("click", clickPrev);
+  function clickPrev() {
+    lightboxNavigate(index - 1);
+  }
+  lightPrevLink.addEventListener("keydown", keyDownPrev);
+  function keyDownPrev(e) {
+    if (e.key == 'Enter') {
+      lightboxNavigate(index - 1);
+    }
+  };
 
   let lightPrevIcon = document.createElement("img");
   lightPrevIcon.src = "Images/Icone-fleche-gauche.png";
   lightPrevIcon.className = "lightbox-icon";
-  lightPrevIcon.onclick = () => {
-    lightboxNavigate(index - 1);
-  }
   lightPrevIcon.setAttribute("alt", "Previous icon");
   
   lightPrevLink.appendChild(lightPrevIcon);
@@ -372,13 +379,20 @@ function createLightbox(id, image, title, description, index) {
   lightNextLink.href = "#";
   lightNextLink.className = "lightbox-icons";
   lightNextLink.setAttribute("aria-label", "Next image");
+  lightNextLink.addEventListener("click", clickNext);
+  function clickNext() {
+    lightboxNavigate(index + 1);
+  }
+  lightNextLink.addEventListener("keydown", keyDownNext);
+  function keyDownNext(e) {
+    if (e.key == 'Enter') {
+      lightboxNavigate(index + 1);
+    }
+  };
 
   let lightNextIcon = document.createElement("img");
   lightNextIcon.src = "Images/Icone-fleche-droite.png";
   lightNextIcon.className = "lightbox-icon";
-  lightNextIcon.onclick = () => {
-    lightboxNavigate(index + 1);
-  }
   lightNextIcon.setAttribute("alt", "Next icon");
   
   lightNextLink.appendChild(lightNextIcon);
@@ -389,23 +403,22 @@ function createLightbox(id, image, title, description, index) {
   lightboxClose.className = "lightbox-icons";
   lightboxClose.id = "lightbox_close";
   lightboxClose.setAttribute("aria-label", "Close dialog");
-
-  let lightCloseIcon = document.createElement("img");
-  lightCloseIcon.src = "Images/Icone-croix.png";
-  lightCloseIcon.className = "lightbox-icon";
-  lightCloseIcon.onclick = () => {
+  lightboxClose.addEventListener("click", clickClose);
+  function clickClose() {
     lightbox.style.display = "none";
     photoHeader.style.display = "block";
     photoMain.style.display = "block";
   };
-  lightCloseIcon.onkeypress = (event) => {
-    if (event.code == 13) {
-      console.log("Fuck !");
-      lightbox.style.display = "none";
-      photoHeader.style.display = "block";
-      photoMain.style.display = "block";
+  lightboxClose.addEventListener("keydown", keyDownClose);
+  function keyDownClose(e) {
+    if (e.key == 'Enter') {
+      clickClose();
     }
   };
+
+  let lightCloseIcon = document.createElement("img");
+  lightCloseIcon.src = "Images/Icone-croix.png";
+  lightCloseIcon.className = "lightbox-icon";
   lightCloseIcon.setAttribute("alt", "Close button");
 
   lightboxClose.appendChild(lightCloseIcon);
