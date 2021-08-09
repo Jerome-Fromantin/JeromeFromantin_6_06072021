@@ -123,11 +123,11 @@ showPresent(thePhotographerId);
 
 // PARTIE GALERIE DE PHOTOGRAPHIES
 // Récupère la lightbox cachée pour la fonction suivante.
-let lightbox = document.getElementById("lightbox_section");
+let lightbox = document.getElementById("lightbox_section");                              // METTRE EN COMMENTAIRE ??
 
 // Récupère le header et le "main" à cacher pour la fonction suivante.
-let photoHeader = document.getElementById("photo_header");
-let photoMain = document.getElementById("photo_main");
+let photoHeader = document.getElementById("photo_header");                               // METTRE EN COMMENTAIRE ??
+let photoMain = document.getElementById("photo_main");                                   // METTRE EN COMMENTAIRE ??
 
 // Chaque carte de la page de photographe : Récupère dynamiquement l'image pour le lien.
 // Cliquer sur l'image (ou "Enter" avec focus) ferme le header et le "main" et ouvre la lightbox.
@@ -361,6 +361,7 @@ async function showLikesNPrice(id, photographerPrice) {
 
 // FENETRE LIGHTBOX-MODAL
 // Crée dynamiquement la lightbox pour chaque image.
+/*
 function createLightbox(id, image, title, likes, date, description, index) {
   let lightboxMain = document.createElement("section");
   lightboxMain.id = "lightbox_main";
@@ -469,12 +470,24 @@ function lightboxNavigate(index) {
   let media = pictures[index];
   showLightbox(media.photographerId, media.image, media.title, media.likes, media.date, media.description, index);
 }
+*/
 
 // Montre la lightbox remplie dynamiquement.
 function showLightbox(id, image, title, likes, date, description, index) {
+  // A ce niveau, les bonnes données sont récupérées...
   let section = document.querySelector("#lightbox_section");
   section.innerText = "";
-  section.appendChild(createLightbox(id, image, title, likes, date, description, index));
+  let fullArticle = document.createElement("article");
+  fullArticle.className = "home_card";
+  let pic = new MediaFactory("picture", pictures);
+  //console.log(pic);                                                                 // SUPPRIMER
+  //let movie = new MediaFactory("movie", pictures);
+  fullArticle.appendChild(pic.toHTML());
+  //section.appendChild(movie.toHTML());
+  //section.appendChild(fullArticle);
+  section.appendChild(fullArticle);
+  //section.appendChild(createLightbox(id, image, title, likes, date, description, index));
+  return section;
 }
 
 // FENETRE FORM-MODAL
