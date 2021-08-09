@@ -130,22 +130,29 @@ let photoHeader = document.getElementById("photo_header");
 let photoMain = document.getElementById("photo_main");
 
 // Chaque carte de la page de photographe : Récupère dynamiquement l'image pour le lien.
-// Cliquer sur l'image ferme le header et le "main" et ouvre la lightbox.
-function photoPhotoLink(photographerId, image, title, description, index) {
+// Cliquer sur l'image (ou "Enter" avec focus) ferme le header et le "main" et ouvre la lightbox.
+function photoPhotoLink(photographerId, image, title, likes, date, description, index) {
   let photoLink = document.createElement("a");
   photoLink.href = "#";
   photoLink.className = "dyn_photo_photoLink";
   photoLink.setAttribute("aria-label", "Photographie");
-  let photoLinkImg = document.createElement("img");
-  photoLinkImg.src = "Images/Thumbnails/" + photographerId + "/" + image;
-  photoLinkImg.className = "dyn_photo_img";
-  photoLinkImg.onclick = function(event) {
-    event.preventDefault();
+  photoLink.addEventListener("click", clickOpenImg);
+  function clickOpenImg(e) {
+    e.preventDefault();
     photoHeader.style.display = "none";
     photoMain.style.display = "none";
     lightbox.style.display = "block";
-    showLightbox(photographerId, image, title, description, index);
-  }
+    showLightbox(photographerId, image, title, likes, date, description, index);
+  };
+  photoLink.addEventListener("keydown", keyDownOpenImg);
+  function keyDownOpenImg(e) {
+    if (e.key == "Enter") {
+      clickOpenImg(e);
+    }
+  };
+  let photoLinkImg = document.createElement("img");
+  photoLinkImg.src = "Images/Thumbnails/" + photographerId + "/" + image;
+  photoLinkImg.className = "dyn_photo_img";
   photoLink.setAttribute("lang", "en");
   photoLink.setAttribute("alt", description);
   photoLink.appendChild(photoLinkImg);
@@ -187,7 +194,7 @@ function photoCardDescr(title, likes) {
 function fillArticle(picture, index) {
   let fullArticle = document.createElement("article");
   fullArticle.className = "photo_card";
-  let link = photoPhotoLink(picture.photographerId, picture.image, picture.title, picture.description, index);
+  let link = photoPhotoLink(picture.photographerId, picture.image, picture.title, picture.likes, picture.date, picture.description, index);
   let descr = photoCardDescr(picture.title, picture.likes);
   fullArticle.appendChild(link);
   fullArticle.appendChild(descr);
@@ -211,59 +218,83 @@ async function showPhotos(id) {
 showPhotos(thePhotographerId);
 
 // LISTE DEROULANTE DE TRIS (POPULARITE, DATE, TITRE)
-// Montre toutes les cartes remplies dynamiquement triées par popularité.
-async function showPhotosByLikes(id) {
+// Réalise les tris en fonction de chacune des 3 options.
+async function showSortedPhotos(id) {
   pictures = await getMediasByPhotographers(id);
-  let triLikes = document.getElementById("tri_likes");
-  triLikes.onclick = function(event) {
-    event.preventDefault();
-    pictures.sort((a, b) => b.likes - a.likes);
-    let section = document.querySelector(".photo_gallery");
-    section.innerText = "";
-    for (let picture of pictures) {
-      let article = fillArticle(picture);
-      section.appendChild(article);
+  let menuSort = document.getElementById("menuTri");
+  menuSort.addEventListener("focus", function(event) {
+    if (this.value == "likes") {
+      event.preventDefault();
+      pictures.sort((a, b) => b.likes - a.likes);
+      let section = document.querySelector(".photo_gallery");
+      section.innerText = "";
+      for (let picture of pictures) {
+        let index = pictures.indexOf(picture);
+        let article = fillArticle(picture, index);
+        section.appendChild(article);
+      }
     }
-  }
+    else if (this.value == "date") {
+      event.preventDefault();
+      pictures.sort((a, b) => a.date > b.date);
+      let section = document.querySelector(".photo_gallery");
+      section.innerText = "";
+      for (let picture of pictures) {
+        let index = pictures.indexOf(picture);
+        let article = fillArticle(picture, index);
+        section.appendChild(article);
+      }
+    }
+    else {
+      event.preventDefault();
+      pictures.sort((a, b) => a.title > b.title);
+      let section = document.querySelector(".photo_gallery");
+      section.innerText = "";
+      for (let picture of pictures) {
+        let index = pictures.indexOf(picture);
+        let article = fillArticle(picture, index);
+        section.appendChild(article);
+      }
+    }
+  });
+  menuSort.addEventListener("change", function(event) {
+    if (this.value == "likes") {
+      event.preventDefault();
+      pictures.sort((a, b) => b.likes - a.likes);
+      let section = document.querySelector(".photo_gallery");
+      section.innerText = "";
+      for (let picture of pictures) {
+        let index = pictures.indexOf(picture);
+        let article = fillArticle(picture, index);
+        section.appendChild(article);
+      }
+    }
+    else if (this.value == "date") {
+      event.preventDefault();
+      pictures.sort((a, b) => a.date > b.date);
+      let section = document.querySelector(".photo_gallery");
+      section.innerText = "";
+      for (let picture of pictures) {
+        let index = pictures.indexOf(picture);
+        let article = fillArticle(picture, index);
+        section.appendChild(article);
+      }
+    }
+    else {
+      event.preventDefault();
+      pictures.sort((a, b) => a.title > b.title);
+      let section = document.querySelector(".photo_gallery");
+      section.innerText = "";
+      for (let picture of pictures) {
+        let index = pictures.indexOf(picture);
+        let article = fillArticle(picture, index);
+        section.appendChild(article);
+      }
+    }
+  });
 }
 
-showPhotosByLikes(thePhotographerId);
-
-// Montre toutes les cartes remplies dynamiquement triées par date.
-async function showPhotosByDate(id) {
-  pictures = await getMediasByPhotographers(id);
-  let triDate = document.getElementById("tri_date");
-  triDate.onclick = function(event) {
-    event.preventDefault();
-    pictures.sort((a, b) => a.date > b.date);
-    let section = document.querySelector(".photo_gallery");
-    section.innerText = "";
-    for (let picture of pictures) {
-      let article = fillArticle(picture);
-      section.appendChild(article);
-    }
-  }
-}
-
-showPhotosByDate(thePhotographerId);
-
-// Montre toutes les cartes remplies dynamiquement triées par titre.
-async function showPhotosByTitle(id) {
-  pictures = await getMediasByPhotographers(id);
-  let triTitre = document.getElementById("tri_titre");
-  triTitre.onclick = function(event) {
-    event.preventDefault();
-    pictures.sort((a, b) => a.title > b.title);
-    let section = document.querySelector(".photo_gallery");
-    section.innerText = "";
-    for (let picture of pictures) {
-      let article = fillArticle(picture);
-      section.appendChild(article);
-    }
-  }
-}
-
-showPhotosByTitle(thePhotographerId);
+showSortedPhotos(thePhotographerId);
 
 // BOUTON DE CONTACT EN BAS EN VERSION MOBILE
 // Récupère dynamiquement le lien de contact pour le bouton en version mobile.
@@ -330,7 +361,7 @@ async function showLikesNPrice(id, photographerPrice) {
 
 // FENETRE LIGHTBOX-MODAL
 // Crée dynamiquement la lightbox pour chaque image.
-function createLightbox(id, image, title, description, index) {
+function createLightbox(id, image, title, likes, date, description, index) {
   let lightboxMain = document.createElement("section");
   lightboxMain.id = "lightbox_main";
   lightboxMain.setAttribute("aria-label", "All the lightbox");
@@ -342,10 +373,10 @@ function createLightbox(id, image, title, description, index) {
   lightPrevLink.addEventListener("click", clickPrev);
   function clickPrev() {
     lightboxNavigate(index - 1);
-  }
+  };
   lightPrevLink.addEventListener("keydown", keyDownPrev);
   function keyDownPrev(e) {
-    if (e.key == 'Enter') {
+    if (e.key == "Enter") {
       lightboxNavigate(index - 1);
     }
   };
@@ -382,10 +413,10 @@ function createLightbox(id, image, title, description, index) {
   lightNextLink.addEventListener("click", clickNext);
   function clickNext() {
     lightboxNavigate(index + 1);
-  }
+  };
   lightNextLink.addEventListener("keydown", keyDownNext);
   function keyDownNext(e) {
-    if (e.key == 'Enter') {
+    if (e.key == "Enter") {
       lightboxNavigate(index + 1);
     }
   };
@@ -411,7 +442,7 @@ function createLightbox(id, image, title, description, index) {
   };
   lightboxClose.addEventListener("keydown", keyDownClose);
   function keyDownClose(e) {
-    if (e.key == 'Enter') {
+    if (e.key == "Enter") {
       clickClose();
     }
   };
@@ -436,14 +467,14 @@ function lightboxNavigate(index) {
     index = pictures.length - 1;
   }
   let media = pictures[index];
-  showLightbox(media.photographerId, media.image, media.title, media.description, index);
+  showLightbox(media.photographerId, media.image, media.title, media.likes, media.date, media.description, index);
 }
 
 // Montre la lightbox remplie dynamiquement.
-function showLightbox(id, image, title, description, index) {
+function showLightbox(id, image, title, likes, date, description, index) {
   let section = document.querySelector("#lightbox_section");
   section.innerText = "";
-  section.appendChild(createLightbox(id, image, title, description, index));
+  section.appendChild(createLightbox(id, image, title, likes, date, description, index));
 }
 
 // FENETRE FORM-MODAL
