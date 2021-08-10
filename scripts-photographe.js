@@ -1,11 +1,8 @@
 // Récupération des données "photographes" du fichier JSON.
 import {getPhotographer, getMediasByPhotographers} from "./services";
 
-// Récupération des données "médias" du fichier JSON.
-import {getOneMediaByMediaId} from "./services";
-
 // Récupération des données dynamiques pour chaque média de la lightbox.
-import {MediaFactory} from "./mediaFactory";
+//import {MediaFactory} from "./mediaFactory";
 
 // PAGE DE PHOTOGRAPHE
 // Récupère dynamiquement l'id du photographe concerné.
@@ -361,7 +358,6 @@ async function showLikesNPrice(id, photographerPrice) {
 
 // FENETRE LIGHTBOX-MODAL
 // Crée dynamiquement la lightbox pour chaque image.
-/*
 function createLightbox(id, image, title, likes, date, description, index) {
   let lightboxMain = document.createElement("section");
   lightboxMain.id = "lightbox_main";
@@ -470,7 +466,6 @@ function lightboxNavigate(index) {
   let media = pictures[index];
   showLightbox(media.photographerId, media.image, media.title, media.likes, media.date, media.description, index);
 }
-*/
 
 // Montre la lightbox remplie dynamiquement.
 function showLightbox(id, image, title, likes, date, description, index) {
@@ -479,15 +474,15 @@ function showLightbox(id, image, title, likes, date, description, index) {
   section.innerText = "";
   let fullArticle = document.createElement("article");
   fullArticle.className = "home_card";
-  let pic = new MediaFactory("picture", pictures);
+  //let pic = new MediaFactory("picture", pictures);
   //console.log(pic);                                                                 // SUPPRIMER
   //let movie = new MediaFactory("movie", pictures);
-  fullArticle.appendChild(pic.toHTML());
+  //fullArticle.appendChild(pic.toHTML());
   //section.appendChild(movie.toHTML());
   //section.appendChild(fullArticle);
-  section.appendChild(fullArticle);
-  //section.appendChild(createLightbox(id, image, title, likes, date, description, index));
-  return section;
+  //section.appendChild(fullArticle);
+  section.appendChild(createLightbox(id, image, title, likes, date, description, index));
+  //return section;
 }
 
 // FENETRE FORM-MODAL
