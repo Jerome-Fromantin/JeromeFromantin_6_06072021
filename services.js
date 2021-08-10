@@ -1,3 +1,9 @@
+// Récupère l'intégralité du fichier JSON.
+async function getAll() {
+    let data = await fetch("FishEyeData.json").then((res)=>res.json());
+    return data;
+}
+
 // Récupère l'intégralité du tableau "photographers" du fichier JSON.
 export const getPhotographers = async() => {
     let {photographers} = await getAll();
@@ -11,37 +17,114 @@ export const getPhotographer = async(id) => {
     return photographer;
 }
 
-// Récupère les photographes concernés par le tag demandé. NE FONCTIONNE PAS POUR L'INSTANT !!
-// TEST !!
-export const getPhotographersByTags = async(tags) => {
+// IL FAUDRA RASSEMBLER LES 8 FONCTIONS SUIVANTES EN UNE SEULE !!!
+// Récupère les photographes concernés par le tag "portrait".
+export const getPhotographersByTag1 = async() => {
     let photographers = await getPhotographers();
-    console.log(photographers[4].tags[3]);   // Résultat correct, "animals"     // SUPPRIMER
-    let photographersByTags = photographers.filter(data => data.tags == tags);
-    console.log(photographersByTags);   // Résultat incorrect, tableau vide     // SUPPRIMER
-    return photographersByTags;
+    let photographersByTag1 = photographers.filter(function(element) {
+        for (let i=0; i < element.tags.length; i++) {
+            if (element.tags[i] === "portrait") {
+                return element;
+            }
+        }
+    });
+    return photographersByTag1;
 }
-// FIN TEST !!
+
+// Récupère les photographes concernés par le tag "art".
+export const getPhotographersByTag2 = async() => {
+    let photographers = await getPhotographers();
+    let photographersByTag2 = photographers.filter(function(element) {
+        for (let i=0; i < element.tags.length; i++) {
+            if (element.tags[i] === "art") {
+                return element;
+            }
+        }
+    });
+    return photographersByTag2;
+}
+
+// Récupère les photographes concernés par le tag "fashion".
+export const getPhotographersByTag3 = async() => {
+    let photographers = await getPhotographers();
+    let photographersByTag3 = photographers.filter(function(element) {
+        for (let i=0; i < element.tags.length; i++) {
+            if (element.tags[i] === "fashion") {
+                return element;
+            }
+        }
+    });
+    return photographersByTag3;
+}
+
+// Récupère les photographes concernés par le tag "architecture".
+export const getPhotographersByTag4 = async() => {
+    let photographers = await getPhotographers();
+    let photographersByTag4 = photographers.filter(function(element) {
+        for (let i=0; i < element.tags.length; i++) {
+            if (element.tags[i] === "architecture") {
+                return element;
+            }
+        }
+    });
+    return photographersByTag4;
+}
+
+// Récupère les photographes concernés par le tag "travel".
+export const getPhotographersByTag5 = async() => {
+    let photographers = await getPhotographers();
+    let photographersByTag5 = photographers.filter(function(element) {
+        for (let i=0; i < element.tags.length; i++) {
+            if (element.tags[i] === "travel") {
+                return element;
+            }
+        }
+    });
+    return photographersByTag5;
+}
+
+// Récupère les photographes concernés par le tag "sport".
+export const getPhotographersByTag6 = async() => {
+    let photographers = await getPhotographers();
+    let photographersByTag6 = photographers.filter(function(element) {
+        for (let i=0; i < element.tags.length; i++) {
+            if (element.tags[i] === "sport") {
+                return element;
+            }
+        }
+    });
+    return photographersByTag6;
+}
+
+// Récupère les photographes concernés par le tag "animals".
+export const getPhotographersByTag7 = async() => {
+    let photographers = await getPhotographers();
+    let photographersByTag7 = photographers.filter(function(element) {
+        for (let i=0; i < element.tags.length; i++) {
+            if (element.tags[i] === "animals") {
+                return element;
+            }
+        }
+    });
+    return photographersByTag7;
+}
+
+// Récupère les photographes concernés par le tag "events".
+export const getPhotographersByTag8 = async() => {
+    let photographers = await getPhotographers();
+    let photographersByTag8 = photographers.filter(function(element) {
+        for (let i=0; i < element.tags.length; i++) {
+            if (element.tags[i] === "events") {
+                return element;
+            }
+        }
+    });
+    return photographersByTag8;
+}
 
 // Récupère les médias concernés par le photographe demandé.
 export const getMediasByPhotographers = async(id) => {
     let {media} = await getAll();
     let medias = media.filter(data => data.photographerId == id);
     return medias;
-}
-
-// Récupère le média concerné par l'id de média demandé. NE FONCTIONNE PAS POUR L'INSTANT !!
-// TEST !!
-export const getOneMediaByMediaId = async(id) => {
-    let medias = await getMediasByPhotographers(id);
-    //console.log(medias);                                                  // SUPPRIMER
-    let oneMedia = medias.find(data => data.id == id);
-    //console.log(oneMedia);                                                  // SUPPRIMER
-    return oneMedia;
-}
-// FIN TEST !!
-
-// Récupère l'intégralité du fichier JSON.
-async function getAll() {
-    let data = await fetch("FishEyeData.json").then((res)=>res.json());
-    return data;
 }
