@@ -29,7 +29,8 @@ Travail réalisé :
 - Mise en place de la lightbox dynamique avec navigation dans les médias (par clic et clavier),
 - Amélioration d'apparence en version mobile,
 - Mise en place du tri du menu déroulant (par clavier),
-- Mise en place du tri par tags (par clic) en page d'accueil.
+- Mise en place du tri par tags (par clic et clavier) en page d'accueil,
+- Accessibilité au clavier du formulaire.
 
 Travail à faire :
 - Mise en place du pattern factory pour les médias de photographes,
