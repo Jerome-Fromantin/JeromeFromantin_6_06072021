@@ -126,7 +126,7 @@ Chaque carte-photo dans chaque page de photographe.
   flex-direction: column;
   font-size: 9px;
   width: 33%;
-  margin-top: 50px;
+  margin-top: 40px;
 }
 
 /* Dans chaque carte, le lien regroupant la photo et le h2. */
@@ -528,6 +528,11 @@ input {
   position: absolute;
   top: 30px;
   right: 30px;
+  border: 2px transparent solid;
+  border-radius: 5px;
+}
+#form_close:hover, #form_close:focus {
+  border-color: #901C1C;
 }
 
 /***** TOUTES LES MEDIA QUERIES POUR MOBILES *****/

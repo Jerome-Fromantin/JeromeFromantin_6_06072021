@@ -21,6 +21,8 @@
 
       <section id="mobile_contact_parent" aria-label="Bouton de contact en version mobile"></section>
 
+      <section id="form_section" aria-labelledby="form_h1"></section>
+
       <section id="likes_prix" aria-label="Nombre de likes et prix du photographe"></section>
 
       <section id="liste_tris" aria-label="Liste déroulante de tris">
@@ -36,34 +38,6 @@
     </main>
 
     <section id="lightbox_section"></section>
-
-    <section id="form_section" aria-labelledby="form_h1">
-      <form id="form_main" action="" method="POST">
-        <h1 id="form_h1" aria-label="Contact me">Contactez-moi<br>Mimi Keel</h1>
-        <div class="form_div">
-          <label for="prenom" id="label_prenom" aria-label="First name">Prénom</label><br>
-          <input type="text" id="prenom" aria-labelledby="label_prenom">
-        </div>
-        <div class="form_div">
-          <label for="nom" id="label_nom" aria-label="Last name">Nom</label><br>
-          <input type="text" id="nom" aria-labelledby="label_nom">
-        </div>
-        <div class="form_div">
-          <label for="email" id="label_email" aria-label="Email">Email</label><br>
-          <input type="email" id="email" aria-labelledby="label_email">
-        </div>
-        <div class="form_div">
-          <label for="message" id="label_message" aria-label="Your message">Votre message</label><br>
-          <textarea id="message" rows="5" aria-labelledby="label_message"></textarea>
-        </div>
-        <div class="form_div" id="form_submit">
-          <span id="submit_button" type="button" aria-label="Send">Envoyer</span>
-        </div>
-        <span id="form_close" aria-label="Close Contact form">
-          <img src="Images/Icone-croix-blanche.png" alt="Close button" id="form_close_icon">
-        </span>
-      </form>
-    </section>
 
     <script type="module" src="dist/photographe.js"></script>
   </body>

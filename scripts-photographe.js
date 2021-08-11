@@ -485,26 +485,181 @@ function showLightbox(id, image, title, likes, date, description, index) {
   //return section;
 }
 
-// FENETRE FORM-MODAL
-// Récupère le "span" qui ferme le formulaire.
-let formSpan = document.getElementById("form_close");
+/*
+async function formH1(id) {
+  let photographer = await getPhotographer(id);
+  let title = document.createElement("h1");
+  title.id = "form_h1";
+  title.innerHTML = "Contactez-moi<br>" + photographer.name;
+  title.setAttribute("aria-label", "Contact me");
+  console.log(photographer.name);
+  return title;
+}
+*/
 
-// Au clic, ferme le formulaire.
-formSpan.onclick = function() {
-  formModal.style.display = "none";
+// FENETRE FORM-MODAL
+// Crée dynamiquement le formulaire pour chaque photographe.
+function createForm(/*id, */photographerName) {
+  let formMain = document.createElement("form");
+  formMain.id = "form_main";
+  formMain.setAttribute("action", "");
+  formMain.setAttribute("method", "POST");
+
+  //formH1(photographer.name);
+
+  let formH1 = document.createElement("h1");
+  formH1.id = "form_h1";
+  formH1.innerHTML = "Contactez-moi<br>" + photographerName;
+  formH1.setAttribute("aria-label", "Contact me");
+  
+  //formMain.appendChild(formH1(photographer.name));
+  formMain.appendChild(formH1);
+
+  let divPrenom = document.createElement("div");
+  divPrenom.className = "form_div";
+  let labelPrenom = document.createElement("label");
+  labelPrenom.id = "label_prenom";
+  labelPrenom.innerText = "Prénom";
+  labelPrenom.setAttribute("for", "prenom");
+  labelPrenom.setAttribute("aria-label", "First name");
+  let brPrenom = document.createElement("br");
+  let inputPrenom = document.createElement("input");
+  inputPrenom.id = "prenom";
+  inputPrenom.type = "text";
+  inputPrenom.setAttribute("aria-labelledby", "label_prenom");
+
+  divPrenom.appendChild(labelPrenom);
+  divPrenom.appendChild(brPrenom);
+  divPrenom.appendChild(inputPrenom);
+  formMain.appendChild(divPrenom);
+
+  let divNom = document.createElement("div");
+  divNom.className = "form_div";
+  let labelNom = document.createElement("label");
+  labelNom.id = "label_nom";
+  labelNom.innerText = "Nom";
+  labelNom.setAttribute("for", "nom");
+  labelNom.setAttribute("aria-label", "Last name");
+  let brNom = document.createElement("br");
+  let inputNom = document.createElement("input");
+  inputNom.id = "nom";
+  inputNom.type = "text";
+  inputNom.setAttribute("aria-labelledby", "label_nom");
+
+  divNom.appendChild(labelNom);
+  divNom.appendChild(brNom);
+  divNom.appendChild(inputNom);
+  formMain.appendChild(divNom);
+
+  let divEmail = document.createElement("div");
+  divEmail.className = "form_div";
+  let labelEmail = document.createElement("label");
+  labelEmail.id = "label_email";
+  labelEmail.innerText = "Email";
+  labelEmail.setAttribute("for", "email");
+  labelEmail.setAttribute("aria-label", "Email");
+  let brEmail = document.createElement("br");
+  let inputEmail = document.createElement("input");
+  inputEmail.id = "email";
+  inputEmail.type = "email";
+  inputEmail.setAttribute("aria-labelledby", "label_email");
+
+  divEmail.appendChild(labelEmail);
+  divEmail.appendChild(brEmail);
+  divEmail.appendChild(inputEmail);
+  formMain.appendChild(divEmail);
+
+  let divMessage = document.createElement("div");
+  divMessage.className = "form_div";
+  let labelMessage = document.createElement("label");
+  labelMessage.id = "label_message";
+  labelMessage.innerText = "Votre message";
+  labelMessage.setAttribute("for", "message");
+  labelMessage.setAttribute("aria-label", "Your message");
+  let brMessage = document.createElement("br");
+  let inputMessage = document.createElement("textarea");
+  inputMessage.id = "message";
+  inputMessage.setAttribute("rows", "5");
+  inputMessage.setAttribute("aria-labelledby", "label_message");
+
+  divMessage.appendChild(labelMessage);
+  divMessage.appendChild(brMessage);
+  divMessage.appendChild(inputMessage);
+  formMain.appendChild(divMessage);
+
+  let divSubmit = document.createElement("div");
+  divSubmit.className = "form_div";
+  divSubmit.id = "form_submit";
+  let submitLink = document.createElement("a");
+  submitLink.id = "submit_button";
+  submitLink.href = "";
+  submitLink.innerText = "Envoyer";
+  submitLink.setAttribute("aria-label", "Send");
+
+  divSubmit.appendChild(submitLink);
+  formMain.appendChild(divSubmit);
+
+  let closeLink = document.createElement("a");
+  closeLink.id = "form_close";
+  closeLink.href = "";
+  closeLink.setAttribute("aria-label", "Close Contact form");
+  let closeLinkImg = document.createElement("img");
+  closeLinkImg.id = "form_close_icon";
+  closeLinkImg.src = "Images/Icone-croix-blanche.png";
+  closeLinkImg.setAttribute("alt", "Close button");
+
+  closeLink.appendChild(closeLinkImg);
+  formMain.appendChild(closeLink);
+
+  return formMain;
+};
+
+// Montre le formulaire rempli dynamiquement.
+function showForm(photographerName) {
+  let section = document.querySelector("#form_section");
+  section.innerText = "";
+  let formulaire = createForm(photographerName);
+  section.appendChild(formulaire);
 }
 
-// Récupère le "span" qui envoie les données.
+showForm();
+
+// Récupère le lien qui envoie les données.
 let submitButton = document.getElementById("submit_button");
 
-// Au clic, envoie les contenus dans la console.
+// Au clic ou à la touche "Entrée", envoie les contenus dans la console.
 let firstName = document.getElementById("prenom");
 let lastName = document.getElementById("nom");
 let eMail = document.getElementById("email");
 let mess = document.getElementById("message");
-submitButton.onclick = function() {
+submitButton.addEventListener("click", clickSubmitForm);
+function clickSubmitForm(e) {
+  e.preventDefault();
   console.log(firstName.value);
   console.log(lastName.value);
   console.log(eMail.value);
   console.log(mess.value);
-}
+};
+submitButton.addEventListener("keydown", keyDownSubmitForm);
+function keyDownSubmitForm(e) {
+  if (e.key == "Enter") {
+    clickSubmitForm(e);
+  }
+};
+
+// Récupère le lien qui ferme le formulaire.
+let formClose = document.getElementById("form_close");
+
+// Au clic ou à la touche "Entrée", ferme le formulaire.
+formClose.addEventListener("click", clickCloseForm);
+function clickCloseForm(e) {
+  e.preventDefault();
+  formModal.style.display = "none";
+};
+formClose.addEventListener("keydown", keyDownCloseForm);
+function keyDownCloseForm(e) {
+  if (e.key == "Enter") {
+    e.preventDefault();
+    formModal.style.display = "none";
+  }
+};
