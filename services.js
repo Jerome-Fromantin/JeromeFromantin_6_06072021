@@ -18,6 +18,25 @@ export const getPhotographer = async(id) => {
 }
 
 // IL FAUDRA RASSEMBLER LES 8 FONCTIONS SUIVANTES EN UNE SEULE !!!
+/*
+// TEST DE FONCTION
+export const getPhotographersByTag = async(tags) => {
+    let photographers = await getPhotographers();
+    let photographersByTag = photographers.filter(function(element) {
+        for (let i=0; i < element.tags.length; i++) {
+            if (element.tags[i] == tags) {
+                console.log(tags);                                                                // SUPPRIMER
+                console.log(element);                                                                // SUPPRIMER
+                return element;
+            }
+        }
+    });
+    console.log(photographersByTag);                                                                // SUPPRIMER
+    return photographersByTag;
+}
+// FIN DE TEST
+*/
+
 // Récupère les photographes concernés par le tag "portrait".
 export const getPhotographersByTag1 = async() => {
     let photographers = await getPhotographers();

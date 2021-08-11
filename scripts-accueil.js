@@ -5,6 +5,7 @@ import {getPhotographers} from "./services";
 // CES IMPORTS DEVRONT ETRE MODIFIES !!!
 import {getPhotographersByTag1, getPhotographersByTag2, getPhotographersByTag3, getPhotographersByTag4} from "./services";
 import {getPhotographersByTag5, getPhotographersByTag6, getPhotographersByTag7, getPhotographersByTag8} from "./services";
+//import {getPhotographersByTag} from "./services";
 
 // PAGE D'ACCUEIL
 // Récupération des données dynamiques pour chaque carte de la page d'accueil.
@@ -36,19 +37,38 @@ async function showPhotographers() {
 showPhotographers();
 
 // IL FAUDRA RASSEMBLER LES 8 FONCTIONS SUIVANTES EN UNE SEULE !!!
-// Montre toutes les cartes remplies dynamiquement en fonction du tag "Portrait".
-async function showByTag1() {
-  let photographers = await getPhotographersByTag1();
+/*
+async function showByTags() {
+  let photographers = await getPhotographersByTag(tags);
   let section = document.querySelector(".main_section");
   let tag1 = document.getElementById("portraitTag");
-  tag1.onclick = function(event) {
-    event.preventDefault();
+  tag1.addEventListener("click", showByTag);
+  function showByTag(e) {
+    e.preventDefault();
     section.innerText = "";
     for (let photographer of photographers) {
       let article = fillArticle(photographer);
       section.appendChild(article);
     }
-  }
+  };
+}
+showByTags();
+*/
+
+// Montre toutes les cartes remplies dynamiquement en fonction du tag "Portrait".
+async function showByTag1() {
+  let photographers = await getPhotographersByTag1();
+  let section = document.querySelector(".main_section");
+  let tag1 = document.getElementById("portraitTag");
+  tag1.addEventListener("click", showByTag);
+  function showByTag(e) {
+    e.preventDefault();
+    section.innerText = "";
+    for (let photographer of photographers) {
+      let article = fillArticle(photographer);
+      section.appendChild(article);
+    }
+  };
 }
 showByTag1();
 
@@ -57,14 +77,15 @@ async function showByTag2() {
   let photographers = await getPhotographersByTag2();
   let section = document.querySelector(".main_section");
   let tag2 = document.getElementById("artTag");
-  tag2.onclick = function(event) {
-    event.preventDefault();
+  tag2.addEventListener("click", showByTag);
+  function showByTag(e) {
+    e.preventDefault();
     section.innerText = "";
     for (let photographer of photographers) {
       let article = fillArticle(photographer);
       section.appendChild(article);
     }
-  }
+  };
 }
 showByTag2();
 
@@ -73,8 +94,9 @@ async function showByTag3() {
   let photographers = await getPhotographersByTag3();
   let section = document.querySelector(".main_section");
   let tag3 = document.getElementById("fashionTag");
-  tag3.onclick = function(event) {
-    event.preventDefault();
+  tag3.addEventListener("click", showByTag);
+  function showByTag(e) {
+    e.preventDefault();
     section.innerText = "";
     for (let photographer of photographers) {
       let article = fillArticle(photographer);
@@ -89,8 +111,9 @@ async function showByTag4() {
   let photographers = await getPhotographersByTag4();
   let section = document.querySelector(".main_section");
   let tag4 = document.getElementById("archiTag");
-  tag4.onclick = function(event) {
-    event.preventDefault();
+  tag4.addEventListener("click", showByTag);
+  function showByTag(e) {
+    e.preventDefault();
     section.innerText = "";
     for (let photographer of photographers) {
       let article = fillArticle(photographer);
@@ -105,8 +128,9 @@ async function showByTag5() {
   let photographers = await getPhotographersByTag5();
   let section = document.querySelector(".main_section");
   let tag5 = document.getElementById("travelTag");
-  tag5.onclick = function(event) {
-    event.preventDefault();
+  tag5.addEventListener("click", showByTag);
+  function showByTag(e) {
+    e.preventDefault();
     section.innerText = "";
     for (let photographer of photographers) {
       let article = fillArticle(photographer);
@@ -121,8 +145,9 @@ async function showByTag6() {
   let photographers = await getPhotographersByTag6();
   let section = document.querySelector(".main_section");
   let tag6 = document.getElementById("sportTag");
-  tag6.onclick = function(event) {
-    event.preventDefault();
+  tag6.addEventListener("click", showByTag);
+  function showByTag(e) {
+    e.preventDefault();
     section.innerText = "";
     for (let photographer of photographers) {
       let article = fillArticle(photographer);
@@ -137,8 +162,9 @@ async function showByTag7() {
   let photographers = await getPhotographersByTag7();
   let section = document.querySelector(".main_section");
   let tag7 = document.getElementById("animalsTag");
-  tag7.onclick = function(event) {
-    event.preventDefault();
+  tag7.addEventListener("click", showByTag);
+  function showByTag(e) {
+    e.preventDefault();
     section.innerText = "";
     for (let photographer of photographers) {
       let article = fillArticle(photographer);
@@ -153,8 +179,9 @@ async function showByTag8() {
   let photographers = await getPhotographersByTag8();
   let section = document.querySelector(".main_section");
   let tag8 = document.getElementById("eventsTag");
-  tag8.onclick = function(event) {
-    event.preventDefault();
+  tag8.addEventListener("click", showByTag);
+  function showByTag(e) {
+    e.preventDefault();
     section.innerText = "";
     for (let photographer of photographers) {
       let article = fillArticle(photographer);
