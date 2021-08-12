@@ -79,6 +79,7 @@ function contactButton() {
   buttonLink.onclick = function(event) {
     event.preventDefault();
     formModal.style.display = "block";
+    showForm();                                             // Voir à la ligne 629.
   }
   let buttonSpan = document.createElement("span");
   buttonSpan.innerText = "Contactez-moi";
@@ -93,8 +94,8 @@ function showLeftPart(photographer) {
   let contact = contactButton();
   sectionleft.appendChild(leftPart);
   sectionleft.appendChild(contact);
-  showMobileContact(photographer.id);
-  showLikesNPrice(photographer.id, photographer.price);
+  showMobileContact(photographer.id);                        // Voir à la ligne 314.
+  showLikesNPrice(photographer.id, photographer.price);      // Voir à la ligne 353.
 }
 
 // Partie droite de la présentation : Récupère dynamiquement le nom de l'image.
@@ -107,24 +108,25 @@ function photoImg(photographerPortrait, photographerName) {
   return image;
 }
 
+let photographer = null;
+
 // Montre la présentation entière remplie dynamiquement.
 async function showPresent(id) {
-  let photographer = await getPhotographer(id);
+  photographer = await getPhotographer(id);
   let presentation = document.querySelector("#photo_pres");
   showLeftPart(photographer);
   let imgPart = photoImg(photographer.portrait, photographer.name);
   presentation.appendChild(imgPart);
 }
-
 showPresent(thePhotographerId);
 
 // PARTIE GALERIE DE PHOTOGRAPHIES
 // Récupère la lightbox cachée pour la fonction suivante.
-let lightbox = document.getElementById("lightbox_section");                              // METTRE EN COMMENTAIRE ??
+let lightbox = document.getElementById("lightbox_section");
 
 // Récupère le header et le "main" à cacher pour la fonction suivante.
-let photoHeader = document.getElementById("photo_header");                               // METTRE EN COMMENTAIRE ??
-let photoMain = document.getElementById("photo_main");                                   // METTRE EN COMMENTAIRE ??
+let photoHeader = document.getElementById("photo_header");
+let photoMain = document.getElementById("photo_main");
 
 // Chaque carte de la page de photographe : Récupère dynamiquement l'image pour le lien.
 // Cliquer sur l'image (ou "Enter" avec focus) ferme le header et le "main" et ouvre la lightbox.
@@ -139,7 +141,7 @@ function photoPhotoLink(photographerId, image, title, likes, date, description, 
     photoHeader.style.display = "none";
     photoMain.style.display = "none";
     lightbox.style.display = "block";
-    showLightbox(photographerId, image, title, likes, date, description, index);
+    showLightbox(photographerId, image, title, likes, date, description, index);      // Voir à la ligne 471.
   };
   photoLink.addEventListener("keydown", keyDownOpenImg);
   function keyDownOpenImg(e) {
@@ -211,7 +213,6 @@ async function showPhotos(id) {
     section.appendChild(article);
   }
 }
-
 showPhotos(thePhotographerId);
 
 // LISTE DEROULANTE DE TRIS (POPULARITE, DATE, TITRE)
@@ -290,7 +291,6 @@ async function showSortedPhotos(id) {
     }
   });
 }
-
 showSortedPhotos(thePhotographerId);
 
 // BOUTON DE CONTACT EN BAS EN VERSION MOBILE
@@ -313,7 +313,7 @@ function mobileContactButton() {
 // Montre la section remplie dynamiquement.
 function showMobileContact() {
   let section = document.querySelector("#mobile_contact_parent");
-  let mobileContact = mobileContactButton();
+  let mobileContact = mobileContactButton();                        // Voir à la ligne 298.
   section.appendChild(mobileContact);
 }
 
@@ -352,7 +352,7 @@ async function bottomRight(id, photographerPrice) {
 // Montre la section remplie dynamiquement.
 async function showLikesNPrice(id, photographerPrice) {
   let section = document.querySelector("#likes_prix");
-  let likesNPrice = await bottomRight(id, photographerPrice);
+  let likesNPrice = await bottomRight(id, photographerPrice);      // Voir à la ligne 322.
   section.appendChild(likesNPrice);
 }
 
@@ -481,38 +481,23 @@ function showLightbox(id, image, title, likes, date, description, index) {
   //section.appendChild(movie.toHTML());
   //section.appendChild(fullArticle);
   //section.appendChild(fullArticle);
-  section.appendChild(createLightbox(id, image, title, likes, date, description, index));
+  section.appendChild(createLightbox(id, image, title, likes, date, description, index)); //mediafactory.tohtml
   //return section;
 }
 
-/*
-async function formH1(id) {
-  let photographer = await getPhotographer(id);
-  let title = document.createElement("h1");
-  title.id = "form_h1";
-  title.innerHTML = "Contactez-moi<br>" + photographer.name;
-  title.setAttribute("aria-label", "Contact me");
-  console.log(photographer.name);
-  return title;
-}
-*/
-
 // FENETRE FORM-MODAL
 // Crée dynamiquement le formulaire pour chaque photographe.
-function createForm(/*id, */photographerName) {
+function createForm() {
   let formMain = document.createElement("form");
   formMain.id = "form_main";
   formMain.setAttribute("action", "");
   formMain.setAttribute("method", "POST");
 
-  //formH1(photographer.name);
-
   let formH1 = document.createElement("h1");
   formH1.id = "form_h1";
-  formH1.innerHTML = "Contactez-moi<br>" + photographerName;
+  formH1.innerHTML = "Contactez-moi<br>" + photographer.name;
   formH1.setAttribute("aria-label", "Contact me");
   
-  //formMain.appendChild(formH1(photographer.name));
   formMain.appendChild(formH1);
 
   let divPrenom = document.createElement("div");
@@ -595,6 +580,20 @@ function createForm(/*id, */photographerName) {
   submitLink.href = "";
   submitLink.innerText = "Envoyer";
   submitLink.setAttribute("aria-label", "Send");
+  submitLink.addEventListener("click", clickSubmitForm);
+  function clickSubmitForm(e) {
+    e.preventDefault();
+    console.log(inputPrenom.value);
+    console.log(inputNom.value);
+    console.log(inputEmail.value);
+    console.log(inputMessage.value);
+  };
+  submitLink.addEventListener("keydown", keyDownSubmitForm);
+  function keyDownSubmitForm(e) {
+    if (e.key == "Enter") {
+      clickSubmitForm(e);
+    }
+  };
 
   divSubmit.appendChild(submitLink);
   formMain.appendChild(divSubmit);
@@ -607,6 +606,18 @@ function createForm(/*id, */photographerName) {
   closeLinkImg.id = "form_close_icon";
   closeLinkImg.src = "Images/Icone-croix-blanche.png";
   closeLinkImg.setAttribute("alt", "Close button");
+  closeLink.addEventListener("click", clickCloseForm);
+  function clickCloseForm(e) {
+    e.preventDefault();
+    formModal.style.display = "none";
+  };
+  closeLink.addEventListener("keydown", keyDownCloseForm);
+  function keyDownCloseForm(e) {
+    if (e.key == "Enter") {
+      e.preventDefault();
+      formModal.style.display = "none";
+    }
+  };
 
   closeLink.appendChild(closeLinkImg);
   formMain.appendChild(closeLink);
@@ -615,51 +626,9 @@ function createForm(/*id, */photographerName) {
 };
 
 // Montre le formulaire rempli dynamiquement.
-function showForm(photographerName) {
+function showForm() {
   let section = document.querySelector("#form_section");
   section.innerText = "";
-  let formulaire = createForm(photographerName);
+  let formulaire = createForm(); // Voir à la ligne 490.                                              // MODIFIER
   section.appendChild(formulaire);
 }
-
-showForm();
-
-// Récupère le lien qui envoie les données.
-let submitButton = document.getElementById("submit_button");
-
-// Au clic ou à la touche "Entrée", envoie les contenus dans la console.
-let firstName = document.getElementById("prenom");
-let lastName = document.getElementById("nom");
-let eMail = document.getElementById("email");
-let mess = document.getElementById("message");
-submitButton.addEventListener("click", clickSubmitForm);
-function clickSubmitForm(e) {
-  e.preventDefault();
-  console.log(firstName.value);
-  console.log(lastName.value);
-  console.log(eMail.value);
-  console.log(mess.value);
-};
-submitButton.addEventListener("keydown", keyDownSubmitForm);
-function keyDownSubmitForm(e) {
-  if (e.key == "Enter") {
-    clickSubmitForm(e);
-  }
-};
-
-// Récupère le lien qui ferme le formulaire.
-let formClose = document.getElementById("form_close");
-
-// Au clic ou à la touche "Entrée", ferme le formulaire.
-formClose.addEventListener("click", clickCloseForm);
-function clickCloseForm(e) {
-  e.preventDefault();
-  formModal.style.display = "none";
-};
-formClose.addEventListener("keydown", keyDownCloseForm);
-function keyDownCloseForm(e) {
-  if (e.key == "Enter") {
-    e.preventDefault();
-    formModal.style.display = "none";
-  }
-};
