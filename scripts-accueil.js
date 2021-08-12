@@ -1,12 +1,6 @@
 // Récupération des données "photographes" du fichier JSON.
 import {getPhotographers} from "./services";
 
-// Récupération des données "photographes triés par tags".
-// CES IMPORTS DEVRONT ETRE MODIFIES !!!
-import {getPhotographersByTag1, getPhotographersByTag2, getPhotographersByTag3, getPhotographersByTag4} from "./services";
-import {getPhotographersByTag5, getPhotographersByTag6, getPhotographersByTag7, getPhotographersByTag8} from "./services";
-//import {getPhotographersByTag} from "./services";
-
 // PAGE D'ACCUEIL
 // Récupération des données dynamiques pour chaque carte de la page d'accueil.
 import {ArticlePartFactory} from "./articlePartFactory";
@@ -24,172 +18,49 @@ function fillArticle(photographer) {
   return fullArticle;
 }
 
-// Montre toutes les cartes remplies dynamiquement.
-async function showPhotographers() {
-  let photographers = await getPhotographers();
+let photographers = [];
+
+// Montre toutes les cartes remplies dynamiquement (1ère partie).
+async function showPhotographers1() {
+  photographers = await getPhotographers();
+  showPhotographers2(photographers);
+}
+showPhotographers1();
+
+// Montre toutes les cartes remplies dynamiquement (2ème partie).
+function showPhotographers2(photographers) {
   let section = document.querySelector(".main_section");
+  section.innerText = "";
   for (let photographer of photographers) {
     let article = fillArticle(photographer);
     section.appendChild(article);
   }
 }
 
-showPhotographers();
+// Récupère chacun des tags et leur valeur pour la fonction suivante.
+let tags = document.querySelectorAll(".barnavTag");
+tags.forEach((tag, index) => {
+  tag.addEventListener("click", (el) => {
+    let target = el.currentTarget;
+    let tagValue = target.id;
+    showByTag(tagValue);
+  });
+  tag.addEventListener("focus", (el) => {                           // MODIFIER POUR KEYDOWN ET TOUCHE "ENTREE"
+    let target = el.currentTarget;
+    let tagValue = target.id;
+    showByTag(tagValue);
+  });
+});
 
-// IL FAUDRA RASSEMBLER LES 8 FONCTIONS SUIVANTES EN UNE SEULE !!!
-/*
-async function showByTags() {
-  let photographers = await getPhotographersByTag(tags);
-  let section = document.querySelector(".main_section");
-  let tag1 = document.getElementById("portraitTag");
-  tag1.addEventListener("click", showByTag);
-  function showByTag(e) {
-    e.preventDefault();
-    section.innerText = "";
-    for (let photographer of photographers) {
-      let article = fillArticle(photographer);
-      section.appendChild(article);
+// Montre les photographes en fonction du tag choisi.
+function showByTag(tag) {
+  let photographersByTag = photographers.filter(function(element) {
+    if (element.tags.includes(tag)) {
+      return element;
     }
-  };
+  });
+  showPhotographers2(photographersByTag);
 }
-showByTags();
-*/
-
-// Montre toutes les cartes remplies dynamiquement en fonction du tag "Portrait".
-async function showByTag1() {
-  let photographers = await getPhotographersByTag1();
-  let section = document.querySelector(".main_section");
-  let tag1 = document.getElementById("portraitTag");
-  tag1.addEventListener("click", showByTag);
-  function showByTag(e) {
-    e.preventDefault();
-    section.innerText = "";
-    for (let photographer of photographers) {
-      let article = fillArticle(photographer);
-      section.appendChild(article);
-    }
-  };
-}
-showByTag1();
-
-// Montre toutes les cartes remplies dynamiquement en fonction du tag "Art".
-async function showByTag2() {
-  let photographers = await getPhotographersByTag2();
-  let section = document.querySelector(".main_section");
-  let tag2 = document.getElementById("artTag");
-  tag2.addEventListener("click", showByTag);
-  function showByTag(e) {
-    e.preventDefault();
-    section.innerText = "";
-    for (let photographer of photographers) {
-      let article = fillArticle(photographer);
-      section.appendChild(article);
-    }
-  };
-}
-showByTag2();
-
-// Montre toutes les cartes remplies dynamiquement en fonction du tag "Fashion".
-async function showByTag3() {
-  let photographers = await getPhotographersByTag3();
-  let section = document.querySelector(".main_section");
-  let tag3 = document.getElementById("fashionTag");
-  tag3.addEventListener("click", showByTag);
-  function showByTag(e) {
-    e.preventDefault();
-    section.innerText = "";
-    for (let photographer of photographers) {
-      let article = fillArticle(photographer);
-      section.appendChild(article);
-    }
-  }
-}
-showByTag3();
-
-// Montre toutes les cartes remplies dynamiquement en fonction du tag "Architecture".
-async function showByTag4() {
-  let photographers = await getPhotographersByTag4();
-  let section = document.querySelector(".main_section");
-  let tag4 = document.getElementById("archiTag");
-  tag4.addEventListener("click", showByTag);
-  function showByTag(e) {
-    e.preventDefault();
-    section.innerText = "";
-    for (let photographer of photographers) {
-      let article = fillArticle(photographer);
-      section.appendChild(article);
-    }
-  }
-}
-showByTag4();
-
-// Montre toutes les cartes remplies dynamiquement en fonction du tag "Travel".
-async function showByTag5() {
-  let photographers = await getPhotographersByTag5();
-  let section = document.querySelector(".main_section");
-  let tag5 = document.getElementById("travelTag");
-  tag5.addEventListener("click", showByTag);
-  function showByTag(e) {
-    e.preventDefault();
-    section.innerText = "";
-    for (let photographer of photographers) {
-      let article = fillArticle(photographer);
-      section.appendChild(article);
-    }
-  }
-}
-showByTag5();
-
-// Montre toutes les cartes remplies dynamiquement en fonction du tag "Sport".
-async function showByTag6() {
-  let photographers = await getPhotographersByTag6();
-  let section = document.querySelector(".main_section");
-  let tag6 = document.getElementById("sportTag");
-  tag6.addEventListener("click", showByTag);
-  function showByTag(e) {
-    e.preventDefault();
-    section.innerText = "";
-    for (let photographer of photographers) {
-      let article = fillArticle(photographer);
-      section.appendChild(article);
-    }
-  }
-}
-showByTag6();
-
-// Montre toutes les cartes remplies dynamiquement en fonction du tag "Animals".
-async function showByTag7() {
-  let photographers = await getPhotographersByTag7();
-  let section = document.querySelector(".main_section");
-  let tag7 = document.getElementById("animalsTag");
-  tag7.addEventListener("click", showByTag);
-  function showByTag(e) {
-    e.preventDefault();
-    section.innerText = "";
-    for (let photographer of photographers) {
-      let article = fillArticle(photographer);
-      section.appendChild(article);
-    }
-  }
-}
-showByTag7();
-
-// Montre toutes les cartes remplies dynamiquement en fonction du tag "Events".
-async function showByTag8() {
-  let photographers = await getPhotographersByTag8();
-  let section = document.querySelector(".main_section");
-  let tag8 = document.getElementById("eventsTag");
-  tag8.addEventListener("click", showByTag);
-  function showByTag(e) {
-    e.preventDefault();
-    section.innerText = "";
-    for (let photographer of photographers) {
-      let article = fillArticle(photographer);
-      section.appendChild(article);
-    }
-  }
-}
-showByTag8();
 
 /* Fonctions à venir pour pages dynamiques. 
 function getURL() {
