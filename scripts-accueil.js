@@ -39,17 +39,25 @@ function showPhotographers2(photographers) {
 
 // Récupère chacun des tags et leur valeur pour la fonction suivante.
 let tags = document.querySelectorAll(".barnavTag");
-tags.forEach((tag, index) => {
-  tag.addEventListener("click", (el) => {
-    let target = el.currentTarget;
+let el = null;
+let target = null;
+tags.forEach((tag) => {
+  tag.addEventListener("click", clickGetTag);
+  function clickGetTag(el) {
+    target = el.currentTarget;
     let tagValue = target.id;
     showByTag(tagValue);
-  });
-  tag.addEventListener("focus", (el) => {                           // MODIFIER POUR KEYDOWN ET TOUCHE "ENTREE"
-    let target = el.currentTarget;
-    let tagValue = target.id;
-    showByTag(tagValue);
-  });
+  };
+  tag.addEventListener("keydown", keyDownGetTag);
+  function keyDownGetTag(e, el) {
+    if (e.key == "Enter") {
+      //clickGetTag(el);
+      target = el.currentTarget;
+      // A chaque appui sur "Entrée", la ligne ci-dessus provoque l'erreur "el is undefined"...
+      let tagValue = target.id;
+      showByTag(tagValue);
+    }
+  };
 });
 
 // Montre les photographes en fonction du tag choisi.
