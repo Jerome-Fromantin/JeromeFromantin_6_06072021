@@ -30,7 +30,8 @@ Travail réalisé :
 - Amélioration d'apparence en version mobile,
 - Mise en place du tri du menu déroulant (par clavier),
 - Mise en place du tri par tags (par clic et clavier) en page d'accueil,
-- Accessibilité au clavier du formulaire.
+- Accessibilité au clavier du formulaire,
+- Améliorations d'apparence de la lightbox en desktop et mobile.
 
 Travail à faire :
 - Mise en place du pattern factory pour les médias de photographes,
