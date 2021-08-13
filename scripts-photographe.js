@@ -79,7 +79,7 @@ function contactButton() {
   buttonLink.onclick = function(event) {
     event.preventDefault();
     formModal.style.display = "block";
-    showForm();                                             // Voir à la ligne 629.
+    showForm();                                             // Voir à la ligne 630.
   }
   let buttonSpan = document.createElement("span");
   buttonSpan.innerText = "Contactez-moi";
@@ -94,8 +94,8 @@ function showLeftPart(photographer) {
   let contact = contactButton();
   sectionleft.appendChild(leftPart);
   sectionleft.appendChild(contact);
-  showMobileContact(photographer.id);                        // Voir à la ligne 314.
-  showLikesNPrice(photographer.id, photographer.price);      // Voir à la ligne 353.
+  showMobileContact(photographer.id);                        // Voir à la ligne 315.
+  showLikesNPrice(photographer.id, photographer.price);      // Voir à la ligne 354.
 }
 
 // Partie droite de la présentation : Récupère dynamiquement le nom de l'image.
@@ -122,7 +122,7 @@ showPresent(thePhotographerId);
 
 // PARTIE GALERIE DE PHOTOGRAPHIES
 // Récupère la lightbox cachée pour la fonction suivante.
-let lightbox = document.getElementById("lightbox_section");
+let lightbox = document.querySelector(".lightbox_section");
 
 // Récupère le header et le "main" à cacher pour la fonction suivante.
 let photoHeader = document.getElementById("photo_header");
@@ -132,7 +132,7 @@ let photoMain = document.getElementById("photo_main");
 // Cliquer sur l'image (ou "Enter" avec focus) ferme le header et le "main" et ouvre la lightbox.
 function photoPhotoLink(photographerId, image, title, likes, date, description, index) {
   let photoLink = document.createElement("a");
-  photoLink.href = "#";
+  photoLink.href = "";
   photoLink.className = "dyn_photo_photoLink";
   photoLink.setAttribute("aria-label", "Photographie");
   photoLink.addEventListener("click", clickOpenImg);
@@ -141,7 +141,9 @@ function photoPhotoLink(photographerId, image, title, likes, date, description, 
     photoHeader.style.display = "none";
     photoMain.style.display = "none";
     lightbox.style.display = "block";
-    showLightbox(photographerId, image, title, likes, date, description, index);      // Voir à la ligne 471.
+    lightbox.classList.remove("lightbox_section");
+    lightbox.classList.add("lightbox_section_on");
+    showLightbox(photographerId, image, title, likes, date, description, index);      // Voir à la ligne 472.
   };
   photoLink.addEventListener("keydown", keyDownOpenImg);
   function keyDownOpenImg(e) {
@@ -303,6 +305,7 @@ function mobileContactButton() {
   buttonLink.onclick = function(event) {
     event.preventDefault();
     formModal.style.display = "block";
+    showForm();                                             // Voir à la ligne 630.
   }
   let buttonSpan = document.createElement("span");
   buttonSpan.innerText = "Contactez-moi";
@@ -352,7 +355,7 @@ async function bottomRight(id, photographerPrice) {
 // Montre la section remplie dynamiquement.
 async function showLikesNPrice(id, photographerPrice) {
   let section = document.querySelector("#likes_prix");
-  let likesNPrice = await bottomRight(id, photographerPrice);      // Voir à la ligne 322.
+  let likesNPrice = await bottomRight(id, photographerPrice);      // Voir à la ligne 323.
   section.appendChild(likesNPrice);
 }
 
@@ -470,7 +473,7 @@ function lightboxNavigate(index) {
 // Montre la lightbox remplie dynamiquement.
 function showLightbox(id, image, title, likes, date, description, index) {
   // A ce niveau, les bonnes données sont récupérées...
-  let section = document.querySelector("#lightbox_section");
+  let section = document.querySelector(".lightbox_section_on");
   section.innerText = "";
   let fullArticle = document.createElement("article");
   fullArticle.className = "home_card";
@@ -629,6 +632,6 @@ function createForm() {
 function showForm() {
   let section = document.querySelector("#form_section");
   section.innerText = "";
-  let formulaire = createForm(); // Voir à la ligne 490.                                              // MODIFIER
+  let formulaire = createForm(); // Voir à la ligne 491.                                              // MODIFIER
   section.appendChild(formulaire);
 }

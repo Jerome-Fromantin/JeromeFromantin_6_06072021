@@ -392,16 +392,20 @@ et dans la présentation de chaque page de photographe. */
 }
 
 /***** FENETRE LIGHTBOX-MODAL *****/
-/* Fenêtre entière. */
-#lightbox_section {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 99vw;
-  height: 102%;
+/* Fenêtre entière non visible. */
+.lightbox_section {
   display: none;
-  margin-left: -40px;
 }
+
+/* Fenêtre entière activée par le JS. */
+.lightbox_section_on {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 99vh;
+  margin: 0 -40px -40px -40px;
+}
+
 /* "main" de la fenêtre. */
 #lightbox_main {
   position: relative;
@@ -409,7 +413,10 @@ et dans la présentation de chaque page de photographe. */
   align-items: center;
   flex-direction: row;
   justify-content: center;
-  margin: 20px auto -40px auto;
+  height: 100%;
+  max-height: 99vh;
+  max-width: 99vw;
+  margin: auto;
 }
 
 /* Icônes "précédent", "suivant" et "fermeture". */
@@ -430,7 +437,9 @@ et dans la présentation de chaque page de photographe. */
   display: flex;
   align-items: flex-start;
   flex-direction: column;
-  justify-content: flex-start;
+  justify-content: center;
+  height: 100%;
+  margin: 0;
 }
 
 /* Image seule. */
@@ -671,11 +680,6 @@ input {
     display: none;
   }
 
-  #lightbox_main {
-    margin: auto 0;
-    border: 1px black solid
-  }
-
   #lightbox-img {
     max-height: 88vh;
     max-width: 75vw;
@@ -734,5 +738,5 @@ input {
     padding: 8px 44px;
   }
   
-  /* Inclure d'autres règles */
+  /* Inclure d'autres règles ? */
 }
