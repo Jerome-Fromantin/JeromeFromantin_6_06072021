@@ -31,9 +31,9 @@ Travail réalisé :
 - Mise en place du tri du menu déroulant (par clavier),
 - Mise en place du tri par tags (par clic et clavier) en page d'accueil,
 - Accessibilité au clavier du formulaire,
-- Améliorations d'apparence de la lightbox en desktop et mobile.
+- Améliorations d'apparence de la lightbox en desktop et mobile,
+- Quelques améliorations minimes et tentative d'avancement du pattern factory "médias".
 
 Travail à faire :
 - Mise en place du pattern factory pour les médias de photographes,
-- Mise en place du tri par tags,
-- Et d'autres choses...
+- Et d'autres choses ??
