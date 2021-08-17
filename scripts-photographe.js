@@ -3,7 +3,7 @@ import {getPhotographer, getMediasByPhotographers} from "./services";
 
 // PAGE DE PHOTOGRAPHE
 // Récupération des données dynamiques pour chaque média de la lightbox.
-import {MediaFactory} from "./mediaFactory";
+//import {MediaFactory} from "./mediaFactory";                                                     // COMMENTAIRES
 
 // Récupère dynamiquement l'id du photographe concerné.
 let param = new URLSearchParams(window.location.search);
@@ -361,7 +361,7 @@ async function showLikesNPrice(id, photographerPrice) {
 
 // FENETRE LIGHTBOX-MODAL
 // Crée dynamiquement la lightbox pour chaque image.
-function createLightbox(id, image, title, likes, date, description, index) {
+function createLightbox(id, image, title, likes, date, description, index) {                     // COMMENTAIRES
   let lightboxMain = document.createElement("section");
   lightboxMain.id = "lightbox_main";
   lightboxMain.setAttribute("aria-label", "All the lightbox");
@@ -468,35 +468,25 @@ function lightboxNavigate(index) {
   }
   let media = pictures[index];
   showLightbox(media.photographerId, media.image, media.title, media.likes, media.date, media.description, index);
-}
-
-// Remplit la lightbox avec les données précédemment récupérées.
-//function fillLightbox(id, image, title, likes, date, description, index) {
-  //let fullLightbox = document.createElement("section");
-  //let fullLightbox = createLightbox(id, image, title, likes, date, description, index);
-  //let pic = new MediaFactory("picture", pictures);
-  //let movie = new MediaFactory("movie", pictures);
-  //fullLightbox.appendChild(pic.toHTML());
-  //fullLightbox.appendChild(movie.toHTML());
-  //return fullLightbox;
-//}
+}                                                                                              // COMMENTAIRES
 
 // Montre la lightbox remplie dynamiquement.
 function showLightbox(id, image, title, likes, date, description, index) {                    // LIGNE 474
+  console.log(image);
   let section = document.querySelector(".lightbox_section_on");
   section.innerText = "";
-  //let lightboxfull = fillLightbox(id, image, title, likes, date, description, index);
   //console.log(pictures);                                                                 // SUPPRIMER
   //console.log(new MediaFactory("picture", pictures));                                         // SUPPRIMER
   //console.log(pic.toHTML());                                                                      // SUPPRIMER
-  //let movie = new MediaFactory("movie", pictures);
+  //let img = new MediaFactory("pic", pictures);                                                 // COMMENTAIRES
+  //let video = new MediaFactory("movie", pictures);
   //fullArticle.appendChild(pic.toHTML());
-  //section.appendChild(movie.toHTML());
-  //section.appendChild(lightboxfull);
-  section.appendChild(new MediaFactory("picture", pictures).toHTML()); //mediafactory.tohtml
-  //section.appendChild(createLightbox(id, image, title, likes, date, description, index));
-  //return section;
+  //section.appendChild(img.toHTML()); //mediafactory.tohtml                                      // COMMENTAIRES
+  //section.appendChild(video.toHTML());
+  section.appendChild(createLightbox(id, image, title, likes, date, description, index));         // COMMENTAIRES
 }
+
+/**/
 
 // FENETRE FORM-MODAL
 // Crée dynamiquement le formulaire pour chaque photographe.
