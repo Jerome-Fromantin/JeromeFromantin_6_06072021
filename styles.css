@@ -52,24 +52,31 @@ body {
   justify-content: center;
 }
 
-/* Ensemble des tags du haut en version mobile. */
-#banner_mobile {
-  display: none;
-}
-
-#passer_contenu {
+/* Lien du bouton "Passer au contenu". */
+#passer_link {
   /*display: none;*/
   /*visibility: hidden;*/
   background: #D3573C;
+  color: black;
   font-weight: bold;
+  text-decoration: none;
   padding: 5px 10px;
   border-radius: 5px;
-  margin: 5px auto;
+  margin: 10px auto;
+}
+#passer_link:hover, #passer_link:focus {
+  background: #901C1C;
+  color: white;
 }
 
 /* Tags de navigation. */
 .barnav {
   margin-top: 15px;
+}
+
+/* Ensemble des tags du haut en version mobile. */
+#banner_mobile {
+  display: none;
 }
 
 /* Chaque tag, en barre de navigation et carte. */
