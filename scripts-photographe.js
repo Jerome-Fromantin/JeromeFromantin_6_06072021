@@ -1,10 +1,10 @@
 // Récupération des données "photographes" du fichier JSON.
 import {getPhotographer, getMediasByPhotographers} from "./services";
 
-// Récupération des données dynamiques pour chaque média de la lightbox.
-//import {MediaFactory} from "./mediaFactory";
-
 // PAGE DE PHOTOGRAPHE
+// Récupération des données dynamiques pour chaque média de la lightbox.
+import {MediaFactory} from "./mediaFactory";
+
 // Récupère dynamiquement l'id du photographe concerné.
 let param = new URLSearchParams(window.location.search);
 let thePhotographerId = param.get("id");
@@ -79,7 +79,7 @@ function contactButton() {
   buttonLink.onclick = function(event) {
     event.preventDefault();
     formModal.style.display = "block";
-    showForm();                                             // Voir à la ligne 630.
+    showForm();                                             // Voir à la ligne 632.
   }
   let buttonSpan = document.createElement("span");
   buttonSpan.innerText = "Contactez-moi";
@@ -94,8 +94,8 @@ function showLeftPart(photographer) {
   let contact = contactButton();
   sectionleft.appendChild(leftPart);
   sectionleft.appendChild(contact);
-  showMobileContact(photographer.id);                        // Voir à la ligne 315.
-  showLikesNPrice(photographer.id, photographer.price);      // Voir à la ligne 354.
+  showMobileContact(photographer.id);                        // Voir à la ligne 317.
+  showLikesNPrice(photographer.id, photographer.price);      // Voir à la ligne 356.
 }
 
 // Partie droite de la présentation : Récupère dynamiquement le nom de l'image.
@@ -143,7 +143,7 @@ function photoPhotoLink(photographerId, image, title, likes, date, description, 
     lightbox.style.display = "block";
     lightbox.classList.remove("lightbox_section");
     lightbox.classList.add("lightbox_section_on");
-    showLightbox(photographerId, image, title, likes, date, description, index);      // Voir à la ligne 472.
+    showLightbox(photographerId, image, title, likes, date, description, index);      // Voir à la ligne 474.
   };
   photoLink.addEventListener("keydown", keyDownOpenImg);
   function keyDownOpenImg(e) {
@@ -305,7 +305,7 @@ function mobileContactButton() {
   buttonLink.onclick = function(event) {
     event.preventDefault();
     formModal.style.display = "block";
-    showForm();                                             // Voir à la ligne 630.
+    showForm();                                             // Voir à la ligne 632.
   }
   let buttonSpan = document.createElement("span");
   buttonSpan.innerText = "Contactez-moi";
@@ -316,7 +316,7 @@ function mobileContactButton() {
 // Montre la section remplie dynamiquement.
 function showMobileContact() {
   let section = document.querySelector("#mobile_contact_parent");
-  let mobileContact = mobileContactButton();                        // Voir à la ligne 298.
+  let mobileContact = mobileContactButton();                        // Voir à la ligne 300.
   section.appendChild(mobileContact);
 }
 
@@ -355,7 +355,7 @@ async function bottomRight(id, photographerPrice) {
 // Montre la section remplie dynamiquement.
 async function showLikesNPrice(id, photographerPrice) {
   let section = document.querySelector("#likes_prix");
-  let likesNPrice = await bottomRight(id, photographerPrice);      // Voir à la ligne 323.
+  let likesNPrice = await bottomRight(id, photographerPrice);      // Voir à la ligne 325.
   section.appendChild(likesNPrice);
 }
 
@@ -470,27 +470,37 @@ function lightboxNavigate(index) {
   showLightbox(media.photographerId, media.image, media.title, media.likes, media.date, media.description, index);
 }
 
+// Remplit la lightbox avec les données précédemment récupérées.
+//function fillLightbox(id, image, title, likes, date, description, index) {
+  //let fullLightbox = document.createElement("section");
+  //let fullLightbox = createLightbox(id, image, title, likes, date, description, index);
+  //let pic = new MediaFactory("picture", pictures);
+  //let movie = new MediaFactory("movie", pictures);
+  //fullLightbox.appendChild(pic.toHTML());
+  //fullLightbox.appendChild(movie.toHTML());
+  //return fullLightbox;
+//}
+
 // Montre la lightbox remplie dynamiquement.
-function showLightbox(id, image, title, likes, date, description, index) {
-  // A ce niveau, les bonnes données sont récupérées...
+function showLightbox(id, image, title, likes, date, description, index) {                    // LIGNE 474
   let section = document.querySelector(".lightbox_section_on");
   section.innerText = "";
-  let fullArticle = document.createElement("article");
-  fullArticle.className = "home_card";
-  //let pic = new MediaFactory("picture", pictures);
-  //console.log(pic);                                                                 // SUPPRIMER
+  //let lightboxfull = fillLightbox(id, image, title, likes, date, description, index);
+  //console.log(pictures);                                                                 // SUPPRIMER
+  //console.log(new MediaFactory("picture", pictures));                                         // SUPPRIMER
+  //console.log(pic.toHTML());                                                                      // SUPPRIMER
   //let movie = new MediaFactory("movie", pictures);
   //fullArticle.appendChild(pic.toHTML());
   //section.appendChild(movie.toHTML());
-  //section.appendChild(fullArticle);
-  //section.appendChild(fullArticle);
-  section.appendChild(createLightbox(id, image, title, likes, date, description, index)); //mediafactory.tohtml
+  //section.appendChild(lightboxfull);
+  section.appendChild(new MediaFactory("picture", pictures).toHTML()); //mediafactory.tohtml
+  //section.appendChild(createLightbox(id, image, title, likes, date, description, index));
   //return section;
 }
 
 // FENETRE FORM-MODAL
 // Crée dynamiquement le formulaire pour chaque photographe.
-function createForm() {
+function createForm() {                                                                  // LIGNE 493
   let formMain = document.createElement("form");
   formMain.id = "form_main";
   formMain.setAttribute("action", "");
@@ -629,9 +639,9 @@ function createForm() {
 };
 
 // Montre le formulaire rempli dynamiquement.
-function showForm() {
+function showForm() {                                                             // LIGNE 632
   let section = document.querySelector("#form_section");
   section.innerText = "";
-  let formulaire = createForm(); // Voir à la ligne 491.                                              // MODIFIER
+  let formulaire = createForm();                                                  // Voir à la ligne 493.
   section.appendChild(formulaire);
 }
