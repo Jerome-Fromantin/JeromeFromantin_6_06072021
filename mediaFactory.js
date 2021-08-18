@@ -1,14 +1,16 @@
+import {initLightbox} from "./lightbox";
+
 // Cette classe utilise 2 instances d'autres classes afin de construire la lightbox pour chaque média.
 export class MediaFactory {
-  constructor (type, data) {
+  constructor (type, data, index) {
     if (!data) {
       throw new Error("Vous avez oublié des éléments !");
     }
     switch (type) {
       case "pic":
-        return new LightboxPic(data);
+        return new PicFactory(data, index);
       case "movie":
-        return new LightboxVid(data);
+        return new VidFactory(data, index);
       default:
         throw new Error("Type de données non reconnu !");
     }
@@ -16,131 +18,78 @@ export class MediaFactory {
 }
 
 // Cette classe concerne les médias "image".
-class LightboxPic {
+class PicFactory {
   pic = null;
-  constructor (data) {
-    const {id, image, title, likes, date, description, index} = data;
-    this.pic = this.createLightbox(id, image, title, likes, date, description, index);
+  constructor (data, index) {
+    this.pic = this.fillArticle(data, index);
     console.log(this.pic);                                                                    // SUPPRIMER
   }
 
-  // Crée dynamiquement la lightbox pour chaque image.
-  createLightbox(id, image, title, likes, date, description, index) {
-    console.log(likes);                                                                              // SUPPRIMER
-    console.log(date);                                                                              // SUPPRIMER
-    let lightboxMain = document.createElement("section");
-    lightboxMain.id = "lightbox_main";
-    lightboxMain.setAttribute("aria-label", "All the lightbox");
-  
-    let lightPrevLink = document.createElement("a");
-    lightPrevLink.href = "#";
-    lightPrevLink.className = "lightbox-icons";
-    lightPrevLink.setAttribute("aria-label", "Previous image");
-    lightPrevLink.addEventListener("click", clickPrev);
-    function clickPrev() {
-      lightboxNavigate(index - 1);
-    };
-    lightPrevLink.addEventListener("keydown", keyDownPrev);
-    function keyDownPrev(e) {
-      if (e.key == "Enter") {
-        lightboxNavigate(index - 1);
-      }
-    };
-  
-    let lightPrevIcon = document.createElement("img");
-    lightPrevIcon.src = "Images/Icone-fleche-gauche.png";
-    lightPrevIcon.className = "lightbox-icon";
-    lightPrevIcon.setAttribute("alt", "Previous icon");
-    
-    lightPrevLink.appendChild(lightPrevIcon);
-    lightboxMain.appendChild(lightPrevLink);
-  
-    let lightImgAndTitle = document.createElement("section");
-    lightImgAndTitle.id = "lightbox-imgAndTitle";
-    lightImgAndTitle.setAttribute("aria-label", "Media and title");
-  
-    let lightboxMedia = document.createElement("img");
-    lightboxMedia.src = "Images/" + id + "/" + image;
-    lightboxMedia.id = "lightbox-img";
-    lightboxMedia.setAttribute("alt", description);
-    console.log(lightboxMedia);                                                                    // SUPPRIMER
-  
-    let lightboxTitle = document.createElement("p");
-    lightboxTitle.id = "lightbox-parag";
-    lightboxTitle.innerText = title;
-    
-    lightImgAndTitle.appendChild(lightboxMedia);
-    lightImgAndTitle.appendChild(lightboxTitle);
-    lightboxMain.appendChild(lightImgAndTitle);
-  
-    let lightNextLink = document.createElement("a");
-    lightNextLink.href = "#";
-    lightNextLink.className = "lightbox-icons";
-    lightNextLink.setAttribute("aria-label", "Next image");
-    lightNextLink.addEventListener("click", clickNext);
-    function clickNext() {
-      lightboxNavigate(index + 1);
-    };
-    lightNextLink.addEventListener("keydown", keyDownNext);
-    function keyDownNext(e) {
-      if (e.key == "Enter") {
-        lightboxNavigate(index + 1);
-      }
-    };
-  
-    let lightNextIcon = document.createElement("img");
-    lightNextIcon.src = "Images/Icone-fleche-droite.png";
-    lightNextIcon.className = "lightbox-icon";
-    lightNextIcon.setAttribute("alt", "Next icon");
-    
-    lightNextLink.appendChild(lightNextIcon);
-    lightboxMain.appendChild(lightNextLink);
 
-    /**/
-    let lightbox = document.querySelector(".lightbox_section");
-    let photoHeader = document.getElementById("photo_header");
-    let photoMain = document.getElementById("photo_main");
-    /**/
-  
-    let lightboxClose = document.createElement("a");
-    lightboxClose.href = "#";
-    lightboxClose.className = "lightbox-icons";
-    lightboxClose.id = "lightbox_close";
-    lightboxClose.setAttribute("aria-label", "Close dialog");
-    lightboxClose.addEventListener("click", clickClose);
-    function clickClose() {
-      lightbox.style.display = "none";
-      photoHeader.style.display = "block";
-      photoMain.style.display = "block";
-    };
-    lightboxClose.addEventListener("keydown", keyDownClose);
-    function keyDownClose(e) {
-      if (e.key == "Enter") {
-        clickClose();
-      }
-    };
-  
-    let lightCloseIcon = document.createElement("img");
-    lightCloseIcon.src = "Images/Icone-croix.png";
-    lightCloseIcon.className = "lightbox-icon";
-    lightCloseIcon.setAttribute("alt", "Close button");
-  
-    lightboxClose.appendChild(lightCloseIcon);
-    lightboxMain.appendChild(lightboxClose);
-  
-    return lightboxMain;
+  // fillArticle
+  fillArticle(picture, index) {
+    let fullArticle = document.createElement("article");
+    fullArticle.className = "photo_card";
+    let link = this.photoPhotoLink(picture.photographerId, picture.image, picture.title, picture.likes, picture.date, picture.description, index);
+    let descr = this.photoCardDescr(picture.title, picture.likes);
+    fullArticle.appendChild(link);
+    fullArticle.appendChild(descr);
+    return fullArticle;
   }
 
-  // Permet de naviguer dans la lightbox.
-  lightboxNavigate(index) {
-    if (index >= pictures.length) {
-    index = 0;
-    }
-    if (index < 0) {
-    index = pictures.length - 1;
-    }
-    let media = pictures[index];
-    showLightbox(media.photographerId, media.image, media.title, media.likes, media.date, media.description, index);
+  photoPhotoLink(photographerId, image, title, likes, date, description, index) {
+    let photoLink = document.createElement("a");
+    photoLink.href = "";
+    photoLink.className = "dyn_photo_photoLink";
+    photoLink.setAttribute("aria-label", "Photographie");
+    photoLink.addEventListener("click", clickOpenImg);
+    function clickOpenImg(e) {
+      e.preventDefault();
+      initLightbox(photographerId, image, title, likes, date, description, index);
+    };
+    photoLink.addEventListener("keydown", keyDownOpenImg);
+    function keyDownOpenImg(e) {
+      if (e.key == "Enter") {
+        clickOpenImg(e);
+      }
+    };
+    let photoLinkImg = document.createElement("img");
+    photoLinkImg.src = "Images/Thumbnails/" + photographerId + "/" + image;
+    photoLinkImg.className = "dyn_photo_img";
+    photoLink.setAttribute("lang", "en");
+    photoLink.setAttribute("alt", description);
+    photoLink.appendChild(photoLinkImg);
+    return photoLink;
+  }
+
+  photoCardDescr(title, likes) {
+    let description = document.createElement("div");
+    description.className = "photo_card_titleLikes";
+    description.setAttribute("lang", "en");
+    let descriptionTitle = document.createElement("span");
+    descriptionTitle.innerText = title;
+    descriptionTitle.className = "dyn_title";
+    descriptionTitle.setAttribute("aria-label", "Titre de la photo");
+    let descriptionLikes = document.createElement("span");
+    descriptionLikes.className = "dyn_likes";
+    descriptionLikes.setAttribute("aria-label", "Likes de la photo");
+    let descriptionLikesNumber = document.createElement("span");
+    descriptionLikesNumber.innerText = likes;
+    descriptionLikesNumber.setAttribute("aria-label", "Nombre de likes");
+    let descriptionLikesIcon = document.createElement("img");
+    descriptionLikesIcon.src = "Images/Icone-coeur.png";
+    descriptionLikesIcon.className = "icone";
+    descriptionLikesIcon.addEventListener("click", () => {
+      descriptionLikesNumber.innerText = Number(descriptionLikesNumber.innerText) + 1;
+      let newTotal = document.getElementById("dyn_likes_number");
+      newTotal.innerText = Number(newTotal.innerText) + 1;
+    })
+    descriptionLikes.setAttribute("alt", "Likes");
+    description.appendChild(descriptionTitle);
+    descriptionLikes.appendChild(descriptionLikesNumber);
+    descriptionLikes.appendChild(descriptionLikesIcon);
+    description.appendChild(descriptionLikes);
+    return description;
   }
 
   toHTML() {
@@ -149,19 +98,76 @@ class LightboxPic {
 }
 
 // Cette classe concerne les médias "vidéo".
-class LightboxVid {
+class VidFactory {
   movie = null;
-  constructor (data) {
-    const {id, image, title, likes, date, description, index} = data;
-    this.movie = this.testFunction(id, image, title, likes, date, description, index)
+  constructor (data, index) {
+    this.movie = this.fillArticle(data, index)
   }
+// fillArticle
+fillArticle(picture, index) {
+  let fullArticle = document.createElement("article");
+  fullArticle.className = "photo_card";
+  let link = this.photoPhotoLink(picture.photographerId, picture.image, picture.title, picture.likes, picture.date, picture.description, index);
+  let descr = this.photoCardDescr(picture.title, picture.likes);
+  fullArticle.appendChild(link);
+  fullArticle.appendChild(descr);
+  return fullArticle;
+}
 
-  testFunction(id, image, title, likes, date, description, index) {
-    // Contenu
-    console.log("Dur dur !");                                                                    // SUPPRIMER
-    console.log(id);                                                                    // SUPPRIMER
-    return kekchose;
-  }
+photoPhotoLink(photographerId, image, title, likes, date, description, index) {
+  let photoLink = document.createElement("a");
+  photoLink.href = "";
+  photoLink.className = "dyn_photo_photoLink";
+  photoLink.setAttribute("aria-label", "Photographie");
+  photoLink.addEventListener("click", clickOpenImg);
+  function clickOpenImg(e) {
+    e.preventDefault();
+    initLightbox(photographerId, image, title, likes, date, description, index);
+  };
+  photoLink.addEventListener("keydown", keyDownOpenImg);
+  function keyDownOpenImg(e) {
+    if (e.key == "Enter") {
+      clickOpenImg(e);
+    }
+  };
+  let photoLinkImg = document.createElement("img");
+  photoLinkImg.src = "Images/Thumbnails/" + photographerId + "/" + image;
+  photoLinkImg.className = "dyn_photo_img";
+  photoLink.setAttribute("lang", "en");
+  photoLink.setAttribute("alt", description);
+  photoLink.appendChild(photoLinkImg);
+  return photoLink;
+}
+
+photoCardDescr(title, likes) {
+  let description = document.createElement("div");
+  description.className = "photo_card_titleLikes";
+  description.setAttribute("lang", "en");
+  let descriptionTitle = document.createElement("span");
+  descriptionTitle.innerText = title;
+  descriptionTitle.className = "dyn_title";
+  descriptionTitle.setAttribute("aria-label", "Titre de la photo");
+  let descriptionLikes = document.createElement("span");
+  descriptionLikes.className = "dyn_likes";
+  descriptionLikes.setAttribute("aria-label", "Likes de la photo");
+  let descriptionLikesNumber = document.createElement("span");
+  descriptionLikesNumber.innerText = likes;
+  descriptionLikesNumber.setAttribute("aria-label", "Nombre de likes");
+  let descriptionLikesIcon = document.createElement("img");
+  descriptionLikesIcon.src = "Images/Icone-coeur.png";
+  descriptionLikesIcon.className = "icone";
+  descriptionLikesIcon.addEventListener("click", () => {
+    descriptionLikesNumber.innerText = Number(descriptionLikesNumber.innerText) + 1;
+    let newTotal = document.getElementById("dyn_likes_number");
+    newTotal.innerText = Number(newTotal.innerText) + 1;
+  })
+  descriptionLikes.setAttribute("alt", "Likes");
+  description.appendChild(descriptionTitle);
+  descriptionLikes.appendChild(descriptionLikesNumber);
+  descriptionLikes.appendChild(descriptionLikesIcon);
+  description.appendChild(descriptionLikes);
+  return description;
+}
 
   toHTML() {
     return this.movie;

@@ -3,7 +3,7 @@ import {getPhotographer, getMediasByPhotographers} from "./services";
 
 // PAGE DE PHOTOGRAPHE
 // Récupération des données dynamiques pour chaque média de la lightbox.
-//import {MediaFactory} from "./mediaFactory";                                                     // COMMENTAIRES
+import {MediaFactory} from "./mediaFactory";                                                     // COMMENTAIRES
 
 // Récupère dynamiquement l'id du photographe concerné.
 let param = new URLSearchParams(window.location.search);
@@ -211,8 +211,9 @@ async function showPhotos(id) {
   let section = document.querySelector(".photo_gallery");
   for (let picture of pictures) {
     let index = pictures.indexOf(picture);
-    let article = fillArticle(picture, index);
-    section.appendChild(article);
+    let mediaType = picture.video ? "movie" : "pic";
+    let article = new MediaFactory(mediaType, picture, index);
+    section.appendChild(article.toHTML());
   }
 }
 showPhotos(thePhotographerId);
@@ -361,7 +362,7 @@ async function showLikesNPrice(id, photographerPrice) {
 
 // FENETRE LIGHTBOX-MODAL
 // Crée dynamiquement la lightbox pour chaque image.
-function createLightbox(id, image, title, likes, date, description, index) {                     // COMMENTAIRES
+/*function createLightbox(id, image, title, likes, date, description, index) {                     // COMMENTAIRES
   let lightboxMain = document.createElement("section");
   lightboxMain.id = "lightbox_main";
   lightboxMain.setAttribute("aria-label", "All the lightbox");
@@ -468,7 +469,7 @@ function lightboxNavigate(index) {
   }
   let media = pictures[index];
   showLightbox(media.photographerId, media.image, media.title, media.likes, media.date, media.description, index);
-}                                                                                              // COMMENTAIRES
+}*/                                                                                              // COMMENTAIRES
 
 // Montre la lightbox remplie dynamiquement.
 function showLightbox(id, image, title, likes, date, description, index) {                    // LIGNE 474
@@ -478,12 +479,12 @@ function showLightbox(id, image, title, likes, date, description, index) {      
   //console.log(pictures);                                                                 // SUPPRIMER
   //console.log(new MediaFactory("picture", pictures));                                         // SUPPRIMER
   //console.log(pic.toHTML());                                                                      // SUPPRIMER
-  //let img = new MediaFactory("pic", pictures);                                                 // COMMENTAIRES
+  let img = new MediaFactory("pic", pictures);                                                 // COMMENTAIRES
   //let video = new MediaFactory("movie", pictures);
   //fullArticle.appendChild(pic.toHTML());
-  //section.appendChild(img.toHTML()); //mediafactory.tohtml                                      // COMMENTAIRES
+  section.appendChild(img.toHTML()); //mediafactory.tohtml                                      // COMMENTAIRES
   //section.appendChild(video.toHTML());
-  section.appendChild(createLightbox(id, image, title, likes, date, description, index));         // COMMENTAIRES
+  //section.appendChild(createLightbox(id, image, title, likes, date, description, index));         // COMMENTAIRES
 }
 
 /**/
