@@ -23,5 +23,3 @@ export const getMediasByPhotographers = async(id) => {
     let medias = media.filter(data => data.photographerId == id);
     return medias;
 }
-
-// lightbox

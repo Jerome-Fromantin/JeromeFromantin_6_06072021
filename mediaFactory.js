@@ -1,4 +1,5 @@
-import {initLightbox} from "./lightbox";
+// Récupération de l'environnement de la lightbox pour pouvoir l'ouvrir.
+import {initLightPic, initLightVid} from "./lightbox";
 
 // Cette classe utilise 2 instances d'autres classes afin de construire la lightbox pour chaque média.
 export class MediaFactory {
@@ -9,7 +10,7 @@ export class MediaFactory {
     switch (type) {
       case "pic":
         return new PicFactory(data, index);
-      case "movie":
+      case "vid":
         return new VidFactory(data, index);
       default:
         throw new Error("Type de données non reconnu !");
@@ -22,22 +23,22 @@ class PicFactory {
   pic = null;
   constructor (data, index) {
     this.pic = this.fillArticle(data, index);
-    console.log(this.pic);                                                                    // SUPPRIMER
   }
 
-
-  // fillArticle
+  // Dans chaque page photographe, organise en article les différents éléments.
   fillArticle(picture, index) {
     let fullArticle = document.createElement("article");
     fullArticle.className = "photo_card";
-    let link = this.photoPhotoLink(picture.photographerId, picture.image, picture.title, picture.likes, picture.date, picture.description, index);
+    let link = this.photoPhotoLink(picture.photographerId, picture.image, picture.video, picture.title, picture.likes, picture.date, picture.description, index);
     let descr = this.photoCardDescr(picture.title, picture.likes);
     fullArticle.appendChild(link);
     fullArticle.appendChild(descr);
     return fullArticle;
   }
 
-  photoPhotoLink(photographerId, image, title, likes, date, description, index) {
+  // Dans chaque page photographe, crée chaque lien contenant une image.
+  // Le clic (ou la touche "Entrée" avec focus) ouvre la lightbox.
+  photoPhotoLink(photographerId, image, video, title, likes, date, description, index) {
     let photoLink = document.createElement("a");
     photoLink.href = "";
     photoLink.className = "dyn_photo_photoLink";
@@ -45,7 +46,7 @@ class PicFactory {
     photoLink.addEventListener("click", clickOpenImg);
     function clickOpenImg(e) {
       e.preventDefault();
-      initLightbox(photographerId, image, title, likes, date, description, index);
+      initLightPic(photographerId, image, video, title, likes, date, description, index);
     };
     photoLink.addEventListener("keydown", keyDownOpenImg);
     function keyDownOpenImg(e) {
@@ -62,6 +63,7 @@ class PicFactory {
     return photoLink;
   }
 
+  // Dans chaque page photographe, crée la description en dessous de chaque image.
   photoCardDescr(title, likes) {
     let description = document.createElement("div");
     description.className = "photo_card_titleLikes";
@@ -103,71 +105,75 @@ class VidFactory {
   constructor (data, index) {
     this.movie = this.fillArticle(data, index)
   }
-// fillArticle
-fillArticle(picture, index) {
-  let fullArticle = document.createElement("article");
-  fullArticle.className = "photo_card";
-  let link = this.photoPhotoLink(picture.photographerId, picture.image, picture.title, picture.likes, picture.date, picture.description, index);
-  let descr = this.photoCardDescr(picture.title, picture.likes);
-  fullArticle.appendChild(link);
-  fullArticle.appendChild(descr);
-  return fullArticle;
-}
 
-photoPhotoLink(photographerId, image, title, likes, date, description, index) {
-  let photoLink = document.createElement("a");
-  photoLink.href = "";
-  photoLink.className = "dyn_photo_photoLink";
-  photoLink.setAttribute("aria-label", "Photographie");
-  photoLink.addEventListener("click", clickOpenImg);
-  function clickOpenImg(e) {
-    e.preventDefault();
-    initLightbox(photographerId, image, title, likes, date, description, index);
-  };
-  photoLink.addEventListener("keydown", keyDownOpenImg);
-  function keyDownOpenImg(e) {
-    if (e.key == "Enter") {
-      clickOpenImg(e);
-    }
-  };
-  let photoLinkImg = document.createElement("img");
-  photoLinkImg.src = "Images/Thumbnails/" + photographerId + "/" + image;
-  photoLinkImg.className = "dyn_photo_img";
-  photoLink.setAttribute("lang", "en");
-  photoLink.setAttribute("alt", description);
-  photoLink.appendChild(photoLinkImg);
-  return photoLink;
-}
+  // Dans chaque page photographe, organise en article les différents éléments.
+  fillArticle(picture, index) {
+    let fullArticle = document.createElement("article");
+    fullArticle.className = "photo_card";
+    let link = this.photoPhotoLink(picture.photographerId, picture.image, picture.video, picture.title, picture.likes, picture.date, picture.description, index);
+    let descr = this.photoCardDescr(picture.title, picture.likes);
+    fullArticle.appendChild(link);
+    fullArticle.appendChild(descr);
+    return fullArticle;
+  }
 
-photoCardDescr(title, likes) {
-  let description = document.createElement("div");
-  description.className = "photo_card_titleLikes";
-  description.setAttribute("lang", "en");
-  let descriptionTitle = document.createElement("span");
-  descriptionTitle.innerText = title;
-  descriptionTitle.className = "dyn_title";
-  descriptionTitle.setAttribute("aria-label", "Titre de la photo");
-  let descriptionLikes = document.createElement("span");
-  descriptionLikes.className = "dyn_likes";
-  descriptionLikes.setAttribute("aria-label", "Likes de la photo");
-  let descriptionLikesNumber = document.createElement("span");
-  descriptionLikesNumber.innerText = likes;
-  descriptionLikesNumber.setAttribute("aria-label", "Nombre de likes");
-  let descriptionLikesIcon = document.createElement("img");
-  descriptionLikesIcon.src = "Images/Icone-coeur.png";
-  descriptionLikesIcon.className = "icone";
-  descriptionLikesIcon.addEventListener("click", () => {
-    descriptionLikesNumber.innerText = Number(descriptionLikesNumber.innerText) + 1;
-    let newTotal = document.getElementById("dyn_likes_number");
-    newTotal.innerText = Number(newTotal.innerText) + 1;
-  })
-  descriptionLikes.setAttribute("alt", "Likes");
-  description.appendChild(descriptionTitle);
-  descriptionLikes.appendChild(descriptionLikesNumber);
-  descriptionLikes.appendChild(descriptionLikesIcon);
-  description.appendChild(descriptionLikes);
-  return description;
-}
+  // Dans chaque page photographe, crée chaque lien contenant une image.
+  // Le clic (ou la touche "Entrée" avec focus) ouvre la lightbox.
+  photoPhotoLink(photographerId, image, video, title, likes, date, description, index) {
+    let photoLink = document.createElement("a");
+    photoLink.href = "";
+    photoLink.className = "dyn_photo_photoLink";
+    photoLink.setAttribute("aria-label", "Photographie");
+    photoLink.addEventListener("click", clickOpenImg);
+    function clickOpenImg(e) {
+      e.preventDefault();
+      initLightVid(photographerId, image, video, title, likes, date, description, index);
+    };
+    photoLink.addEventListener("keydown", keyDownOpenImg);
+    function keyDownOpenImg(e) {
+      if (e.key == "Enter") {
+        clickOpenImg(e);
+      }
+    };
+    let photoLinkImg = document.createElement("img");
+    photoLinkImg.src = "Images/Thumbnails/" + photographerId + "/" + image;
+    photoLinkImg.className = "dyn_photo_img";
+    photoLink.setAttribute("lang", "en");
+    photoLink.setAttribute("alt", description);
+    photoLink.appendChild(photoLinkImg);
+    return photoLink;
+  }
+
+  // Dans chaque page photographe, crée la description en dessous de chaque image.
+  photoCardDescr(title, likes) {
+    let description = document.createElement("div");
+    description.className = "photo_card_titleLikes";
+    description.setAttribute("lang", "en");
+    let descriptionTitle = document.createElement("span");
+    descriptionTitle.innerText = title;
+    descriptionTitle.className = "dyn_title";
+    descriptionTitle.setAttribute("aria-label", "Titre de la photo");
+    let descriptionLikes = document.createElement("span");
+    descriptionLikes.className = "dyn_likes";
+    descriptionLikes.setAttribute("aria-label", "Likes de la photo");
+    let descriptionLikesNumber = document.createElement("span");
+    descriptionLikesNumber.innerText = likes;
+    descriptionLikesNumber.setAttribute("aria-label", "Nombre de likes");
+    let descriptionLikesIcon = document.createElement("img");
+    descriptionLikesIcon.src = "Images/Icone-coeur.png";
+    descriptionLikesIcon.className = "icone";
+    descriptionLikesIcon.addEventListener("click", () => {
+      descriptionLikesNumber.innerText = Number(descriptionLikesNumber.innerText) + 1;
+      let newTotal = document.getElementById("dyn_likes_number");
+      newTotal.innerText = Number(newTotal.innerText) + 1;
+    })
+    descriptionLikes.setAttribute("alt", "Likes");
+    description.appendChild(descriptionTitle);
+    descriptionLikes.appendChild(descriptionLikesNumber);
+    descriptionLikes.appendChild(descriptionLikesIcon);
+    description.appendChild(descriptionLikes);
+    return description;
+  }
 
   toHTML() {
     return this.movie;

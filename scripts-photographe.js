@@ -3,7 +3,7 @@ import {getPhotographer, getMediasByPhotographers} from "./services";
 
 // PAGE DE PHOTOGRAPHE
 // Récupération des données dynamiques pour chaque média de la lightbox.
-import {MediaFactory} from "./mediaFactory";                                                     // COMMENTAIRES
+import {MediaFactory} from "./mediaFactory";
 
 // Récupère dynamiquement l'id du photographe concerné.
 let param = new URLSearchParams(window.location.search);
@@ -79,7 +79,7 @@ function contactButton() {
   buttonLink.onclick = function(event) {
     event.preventDefault();
     formModal.style.display = "block";
-    showForm();                                             // Voir à la ligne 632.
+    showForm();                       // Voir à la ligne 423.
   }
   let buttonSpan = document.createElement("span");
   buttonSpan.innerText = "Contactez-moi";
@@ -94,8 +94,8 @@ function showLeftPart(photographer) {
   let contact = contactButton();
   sectionleft.appendChild(leftPart);
   sectionleft.appendChild(contact);
-  showMobileContact(photographer.id);                        // Voir à la ligne 317.
-  showLikesNPrice(photographer.id, photographer.price);      // Voir à la ligne 356.
+  showMobileContact(photographer.id);                       // Voir à la ligne 237.
+  showLikesNPrice(photographer.id, photographer.price);     // Voir à la ligne 276.
 }
 
 // Partie droite de la présentation : Récupère dynamiquement le nom de l'image.
@@ -121,88 +121,7 @@ async function showPresent(id) {
 showPresent(thePhotographerId);
 
 // PARTIE GALERIE DE PHOTOGRAPHIES
-// Récupère la lightbox cachée pour la fonction suivante.
-let lightbox = document.querySelector(".lightbox_section");
-
-// Récupère le header et le "main" à cacher pour la fonction suivante.
-let photoHeader = document.getElementById("photo_header");
-let photoMain = document.getElementById("photo_main");
-
-// Chaque carte de la page de photographe : Récupère dynamiquement l'image pour le lien.
-// Cliquer sur l'image (ou "Enter" avec focus) ferme le header et le "main" et ouvre la lightbox.
-function photoPhotoLink(photographerId, image, title, likes, date, description, index) {
-  let photoLink = document.createElement("a");
-  photoLink.href = "";
-  photoLink.className = "dyn_photo_photoLink";
-  photoLink.setAttribute("aria-label", "Photographie");
-  photoLink.addEventListener("click", clickOpenImg);
-  function clickOpenImg(e) {
-    e.preventDefault();
-    photoHeader.style.display = "none";
-    photoMain.style.display = "none";
-    lightbox.style.display = "block";
-    lightbox.classList.remove("lightbox_section");
-    lightbox.classList.add("lightbox_section_on");
-    showLightbox(photographerId, image, title, likes, date, description, index);      // Voir à la ligne 474.
-  };
-  photoLink.addEventListener("keydown", keyDownOpenImg);
-  function keyDownOpenImg(e) {
-    if (e.key == "Enter") {
-      clickOpenImg(e);
-    }
-  };
-  let photoLinkImg = document.createElement("img");
-  photoLinkImg.src = "Images/Thumbnails/" + photographerId + "/" + image;
-  photoLinkImg.className = "dyn_photo_img";
-  photoLink.setAttribute("lang", "en");
-  photoLink.setAttribute("alt", description);
-  photoLink.appendChild(photoLinkImg);
-  return photoLink;
-}
-
-// Chaque carte de la page de photographe : Récupère dynamiquement les données pour la ligne de description.
-function photoCardDescr(title, likes) {
-  let description = document.createElement("div");
-  description.className = "photo_card_titleLikes";
-  description.setAttribute("lang", "en");
-  let descriptionTitle = document.createElement("span");
-  descriptionTitle.innerText = title;
-  descriptionTitle.className = "dyn_title";
-  descriptionTitle.setAttribute("aria-label", "Titre de la photo");
-  let descriptionLikes = document.createElement("span");
-  descriptionLikes.className = "dyn_likes";
-  descriptionLikes.setAttribute("aria-label", "Likes de la photo");
-  let descriptionLikesNumber = document.createElement("span");
-  descriptionLikesNumber.innerText = likes;
-  descriptionLikesNumber.setAttribute("aria-label", "Nombre de likes");
-  let descriptionLikesIcon = document.createElement("img");
-  descriptionLikesIcon.src = "Images/Icone-coeur.png";
-  descriptionLikesIcon.className = "icone";
-  descriptionLikesIcon.addEventListener("click", () => {
-    descriptionLikesNumber.innerText = Number(descriptionLikesNumber.innerText) + 1;
-    let newTotal = document.getElementById("dyn_likes_number");
-    newTotal.innerText = Number(newTotal.innerText) + 1;
-  })
-  descriptionLikes.setAttribute("alt", "Likes");
-  description.appendChild(descriptionTitle);
-  descriptionLikes.appendChild(descriptionLikesNumber);
-  descriptionLikes.appendChild(descriptionLikesIcon);
-  description.appendChild(descriptionLikes);
-  return description;
-}
-
-// Organise en carte toutes les données médias précédemment récupérées.
-function fillArticle(picture, index) {
-  let fullArticle = document.createElement("article");
-  fullArticle.className = "photo_card";
-  let link = photoPhotoLink(picture.photographerId, picture.image, picture.title, picture.likes, picture.date, picture.description, index);
-  let descr = photoCardDescr(picture.title, picture.likes);
-  fullArticle.appendChild(link);
-  fullArticle.appendChild(descr);
-  return fullArticle;
-}
-
-// Variable utilisée pour contenir les médias.
+// Variable globale utilisée pour contenir les médias.
 let pictures = [];
 
 // Montre toutes les cartes remplies dynamiquement.
@@ -211,7 +130,7 @@ async function showPhotos(id) {
   let section = document.querySelector(".photo_gallery");
   for (let picture of pictures) {
     let index = pictures.indexOf(picture);
-    let mediaType = picture.video ? "movie" : "pic";
+    let mediaType = picture.video ? "vid" : "pic";
     let article = new MediaFactory(mediaType, picture, index);
     section.appendChild(article.toHTML());
   }
@@ -306,7 +225,7 @@ function mobileContactButton() {
   buttonLink.onclick = function(event) {
     event.preventDefault();
     formModal.style.display = "block";
-    showForm();                                             // Voir à la ligne 632.
+    showForm();                       // Voir à la ligne 423.
   }
   let buttonSpan = document.createElement("span");
   buttonSpan.innerText = "Contactez-moi";
@@ -317,7 +236,7 @@ function mobileContactButton() {
 // Montre la section remplie dynamiquement.
 function showMobileContact() {
   let section = document.querySelector("#mobile_contact_parent");
-  let mobileContact = mobileContactButton();                        // Voir à la ligne 300.
+  let mobileContact = mobileContactButton();                     // Voir à la ligne 220.
   section.appendChild(mobileContact);
 }
 
@@ -356,142 +275,13 @@ async function bottomRight(id, photographerPrice) {
 // Montre la section remplie dynamiquement.
 async function showLikesNPrice(id, photographerPrice) {
   let section = document.querySelector("#likes_prix");
-  let likesNPrice = await bottomRight(id, photographerPrice);      // Voir à la ligne 325.
+  let likesNPrice = await bottomRight(id, photographerPrice);     // Voir à la ligne 245.
   section.appendChild(likesNPrice);
 }
 
-// FENETRE LIGHTBOX-MODAL
-// Crée dynamiquement la lightbox pour chaque image.
-/*function createLightbox(id, image, title, likes, date, description, index) {                     // COMMENTAIRES
-  let lightboxMain = document.createElement("section");
-  lightboxMain.id = "lightbox_main";
-  lightboxMain.setAttribute("aria-label", "All the lightbox");
-
-  let lightPrevLink = document.createElement("a");
-  lightPrevLink.href = "#";
-  lightPrevLink.className = "lightbox-icons";
-  lightPrevLink.setAttribute("aria-label", "Previous image");
-  lightPrevLink.addEventListener("click", clickPrev);
-  function clickPrev() {
-    lightboxNavigate(index - 1);
-  };
-  lightPrevLink.addEventListener("keydown", keyDownPrev);
-  function keyDownPrev(e) {
-    if (e.key == "Enter") {
-      lightboxNavigate(index - 1);
-    }
-  };
-
-  let lightPrevIcon = document.createElement("img");
-  lightPrevIcon.src = "Images/Icone-fleche-gauche.png";
-  lightPrevIcon.className = "lightbox-icon";
-  lightPrevIcon.setAttribute("alt", "Previous icon");
-  
-  lightPrevLink.appendChild(lightPrevIcon);
-  lightboxMain.appendChild(lightPrevLink);
-
-  let lightImgAndTitle = document.createElement("section");
-  lightImgAndTitle.id = "lightbox-imgAndTitle";
-  lightImgAndTitle.setAttribute("aria-label", "Media and title");
-
-  let lightboxMedia = document.createElement("img");
-  lightboxMedia.src = "Images/" + id + "/" + image;
-  lightboxMedia.id = "lightbox-img";
-  lightboxMedia.setAttribute("alt", description);
-
-  let lightboxTitle = document.createElement("p");
-  lightboxTitle.id = "lightbox-parag";
-  lightboxTitle.innerText = title;
-  
-  lightImgAndTitle.appendChild(lightboxMedia);
-  lightImgAndTitle.appendChild(lightboxTitle);
-  lightboxMain.appendChild(lightImgAndTitle);
-
-  let lightNextLink = document.createElement("a");
-  lightNextLink.href = "#";
-  lightNextLink.className = "lightbox-icons";
-  lightNextLink.setAttribute("aria-label", "Next image");
-  lightNextLink.addEventListener("click", clickNext);
-  function clickNext() {
-    lightboxNavigate(index + 1);
-  };
-  lightNextLink.addEventListener("keydown", keyDownNext);
-  function keyDownNext(e) {
-    if (e.key == "Enter") {
-      lightboxNavigate(index + 1);
-    }
-  };
-
-  let lightNextIcon = document.createElement("img");
-  lightNextIcon.src = "Images/Icone-fleche-droite.png";
-  lightNextIcon.className = "lightbox-icon";
-  lightNextIcon.setAttribute("alt", "Next icon");
-  
-  lightNextLink.appendChild(lightNextIcon);
-  lightboxMain.appendChild(lightNextLink);
-
-  let lightboxClose = document.createElement("a");
-  lightboxClose.href = "#";
-  lightboxClose.className = "lightbox-icons";
-  lightboxClose.id = "lightbox_close";
-  lightboxClose.setAttribute("aria-label", "Close dialog");
-  lightboxClose.addEventListener("click", clickClose);
-  function clickClose() {
-    lightbox.style.display = "none";
-    photoHeader.style.display = "block";
-    photoMain.style.display = "block";
-  };
-  lightboxClose.addEventListener("keydown", keyDownClose);
-  function keyDownClose(e) {
-    if (e.key == "Enter") {
-      clickClose();
-    }
-  };
-
-  let lightCloseIcon = document.createElement("img");
-  lightCloseIcon.src = "Images/Icone-croix.png";
-  lightCloseIcon.className = "lightbox-icon";
-  lightCloseIcon.setAttribute("alt", "Close button");
-
-  lightboxClose.appendChild(lightCloseIcon);
-  lightboxMain.appendChild(lightboxClose);
-
-  return lightboxMain;
-}
-
-// Permet de naviguer dans la lightbox.
-function lightboxNavigate(index) {
-  if (index >= pictures.length) {
-    index = 0;
-  }
-  if (index < 0) {
-    index = pictures.length - 1;
-  }
-  let media = pictures[index];
-  showLightbox(media.photographerId, media.image, media.title, media.likes, media.date, media.description, index);
-}*/                                                                                              // COMMENTAIRES
-
-// Montre la lightbox remplie dynamiquement.
-function showLightbox(id, image, title, likes, date, description, index) {                    // LIGNE 474
-  console.log(image);
-  let section = document.querySelector(".lightbox_section_on");
-  section.innerText = "";
-  //console.log(pictures);                                                                 // SUPPRIMER
-  //console.log(new MediaFactory("picture", pictures));                                         // SUPPRIMER
-  //console.log(pic.toHTML());                                                                      // SUPPRIMER
-  let img = new MediaFactory("pic", pictures);                                                 // COMMENTAIRES
-  //let video = new MediaFactory("movie", pictures);
-  //fullArticle.appendChild(pic.toHTML());
-  section.appendChild(img.toHTML()); //mediafactory.tohtml                                      // COMMENTAIRES
-  //section.appendChild(video.toHTML());
-  //section.appendChild(createLightbox(id, image, title, likes, date, description, index));         // COMMENTAIRES
-}
-
-/**/
-
 // FENETRE FORM-MODAL
 // Crée dynamiquement le formulaire pour chaque photographe.
-function createForm() {                                                                  // LIGNE 493
+function createForm() {
   let formMain = document.createElement("form");
   formMain.id = "form_main";
   formMain.setAttribute("action", "");
@@ -630,9 +420,9 @@ function createForm() {                                                         
 };
 
 // Montre le formulaire rempli dynamiquement.
-function showForm() {                                                             // LIGNE 632
+function showForm() {
   let section = document.querySelector("#form_section");
   section.innerText = "";
-  let formulaire = createForm();                                                  // Voir à la ligne 493.
+  let formulaire = createForm();                        // Voir à la ligne 284.
   section.appendChild(formulaire);
 }
