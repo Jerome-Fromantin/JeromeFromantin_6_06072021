@@ -65,6 +65,7 @@ body {
   margin: 10px auto;
 }
 #passer_link:hover, #passer_link:focus {
+  outline: none;
   background: #901C1C;
   color: white;
 }
@@ -92,6 +93,7 @@ body {
   margin: 0 2px;
 }
 .barnavTag:hover, .tag:hover, .barnavTag:focus, .tag:focus {
+  outline: none;
   background: #901C1C;
   color: white;
   border: 1px #901C1C solid;
@@ -145,6 +147,7 @@ Chaque carte-photo dans chaque page de photographe.
   border-radius: 5px;
 }
 .dyn_home_photoLink:hover, .dyn_home_photoLink:focus {
+  outline: none;
   border: 2px #901C1C solid;
 }
 
@@ -271,6 +274,7 @@ et dans la présentation de chaque page de photographe. */
   margin: 0 2px;
 }
 .photo_pres_tag:hover, .photo_pres_tag:focus {
+  outline: none;
   background: #901C1C;
   color: white;
   border: 1px #901C1C solid;
@@ -288,6 +292,7 @@ et dans la présentation de chaque page de photographe. */
 }
 #dyn_photo_contact_link:hover, #dyn_photo_contact_link:focus,
 #dyn_photo_contact_link_mobile:hover, #dyn_photo_contact_link_mobile:focus {
+  outline: none;
   background: #D3573C;
   color: black;
 }
@@ -345,6 +350,12 @@ et dans la présentation de chaque page de photographe. */
   border-radius: 5px;
   margin-left: 15px;
 }
+#menuTri:hover, #menuTri:focus {
+  cursor: pointer;
+  outline: none;
+  background: #D3573C;
+  color: black;
+}
 
 /* Section des médias. */
 .photo_gallery {
@@ -364,6 +375,7 @@ et dans la présentation de chaque page de photographe. */
   margin: 0;
 }
 .dyn_photo_photoLink:hover, .dyn_photo_photoLink:focus {
+  outline: none;
   border: 2px #901C1C solid;
 }
 
@@ -406,6 +418,7 @@ et dans la présentation de chaque page de photographe. */
 
 /* Fenêtre entière activée par le JS. */
 .lightbox_section_on {
+  z-index: 10000;
   display: flex;
   align-items: center;
   justify-content: center;
