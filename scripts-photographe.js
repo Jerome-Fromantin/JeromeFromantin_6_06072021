@@ -124,9 +124,10 @@ showPresent(thePhotographerId);
 // Variable globale utilisée pour contenir les médias.
 let pictures = [];
 
-// Montre toutes les cartes remplies dynamiquement.
+// Montre toutes les cartes remplies dynamiquement, triées par défaut par "Popularité".
 async function showPhotos(id) {
   pictures = await getMediasByPhotographers(id);
+  pictures.sort((a, b) => b.likes - a.likes);
   let section = document.querySelector(".photo_gallery");
   for (let picture of pictures) {
     let index = pictures.indexOf(picture);
@@ -150,8 +151,9 @@ async function showSortedPhotos(id) {
       section.innerText = "";
       for (let picture of pictures) {
         let index = pictures.indexOf(picture);
-        let article = fillArticle(picture, index);
-        section.appendChild(article);
+        let mediaType = picture.video ? "vid" : "pic";
+        let article = new MediaFactory(mediaType, picture, index);
+        section.appendChild(article.toHTML());
       }
     }
     else if (this.value == "date") {
@@ -161,8 +163,9 @@ async function showSortedPhotos(id) {
       section.innerText = "";
       for (let picture of pictures) {
         let index = pictures.indexOf(picture);
-        let article = fillArticle(picture, index);
-        section.appendChild(article);
+        let mediaType = picture.video ? "vid" : "pic";
+        let article = new MediaFactory(mediaType, picture, index);
+        section.appendChild(article.toHTML());
       }
     }
     else {
@@ -172,8 +175,9 @@ async function showSortedPhotos(id) {
       section.innerText = "";
       for (let picture of pictures) {
         let index = pictures.indexOf(picture);
-        let article = fillArticle(picture, index);
-        section.appendChild(article);
+        let mediaType = picture.video ? "vid" : "pic";
+        let article = new MediaFactory(mediaType, picture, index);
+        section.appendChild(article.toHTML());
       }
     }
   });
@@ -185,8 +189,9 @@ async function showSortedPhotos(id) {
       section.innerText = "";
       for (let picture of pictures) {
         let index = pictures.indexOf(picture);
-        let article = fillArticle(picture, index);
-        section.appendChild(article);
+        let mediaType = picture.video ? "vid" : "pic";
+        let article = new MediaFactory(mediaType, picture, index);
+        section.appendChild(article.toHTML());
       }
     }
     else if (this.value == "date") {
@@ -196,8 +201,9 @@ async function showSortedPhotos(id) {
       section.innerText = "";
       for (let picture of pictures) {
         let index = pictures.indexOf(picture);
-        let article = fillArticle(picture, index);
-        section.appendChild(article);
+        let mediaType = picture.video ? "vid" : "pic";
+        let article = new MediaFactory(mediaType, picture, index);
+        section.appendChild(article.toHTML());
       }
     }
     else {
@@ -207,8 +213,9 @@ async function showSortedPhotos(id) {
       section.innerText = "";
       for (let picture of pictures) {
         let index = pictures.indexOf(picture);
-        let article = fillArticle(picture, index);
-        section.appendChild(article);
+        let mediaType = picture.video ? "vid" : "pic";
+        let article = new MediaFactory(mediaType, picture, index);
+        section.appendChild(article.toHTML());
       }
     }
   });
