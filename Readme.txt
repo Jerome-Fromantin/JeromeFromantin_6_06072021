@@ -32,7 +32,8 @@ Travail réalisé :
 - Mise en place du tri par tags (par clic et clavier) en page d'accueil,
 - Accessibilité au clavier du formulaire,
 - Améliorations d'apparence de la lightbox en desktop et mobile,
-- Mise en place du pattern factory "médias" pour images et vidéos.
+- Mise en place du pattern factory "médias" pour images et vidéos
+- Amélioration d'apparence pour Chrome et de la navigation dans la lightbox.
 
 Travail à faire :
 - Derniers petits ajustements,
