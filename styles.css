@@ -347,14 +347,14 @@ et dans la présentation de chaque page de photographe. */
   color: white;
   font-size: 20px;
   padding: 20px 10px;
+  border: 2px white solid;
   border-radius: 5px;
   margin-left: 15px;
 }
 #menuTri:hover, #menuTri:focus {
   cursor: pointer;
   outline: none;
-  background: #D3573C;
-  color: black;
+  border: 2px black solid;
 }
 
 /* Section des médias. */
