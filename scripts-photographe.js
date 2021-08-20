@@ -79,7 +79,7 @@ function contactButton() {
   buttonLink.onclick = function(event) {
     event.preventDefault();
     formModal.style.display = "block";
-    showForm();                       // Voir à la ligne 423.
+    showForm();                       // Voir à la ligne 430.
   }
   let buttonSpan = document.createElement("span");
   buttonSpan.innerText = "Contactez-moi";
@@ -94,8 +94,8 @@ function showLeftPart(photographer) {
   let contact = contactButton();
   sectionleft.appendChild(leftPart);
   sectionleft.appendChild(contact);
-  showMobileContact(photographer.id);                       // Voir à la ligne 237.
-  showLikesNPrice(photographer.id, photographer.price);     // Voir à la ligne 276.
+  showMobileContact(photographer.id);                       // Voir à la ligne 244.
+  showLikesNPrice(photographer.id, photographer.price);     // Voir à la ligne 283.
 }
 
 // Partie droite de la présentation : Récupère dynamiquement le nom de l'image.
@@ -127,7 +127,7 @@ let pictures = [];
 // Montre toutes les cartes remplies dynamiquement, triées par défaut par "Popularité".
 async function showPhotos(id) {
   pictures = await getMediasByPhotographers(id);
-  pictures.sort((a, b) => b.likes - a.likes);
+  pictures.sort((a, b) => {return b.likes - a.likes});
   let section = document.querySelector(".photo_gallery");
   for (let picture of pictures) {
     let index = pictures.indexOf(picture);
@@ -146,7 +146,7 @@ async function showSortedPhotos(id) {
   menuSort.addEventListener("focus", function(event) {
     if (this.value == "likes") {
       event.preventDefault();
-      pictures.sort((a, b) => b.likes - a.likes);
+      pictures.sort((a, b) => {return b.likes - a.likes});
       let section = document.querySelector(".photo_gallery");
       section.innerText = "";
       for (let picture of pictures) {
@@ -156,9 +156,9 @@ async function showSortedPhotos(id) {
         section.appendChild(article.toHTML());
       }
     }
-    else if (this.value == "date") {
+    if (this.value == "date") {
       event.preventDefault();
-      pictures.sort((a, b) => a.date > b.date);
+      pictures.sort((a, b) => {return a.date > b.date ? 1 : -1});
       let section = document.querySelector(".photo_gallery");
       section.innerText = "";
       for (let picture of pictures) {
@@ -168,9 +168,9 @@ async function showSortedPhotos(id) {
         section.appendChild(article.toHTML());
       }
     }
-    else {
+    if (this.value == "title") {
       event.preventDefault();
-      pictures.sort((a, b) => a.title > b.title);
+      pictures.sort((a, b) => {return a.title > b.title ? 1 : -1});
       let section = document.querySelector(".photo_gallery");
       section.innerText = "";
       for (let picture of pictures) {
@@ -184,7 +184,7 @@ async function showSortedPhotos(id) {
   menuSort.addEventListener("change", function(event) {
     if (this.value == "likes") {
       event.preventDefault();
-      pictures.sort((a, b) => b.likes - a.likes);
+      pictures.sort((a, b) => {return b.likes - a.likes});
       let section = document.querySelector(".photo_gallery");
       section.innerText = "";
       for (let picture of pictures) {
@@ -194,9 +194,9 @@ async function showSortedPhotos(id) {
         section.appendChild(article.toHTML());
       }
     }
-    else if (this.value == "date") {
+    if (this.value == "date") {
       event.preventDefault();
-      pictures.sort((a, b) => a.date > b.date);
+      pictures.sort((a, b) => {return a.date > b.date ? 1 : -1});
       let section = document.querySelector(".photo_gallery");
       section.innerText = "";
       for (let picture of pictures) {
@@ -206,9 +206,9 @@ async function showSortedPhotos(id) {
         section.appendChild(article.toHTML());
       }
     }
-    else {
+    if (this.value == "title") {
       event.preventDefault();
-      pictures.sort((a, b) => a.title > b.title);
+      pictures.sort((a, b) => {return a.title > b.title ? 1 : -1});
       let section = document.querySelector(".photo_gallery");
       section.innerText = "";
       for (let picture of pictures) {
@@ -232,7 +232,7 @@ function mobileContactButton() {
   buttonLink.onclick = function(event) {
     event.preventDefault();
     formModal.style.display = "block";
-    showForm();                       // Voir à la ligne 423.
+    showForm();                       // Voir à la ligne 430.
   }
   let buttonSpan = document.createElement("span");
   buttonSpan.innerText = "Contactez-moi";
@@ -243,7 +243,7 @@ function mobileContactButton() {
 // Montre la section remplie dynamiquement.
 function showMobileContact() {
   let section = document.querySelector("#mobile_contact_parent");
-  let mobileContact = mobileContactButton();                     // Voir à la ligne 220.
+  let mobileContact = mobileContactButton();                     // Voir à la ligne 227.
   section.appendChild(mobileContact);
 }
 
@@ -282,7 +282,7 @@ async function bottomRight(id, photographerPrice) {
 // Montre la section remplie dynamiquement.
 async function showLikesNPrice(id, photographerPrice) {
   let section = document.querySelector("#likes_prix");
-  let likesNPrice = await bottomRight(id, photographerPrice);     // Voir à la ligne 245.
+  let likesNPrice = await bottomRight(id, photographerPrice);     // Voir à la ligne 252.
   section.appendChild(likesNPrice);
 }
 
@@ -430,6 +430,6 @@ function createForm() {
 function showForm() {
   let section = document.querySelector("#form_section");
   section.innerText = "";
-  let formulaire = createForm();                        // Voir à la ligne 284.
+  let formulaire = createForm();                        // Voir à la ligne 291.
   section.appendChild(formulaire);
 }

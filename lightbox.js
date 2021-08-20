@@ -136,8 +136,7 @@ function createLightPic(id, image, video, title, likes, date, description, index
 function lightboxNavigate(index) {
   let menuSort = document.getElementById("menuTri");
   if (menuSort.value == "likes") {
-    //e.preventDefault();
-    pictures.sort((a, b) => b.likes - a.likes);
+    pictures.sort((a, b) => {return b.likes - a.likes});
     if (index >= pictures.length) {
       index = 0;
     }
@@ -145,9 +144,8 @@ function lightboxNavigate(index) {
       index = pictures.length - 1;
     }
   }
-  else if (menuSort.value == "date") {
-    //e.preventDefault();
-    pictures.sort((a, b) => a.date > b.date);
+  if (menuSort.value == "date") {
+    pictures.sort((a, b) => {return a.date > b.date ? 1 : -1});
     if (index >= pictures.length) {
       index = 0;
     }
@@ -155,18 +153,8 @@ function lightboxNavigate(index) {
       index = pictures.length - 1;
     }
   }
-  else if (menuSort.value == "title") {
-    //e.preventDefault();
-    pictures.sort((a, b) => a.title > b.title);
-    if (index >= pictures.length) {
-      index = 0;
-    }
-    if (index < 0) {
-      index = pictures.length - 1;
-    }
-  }
-  else {
-    //e.preventDefault();
+  if (menuSort.value == "title") {
+    pictures.sort((a, b) => {return a.title > b.title ? 1 : -1});
     if (index >= pictures.length) {
       index = 0;
     }
