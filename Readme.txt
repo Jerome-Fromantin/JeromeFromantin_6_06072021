@@ -32,8 +32,9 @@ Travail réalisé :
 - Mise en place du tri par tags (par clic et clavier) en page d'accueil,
 - Accessibilité au clavier du formulaire,
 - Améliorations d'apparence de la lightbox en desktop et mobile,
-- Mise en place du pattern factory "médias" pour images et vidéos
-- Amélioration d'apparence pour Chrome et de la navigation dans la lightbox.
+- Mise en place du pattern factory "médias" pour images et vidéos,
+- Amélioration d'apparence pour Chrome et de la navigation dans la lightbox,
+- Correction d'erreurs, améliorations pour NVDA et début d'ajout de tri par tag de cartes (à terminer).
 
 Travail à faire :
 - Derniers petits ajustements,
