@@ -288,7 +288,7 @@ function createLightVid(id, image, video, title, likes, date, description, index
   lightboxClose.addEventListener("keydown", keyDownClose);
   function keyDownClose(e) {
     if (e.key == "Enter") {
-      clickClose();
+      clickClose(e);
     }
   };
 
