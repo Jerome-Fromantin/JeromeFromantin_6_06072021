@@ -30,13 +30,18 @@ class ArticleLink {
         let link = document.createElement("a");
         link.href = "photographer-page.html?id=" + id;
         link.className = "dyn_home_photoLink";
-        link.setAttribute("aria-label", name);
+        //link.setAttribute("aria-label", name);
+        //link.setAttribute("aria-labelledby", "dyn_home_h2");
         let linkImg = document.createElement("img");
         linkImg.src = "Images/ID_Photos/" + portrait;
         linkImg.className = "dyn_round_img";
+        linkImg.setAttribute("alt", name);
+        //linkImg.setAttribute("aria-label", name);
+        //linkImg.setAttribute("aria-labelledby", "dyn_home_h2");
         let linkH2 = document.createElement("h2");
         linkH2.innerText = name;
         linkH2.className = "dyn_home_h2";
+        linkH2.id = "dyn_home_h2";                                               // SUPPRIMER ?
         link.appendChild(linkImg);
         link.appendChild(linkH2);
         return link;
@@ -94,13 +99,34 @@ class ArticleTags {
         let tagGroup = document.createElement("nav");
         tagGroup.className = "barnav";
         tagGroup.setAttribute("lang", "en");
-        tagGroup.setAttribute("aria-label", "Catégories du photographe");
+        tagGroup.setAttribute("aria-label", "Photographer categories");
         for (let tag of tags) {
           let tagGroupLink = document.createElement("a");
           tagGroupLink.href = "#";
           tagGroupLink.className = "tag";
-          tagGroupLink.id = "tag";
+          tagGroupLink.id = tag;
           tagGroupLink.setAttribute("aria-label", tag);
+          /*
+          // TEST
+          console.log(tagGroupLink);                                                             // SUPPRIMER
+          let cardTarget = null;
+          tagGroup.forEach((tag) => {
+            tag.addEventListener("click", clickGetTag);
+            function clickGetTag(el) {
+              cardTarget = el.currentTarget;
+              let tagValue = cardTarget.id;
+              console.log(tagValue);                                                           // SUPPRIMER
+              showByCardTag(tagValue);
+            };
+            tag.addEventListener("keydown", keyDownGetTag);
+            function keyDownGetTag(el) {
+              if (el.key == "Enter") {
+                clickGetTag(el);
+              }
+            };
+          });
+          // FIN TEST
+          */
           let tagGroupSpan = document.createElement("span");
           tagGroupSpan.innerText = "#" + tag;
           tagGroupLink.appendChild(tagGroupSpan);
@@ -108,6 +134,19 @@ class ArticleTags {
         }
         return tagGroup;
     }
+
+    /*
+    // TEST
+    showByCardTag(tag) {
+        let photographersByCardTag = photographers.filter(function(element) {
+          if (element.tags.includes(tag)) {
+            return element;
+          }
+        });
+        return photographersByCardTag;
+    }
+    // FIN TEST
+    */
 
     toHTML() {
         return this.tags;

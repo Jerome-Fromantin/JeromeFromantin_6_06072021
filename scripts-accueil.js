@@ -37,35 +37,30 @@ function showPhotographers2(photographers) {
   }
 }
 
-// Récupère chacun des tags et leur valeur pour la fonction suivante.
-let tags = document.querySelectorAll(".barnavTag");
-let target = null;
-tags.forEach((tag) => {
+// Récupère chacun des tags du haut et leur valeur pour la fonction suivante.
+let topTags = document.querySelectorAll(".barnavTag");
+let topTarget = null;
+topTags.forEach((tag) => {
   tag.addEventListener("click", clickGetTag);
   function clickGetTag(el) {
-    console.log(el);
-    target = el.currentTarget;
-    let tagValue = target.id;
-    showByTag(tagValue);
+    topTarget = el.currentTarget;
+    let tagValue = topTarget.id;
+    showByTopTag(tagValue);
   };
   tag.addEventListener("keydown", keyDownGetTag);
-  function keyDownGetTag(e, el) {
-    if (e.key == "Enter") {
-      //clickGetTag(el);
-      target = el.currentTarget;
-      // A chaque appui sur "Entrée", la ligne ci-dessus provoque l'erreur "el is undefined"...
-      let tagValue = target.id;
-      showByTag(tagValue);
+  function keyDownGetTag(el) {
+    if (el.key == "Enter") {
+      clickGetTag(el);
     }
   };
 });
 
-// Montre les photographes en fonction du tag choisi.
-function showByTag(tag) {
-  let photographersByTag = photographers.filter(function(element) {
+// Montre les photographes en fonction du tag du haut choisi.
+function showByTopTag(tag) {
+  let photographersByTopTag = photographers.filter(function(element) {
     if (element.tags.includes(tag)) {
       return element;
     }
   });
-  showPhotographers2(photographersByTag);
+  showPhotographers2(photographersByTopTag);
 }
