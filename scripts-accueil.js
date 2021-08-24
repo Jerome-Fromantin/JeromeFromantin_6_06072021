@@ -37,7 +37,7 @@ function showPhotographers2(photographers) {
   }
 }
 
-// Récupère chacun des tags du haut et leur valeur pour la fonction suivante.
+// Récupère chacun des tags du haut en desktop et leur valeur pour la fonction suivante.
 let topTags = document.querySelectorAll(".barnavTag");
 let topTarget = null;
 topTags.forEach((tag) => {
@@ -55,8 +55,36 @@ topTags.forEach((tag) => {
   };
 });
 
-// Montre les photographes en fonction du tag du haut choisi.
+// Montre les photographes en fonction du tag du haut en desktop choisi.
 function showByTopTag(tag) {
+  let photographersByTopTag = photographers.filter(function(element) {
+    if (element.tags.includes(tag)) {
+      return element;
+    }
+  });
+  showPhotographers2(photographersByTopTag);
+}
+
+// Récupère chacun des tags du haut en mobile et leur valeur pour la fonction suivante.
+let topTagsMob = document.querySelectorAll(".barnavTagMob");
+let topTargetMob = null;
+topTagsMob.forEach((tag) => {
+  tag.addEventListener("click", clickGetTag);
+  function clickGetTag(el) {
+    topTargetMob = el.currentTarget;
+    let tagValue = topTargetMob.id.split("M")[0];
+    showByTopTagMob(tagValue);
+  };
+  tag.addEventListener("keydown", keyDownGetTag);
+  function keyDownGetTag(el) {
+    if (el.key == "Enter") {
+      clickGetTag(el);
+    }
+  };
+});
+
+// Montre les photographes en fonction du tag du haut en mobile choisi.
+function showByTopTagMob(tag) {
   let photographersByTopTag = photographers.filter(function(element) {
     if (element.tags.includes(tag)) {
       return element;

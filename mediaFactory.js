@@ -57,8 +57,8 @@ class PicFactory {
     let photoLinkImg = document.createElement("img");
     photoLinkImg.src = "Images/Thumbnails/" + photographerId + "/" + image;
     photoLinkImg.className = "dyn_photo_img";
-    photoLink.setAttribute("lang", "en");
-    photoLink.setAttribute("alt", description);
+    photoLinkImg.setAttribute("lang", "en");
+    photoLinkImg.setAttribute("alt", description);
     photoLink.appendChild(photoLinkImg);
     return photoLink;
   }
@@ -81,6 +81,7 @@ class PicFactory {
     let descriptionLikesIcon = document.createElement("img");
     descriptionLikesIcon.src = "Images/Icone-coeur.png";
     descriptionLikesIcon.className = "icone";
+    descriptionLikesIcon.setAttribute("alt", "Likes");
     descriptionLikesIcon.addEventListener("click", () => {
       descriptionLikesNumber.innerText = Number(descriptionLikesNumber.innerText) + 1;
       let newTotal = document.getElementById("dyn_likes_number");
@@ -138,8 +139,8 @@ class VidFactory {
     let photoLinkImg = document.createElement("img");
     photoLinkImg.src = "Images/Thumbnails/" + photographerId + "/" + image;
     photoLinkImg.className = "dyn_photo_img";
-    photoLink.setAttribute("lang", "en");
-    photoLink.setAttribute("alt", description);
+    photoLinkImg.setAttribute("lang", "en");
+    photoLinkImg.setAttribute("alt", description);
     photoLink.appendChild(photoLinkImg);
     return photoLink;
   }
@@ -162,6 +163,7 @@ class VidFactory {
     let descriptionLikesIcon = document.createElement("img");
     descriptionLikesIcon.src = "Images/Icone-coeur.png";
     descriptionLikesIcon.className = "icone";
+    descriptionLikesIcon.setAttribute("alt", "Likes");
     descriptionLikesIcon.addEventListener("click", () => {
       descriptionLikesNumber.innerText = Number(descriptionLikesNumber.innerText) + 1;
       let newTotal = document.getElementById("dyn_likes_number");

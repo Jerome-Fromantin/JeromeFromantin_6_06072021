@@ -81,7 +81,7 @@ body {
 }
 
 /* Chaque tag, en barre de navigation et carte. */
-.barnavTag, .tag {
+.barnavTag, .barnavTagMob, .tag {
   color: #901C1C;
   font-size: 12px;
   text-decoration: none;
@@ -89,10 +89,10 @@ body {
   border: 1px #bbb solid;
   border-radius: 15px;
 }
-#tag {
+#portrait, #art, #fashion, #architecture, #travel, #sport, #animals, #events {
   margin: 0 2px;
 }
-.barnavTag:hover, .tag:hover, .barnavTag:focus, .tag:focus {
+.barnavTag:hover, .barnavTagMob:hover, .tag:hover, .barnavTag:focus, .barnavTagMob:focus, .tag:focus {
   outline: none;
   background: #901C1C;
   color: white;
