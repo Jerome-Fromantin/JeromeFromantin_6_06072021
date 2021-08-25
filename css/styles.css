@@ -1,0 +1,772 @@
+/* Les id ou classes dont le nom débute par "dyn" concernent
+des contenus remplis dynamiquement.*/
+/***** PAGE D'ACCUEIL OU TOUTES LES PAGES *****/
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 16px;
+  margin: 0 40px 40px 40px;
+}
+
+/* "main" de la page d'accueil. */
+#home_main {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+}
+
+/* Header de la page d'accueil. */
+#home_header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: flex-start;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 70%;
+}
+
+/* Lien entourant le logo en haut à gauche. */
+#logo_link {
+  width: 270px;
+  border: 2px transparent solid;
+  border-radius: 5px;
+  margin-top: 20px;
+}
+#logo_link:hover, #logo_link:focus {
+  outline: none;
+  border: 2px #901C1C solid;
+}
+
+/* Logo. */
+#logo {
+  width: 270px;
+}
+
+/* Ensemble "Passer..." + nav. */
+#banner {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* Lien du bouton "Passer au contenu". */
+#passer_link {
+  /*display: none;*/
+  /*visibility: hidden;*/
+  background: #D3573C;
+  color: black;
+  font-weight: bold;
+  text-decoration: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  margin: 10px auto;
+}
+#passer_link:hover, #passer_link:focus {
+  outline: none;
+  background: #901C1C;
+  color: white;
+}
+
+/* Tags de navigation. */
+.barnav {
+  margin-top: 15px;
+}
+
+/* Ensemble des tags du haut en version mobile. */
+#banner_mobile {
+  display: none;
+}
+
+/* Chaque tag, en barre de navigation et carte. */
+.barnavTag, .barnavTagMob, .tag {
+  color: #901C1C;
+  font-size: 12px;
+  text-decoration: none;
+  padding: 3px 6px;
+  border: 1px #bbb solid;
+  border-radius: 15px;
+}
+#portrait, #art, #fashion, #architecture, #travel, #sport, #animals, #events {
+  margin: 0 2px;
+}
+.barnavTag:hover, .barnavTagMob:hover, .tag:hover, .barnavTag:focus, .barnavTagMob:focus, .tag:focus {
+  outline: none;
+  background: #901C1C;
+  color: white;
+  border: 1px #901C1C solid;
+}
+
+/* h1 de la page d'accueil. */
+#home_h1 {
+  color: #901C1C;
+  font-size: 32px;
+  font-weight: normal;
+  text-align: right;
+  margin: 44px 20px 50px 0;
+}
+
+/*
+Section des 6 cartes-photos dans la page d'accueil.
+Section de la galerie dans chaque page de photographe.
+*/
+.main_section, .photo_gallery {
+  display: flex;
+  align-items: flex-start;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.photo_gallery {
+  margin: 20px 50px 0 50px;
+}
+
+/*
+Chaque carte-photo dans la page d'accueil.
+Chaque carte-photo dans chaque page de photographe.
+*/
+.home_card, .photo_card {
+  display: flex;
+  align-content: center;
+  align-items: center;
+  flex-direction: column;
+  font-size: 9px;
+  width: 33%;
+  margin-top: 40px;
+}
+
+/* Dans chaque carte, le lien regroupant la photo et le h2. */
+.dyn_home_photoLink {
+  text-align: center;
+  text-decoration: none;
+  padding: 5px;
+  border: 2px transparent solid;
+  border-radius: 5px;
+}
+.dyn_home_photoLink:hover, .dyn_home_photoLink:focus {
+  outline: none;
+  border: 2px #901C1C solid;
+}
+
+/* Chaque photo ronde. */
+/* Présente dans chaque carte de la page d'accueil
+et dans la présentation de chaque page de photographe. */
+.dyn_round_img {
+  box-shadow: 0 4px 4px #bbb;
+  width: 180px;
+  border-radius: 90px;
+}
+
+/* Dans chaque carte de la page d'accueil, le h2 lui-même. */
+.dyn_home_h2 {
+  color: #D3573C;
+  font-size: 32px;
+  font-weight: normal;
+  margin: 10px 0 0 0;
+}
+
+/* Dans chaque carte, la div qui rassemble les 3 lignes de description. */
+.dyn_home_card_descr {
+  text-align: center;
+}
+
+/* Ligne du lieu. */
+.dyn_home_card_lieu {
+  color: #901C1C;
+  font-size: 12px;
+  margin: 0;
+}
+
+/* Ligne du slogan. */
+.dyn_home_card_slogan {
+  font-weight: bold;
+  margin: 5px 0 0 0;
+}
+
+/* Ligne du prix. */
+.dyn_home_card_prix {
+  margin: 5px 0 0 0;
+}
+
+/***** PAGES DE PHOTOGRAPHES *****/
+/* Body de chaque page. */
+#photo_body {
+  position: relative;
+}
+
+/* Header. */
+#photo_header {
+  display: flex;
+  align-items: flex-start;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 70%;
+}
+
+/* "main". */
+#photo_main {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+  padding-bottom: 40px;
+}
+
+/* Bloc de présentation sur fond gris. */
+#photo_pres, #photo_pres_text {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  justify-content: space-between;
+  background: #FAFAFA;
+  margin: 30px 50px 0 50px;
+}
+
+/* Dans chaque présentation, le bloc textuel + le bouton de contact. */
+#photo_pres_text {
+  align-self: flex-start;
+  margin: 0;
+}
+
+/* Bloc textuel seul. */
+#photo_pres_leftText {
+  padding: 0;
+  margin: 0 20px 0 0;
+}
+
+/* Dans chaque bloc textuel, le h1. */
+#dyn_photo_h1 {
+  color: #D3573C;
+  font-size: 56px;
+  font-weight: normal;
+  text-align: left;
+  margin: 60px 0 0 50px;
+}
+
+/* Dans chaque bloc textuel, la ligne du lieu. */
+#dyn_photo_pres_lieu {
+  color: #901C1C;
+  font-size: 20px;
+  margin: 0 0 0 50px;
+}
+
+/* Ligne du slogan. */
+#dyn_photo_pres_slogan {
+  margin: 20px 0 0 50px;
+}
+
+/* Tags de navigation. */
+#dyn_photo_pres_barnav {
+  margin: 20px 0 0 50px;
+}
+
+/* Chaque tag. */
+.photo_pres_tag {
+  color: #901C1C;
+  font-size: 19px;
+  text-decoration: none;
+  padding: 3px 6px;
+  border: 1px #bbb solid;
+  border-radius: 15px;
+  margin: 0 2px;
+}
+.photo_pres_tag:hover, .photo_pres_tag:focus {
+  outline: none;
+  background: #901C1C;
+  color: white;
+  border: 1px #901C1C solid;
+}
+
+/* Lien englobant le bouton de contact, en version desktop et en version mobile. */
+#dyn_photo_contact_link, #dyn_photo_contact_link_mobile {
+  background: #901C1C;
+  color: white;
+  font-size: 20px;
+  text-decoration: none;
+  padding: 20px 10px;
+  border-radius: 5px;
+  margin-top: -35px;
+}
+#dyn_photo_contact_link:hover, #dyn_photo_contact_link:focus,
+#dyn_photo_contact_link_mobile:hover, #dyn_photo_contact_link_mobile:focus {
+  outline: none;
+  background: #D3573C;
+  color: black;
+}
+
+/* Lien englobant le bouton de contact en version mobile. */
+#dyn_photo_contact_link_mobile {
+  display: none;
+}
+
+/* Image ronde. */
+#dyn_photo_round_img {
+  margin: 50px 40px;
+}
+
+/* Bloc en bas à droite du nombre de likes et prix. */
+#likes_prix, #likes_prix_child {
+  background: #D3573C;
+  position: fixed;
+  bottom: 0;
+  right: 30px;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  justify-content: space-between;
+  font-size: 24px;
+  width: 300px;
+  padding: 15px;
+  border-radius: 5px;
+}
+
+/* Likes du bloc et de chaque carte-photo. */
+#dyn_likes, .dyn_likes {
+  display: flex;
+  align-items: center;
+  margin-right: 45px;
+}
+
+/* Icône "coeur noir" du bloc. */
+#icone {
+  cursor: auto;
+}
+
+/* "Trier par" et sa liste déroulante. */
+#liste_tris {
+  font-size: 20px;
+  margin: 5px 0 30px 50px;
+}
+
+/* Liste déroulante de tris. */
+#menuTri {
+  background: #901C1C;
+  color: white;
+  font-size: 20px;
+  padding: 20px 10px;
+  border: 2px white solid;
+  border-radius: 5px;
+  margin-left: 15px;
+}
+#menuTri:hover, #menuTri:focus {
+  cursor: pointer;
+  outline: none;
+  border: 2px black solid;
+}
+
+/* Section des médias. */
+.photo_gallery {
+  margin: 0;
+}
+
+/* Dans chaque carte, le lien incluant la photo. */
+.dyn_photo_photoLink {
+  cursor: pointer;
+  width: 300px;
+  height: 256px;
+  overflow: hidden;
+  font-size: 16px;
+  text-decoration: none;
+  border: 2px transparent solid;
+  border-radius: 5px;
+  margin: 0;
+}
+.dyn_photo_photoLink:hover, .dyn_photo_photoLink:focus {
+  outline: none;
+  border: 2px #901C1C solid;
+}
+
+/* Chaque photo dans le lien. */
+.dyn_photo_img {
+  width: 100%;
+  height: 100%;
+  border-radius: 5px;
+  margin-bottom: -4px;
+}
+
+/* Dans chaque carte, la ligne du titre et des likes. */
+.photo_card_titleLikes {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  justify-content: space-between;
+  color: #901C1C;
+  font-size: 24px;
+  width: 100%;
+  margin: 5px 0 0 0;
+}
+
+/* Titre seul. */
+.dyn_title {
+  margin-left: 45px;
+}
+
+/* Lien de l'icône "coeur" cliquable. */
+.lien-coeur {
+  cursor: pointer;
+  outline: none;
+  border: 1px white solid;
+}
+.lien-coeur:focus {
+  outline: none;
+  border: 1px #901C1C solid;
+}
+
+/* Icône "coeur" cliquable. */
+.icone {
+  width: 24px;
+}
+
+/***** FENETRE LIGHTBOX-MODAL *****/
+/* Fenêtre entière non visible. */
+.lightbox_section {
+  display: none;
+}
+
+/* Fenêtre entière activée par le JS. */
+.lightbox_section_on {
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 99vh;
+  margin: 0 -40px -40px -40px;
+}
+
+/* "main" de la fenêtre. */
+#lightbox_main {
+  position: relative;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  justify-content: center;
+  height: 100%;
+  max-height: 99vh;
+  max-width: 99vw;
+  margin: auto;
+}
+
+/* Icônes "précédent", "suivant" et "fermeture". */
+.lightbox-icons {
+  padding: 0;
+  border: 2px transparent solid;
+  border-radius: 5px;
+  margin: 20px;
+}
+.lightbox-icons:hover, .lightbox-icons:focus {
+  outline: none;
+  border: 2px #901C1C solid;
+}
+
+
+/* Bloc image et titre. */
+#lightbox-imgAndTitle {
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  justify-content: center;
+  height: 100%;
+  margin: 0;
+}
+
+/* Image seule. */
+#lightbox-img {
+  max-height: 88vh;
+  max-width: 80vw;
+}
+
+/* Titre seul. */
+#lightbox-parag {
+  color: #901C1C;
+  font-size: 28px;
+  margin: 10px 0 10px 0;
+}
+
+/* Bouton de fermeture. */
+#lightbox_close {
+  cursor: pointer;
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+/***** FENETRE FORM-MODAL *****/
+/* Fenêtre entière. */
+#form_section {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 99vw;
+  height: 102%;
+  display: none;
+  background: RGBa(0, 0, 0, 0.5);
+  margin-left: -40px;
+}
+
+/* "main" du formulaire. */
+#form_main {
+  position: relative;
+  background: #D3573C;
+  width: 48%;
+  padding-bottom: 20px;
+  border-radius: 5px;
+  margin: 0 auto;
+}
+
+/* h1. */
+#form_h1 {
+  font-weight: normal;
+  font-size: 60px;
+  padding: 15px 0 0 2%;
+}
+
+/* Chaque div (label et input). */
+.form_div {
+  font-weight: 100;
+  font-size: 32px;
+  padding: 0 2%;
+}
+
+/* Chaque champ. */
+input, textarea {
+  font-size: 32px;
+  width: 98%;
+  border-radius: 5px;
+  margin-bottom: 5px;
+}
+
+input {
+  height: 50px;
+}
+
+/* Div du bouton "Envoyer". */
+#form_submit {
+  margin: 20px 0;
+}
+
+/* Bouton "Envoyer". */
+#submit_button {
+  background: #901C1C;
+  color: white;
+  font-size: 16px;
+  padding: 22px 44px;
+  border-radius: 5px;
+}
+#submit_button:hover, #submit_button:focus {
+  background: #D3573C;
+  color: black;
+  border: 2px #901C1C solid;
+}
+
+/* Bouton de fermeture. */
+#form_close {
+  cursor: pointer;
+  position: absolute;
+  top: 30px;
+  right: 30px;
+  border: 2px transparent solid;
+  border-radius: 5px;
+}
+#form_close:hover, #form_close:focus {
+  border-color: #901C1C;
+}
+
+/***** TOUTES LES MEDIA QUERIES POUR MOBILES *****/
+@media all and (max-width: 600px) {
+  #logo_link {
+    width: 210px;
+    margin: 30px 0 0 -40px;
+  }
+
+  #logo {
+    width: 230px;
+    margin: 0px 0 -5px -20px;
+  }
+
+  #home_h1 {
+    font-size: 14px;
+    margin: 44px -20px 50px 0;
+  }
+
+  #banner {
+    display: none;
+  }
+
+  #banner_mobile {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .barnav_mobile {
+    line-height: 24px;
+    text-align: center;
+    margin-top: 0;
+  }
+
+  .main_section {
+    flex-direction: column;
+    padding-top: 10px;
+    margin-top: 0;
+  }
+  
+  .home_card, .photo_card {
+    width: 100%;
+    margin-top: 30px;
+  }
+
+  #photo_pres, #photo_pres_text {
+    align-items: flex-start;
+    background: white;
+    margin: 20px 0 0 -20px;
+  }
+
+  #photo_pres_text {
+    margin: 0;
+  }
+
+  #likes_prix {
+    display: none;
+  }
+
+  #dyn_photo_h1 {
+    font-size: 36px;
+    padding: 0;
+    margin: 0 0 0 -5px;
+  }
+
+  #dyn_photo_pres_lieu {
+    margin: 0 0 0 -3px;
+  }
+
+  #dyn_photo_pres_slogan {
+    font-size: 14px;
+    margin: 4px 0 0 -2px;
+  }
+
+  #dyn_photo_pres_barnav {
+    margin: 10px -40px 0 -4px;
+  }
+
+  .photo_pres_tag {
+    font-size: 14px;
+  }
+  
+  #dyn_photo_contact_link {
+    display: none;
+  }
+
+  #dyn_photo_contact_link_mobile {
+    display: block;
+    position: fixed;
+    bottom: 35px;
+    left: 30%;
+    width: 40%;
+    text-align: center;
+    padding: 5px 10px;
+  }
+
+  #dyn_photo_round_img {
+    width: 100px;
+    border-radius: 50px;
+    margin: -10px 0 0 -20px;
+  }
+
+  .dyn_photo_photoLink {
+    display: flex;
+    align-items: center;
+    width: 335px;
+    height: 190px;
+  }
+
+  .dyn_photo_img {
+    width: 335px;
+    height: auto;
+  }
+
+  .photo_card_titleLikes {
+    font-size: 16px;
+    margin: 5px 0 0 0;
+  }
+
+  .dyn_title {
+    margin-left: -20px;
+  }
+  
+  .dyn_likes {
+    display: flex;
+    align-items: flex-start;
+    margin-right: -20px;
+  }
+
+  .icone {
+    width: 16px;
+  }
+
+  #liste_tris {
+    display: none;
+  }
+
+  #lightbox-img {
+    max-height: 88vh;
+    max-width: 75vw;
+  }
+
+  .lightbox-icons {
+    margin: 12px;
+  }
+  
+  .lightbox-icon {
+    width: 12px;
+  }
+  
+  #lightbox-close {
+    margin: 5px 10px 0 0;
+  }
+
+  #form_main {
+    width: 100vw;
+    padding-bottom: 20px;
+    margin: -30px auto 0 auto;
+  }
+
+  #form_h1 {
+    font-size: 32px;
+    padding: 15px 0 0 2%;
+  }
+
+  #form_close {
+    top: 20px;
+    right: 20px;
+  }
+
+  #form_close_icon {
+    width: 12px;
+  }
+
+  label {
+    font-size: 20px;
+  }
+
+  input, textarea {
+    font-size: 20px;
+  }
+  
+  input {
+    height: 30px;
+  }
+
+  #form_submit {
+    text-align: center;
+  }
+
+  #submit_button {
+    font-size: 16px;
+    padding: 8px 44px;
+  }
+  
+  /* Inclure d'autres règles ? */
+}
