@@ -34,8 +34,9 @@ Travail réalisé :
 - Améliorations d'apparence de la lightbox en desktop et mobile,
 - Mise en place du pattern factory "médias" pour images et vidéos,
 - Amélioration d'apparence pour Chrome et de la navigation dans la lightbox,
-- Correction d'erreurs, améliorations pour NVDA et début d'ajout de tri par tag de cartes (à terminer).
+- Correction d'erreurs, améliorations pour NVDA et début d'ajout de tri par tag de cartes,
+- Réduction du poids des images les plus lourdes,
+- Améliorations diverses : apparence mobile, navigation au clavier, utilisation NVDA,
+- Fin de mise en place du tri par tags de cartes.
 
-Travail à faire :
-- Derniers petits ajustements,
-- Et d'autres choses ??
+Ce projet est désormais terminé mais peut éventuellement être amélioré.
