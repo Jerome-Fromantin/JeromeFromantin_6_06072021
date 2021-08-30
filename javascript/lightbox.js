@@ -16,6 +16,7 @@ export const initLightPic = async (photographerId, image, video, title, likes, d
   lightSection.style.display = "block";
   lightSection.classList.remove("lightbox_section");
   lightSection.classList.add("lightbox_section_on");
+  lightSection.setAttribute("role", "dialog");
   showLightPic(photographerId, image, video, title, likes, date, description, index);
 }
 
@@ -31,12 +32,11 @@ function showLightPic(photographerId, image, video, title, likes, date, descript
 function createLightPic(id, image, video, title, likes, date, description, index) {
   let lightboxMain = document.createElement("section");
   lightboxMain.id = "lightbox_main";
-  lightboxMain.setAttribute("aria-label", "All the lightbox");
+  lightboxMain.setAttribute("aria-label", "Lightbox");
 
   let lightPrevLink = document.createElement("a");
   lightPrevLink.href = "";
   lightPrevLink.className = "lightbox-icons";
-  lightPrevLink.setAttribute("aria-label", "Previous image");
   lightPrevLink.addEventListener("click", clickPrev);
   function clickPrev(e) {
     e.preventDefault();
@@ -53,7 +53,7 @@ function createLightPic(id, image, video, title, likes, date, description, index
   let lightPrevIcon = document.createElement("img");
   lightPrevIcon.src = "Images/Icone-fleche-gauche.png";
   lightPrevIcon.className = "lightbox-icon";
-  lightPrevIcon.setAttribute("alt", "Previous icon");
+  lightPrevIcon.setAttribute("alt", "Previous image");
   
   lightPrevLink.appendChild(lightPrevIcon);
   lightboxMain.appendChild(lightPrevLink);
@@ -78,7 +78,6 @@ function createLightPic(id, image, video, title, likes, date, description, index
   let lightNextLink = document.createElement("a");
   lightNextLink.href = "";
   lightNextLink.className = "lightbox-icons";
-  lightNextLink.setAttribute("aria-label", "Next image");
   lightNextLink.addEventListener("click", clickNext);
   function clickNext(e) {
     e.preventDefault();
@@ -95,7 +94,7 @@ function createLightPic(id, image, video, title, likes, date, description, index
   let lightNextIcon = document.createElement("img");
   lightNextIcon.src = "Images/Icone-fleche-droite.png";
   lightNextIcon.className = "lightbox-icon";
-  lightNextIcon.setAttribute("alt", "Next icon");
+  lightNextIcon.setAttribute("alt", "Next image");
   
   lightNextLink.appendChild(lightNextIcon);
   lightboxMain.appendChild(lightNextLink);
@@ -104,7 +103,6 @@ function createLightPic(id, image, video, title, likes, date, description, index
   lightboxClose.href = "";
   lightboxClose.className = "lightbox-icons";
   lightboxClose.id = "lightbox_close";
-  lightboxClose.setAttribute("aria-label", "Close dialog");
   lightboxClose.addEventListener("click", clickClose);
   function clickClose(e) {
     e.preventDefault();
@@ -116,7 +114,7 @@ function createLightPic(id, image, video, title, likes, date, description, index
   };
   lightboxClose.addEventListener("keydown", keyDownClose);
   function keyDownClose(e) {
-    if (e.key == "Enter") {
+    if (e.keyCode == 27) {
       clickClose(e);
     }
   };
@@ -124,7 +122,7 @@ function createLightPic(id, image, video, title, likes, date, description, index
   let lightCloseIcon = document.createElement("img");
   lightCloseIcon.src = "Images/Icone-croix.png";
   lightCloseIcon.className = "lightbox-icon";
-  lightCloseIcon.setAttribute("alt", "Close button");
+  lightCloseIcon.setAttribute("alt", "Close dialog");
 
   lightboxClose.appendChild(lightCloseIcon);
   lightboxMain.appendChild(lightboxClose);
@@ -182,6 +180,7 @@ export const initLightVid = async (photographerId, image, video, title, likes, d
   lightSection.style.display = "block";
   lightSection.classList.remove("lightbox_section");
   lightSection.classList.add("lightbox_section_on");
+  lightSection.setAttribute("role", "dialog");
   showLightVid(photographerId, image, video, title, likes, date, description, index);
 }
 
@@ -202,7 +201,6 @@ function createLightVid(id, image, video, title, likes, date, description, index
   let lightPrevLink = document.createElement("a");
   lightPrevLink.href = "";
   lightPrevLink.className = "lightbox-icons";
-  lightPrevLink.setAttribute("aria-label", "Previous image");
   lightPrevLink.addEventListener("click", clickPrev);
   function clickPrev(e) {
     e.preventDefault();
@@ -219,7 +217,7 @@ function createLightVid(id, image, video, title, likes, date, description, index
   let lightPrevIcon = document.createElement("img");
   lightPrevIcon.src = "Images/Icone-fleche-gauche.png";
   lightPrevIcon.className = "lightbox-icon";
-  lightPrevIcon.setAttribute("alt", "Previous icon");
+  lightPrevIcon.setAttribute("alt", "Previous image");
   
   lightPrevLink.appendChild(lightPrevIcon);
   lightboxMain.appendChild(lightPrevLink);
@@ -249,7 +247,6 @@ function createLightVid(id, image, video, title, likes, date, description, index
   let lightNextLink = document.createElement("a");
   lightNextLink.href = "#";
   lightNextLink.className = "lightbox-icons";
-  lightNextLink.setAttribute("aria-label", "Next image");
   lightNextLink.addEventListener("click", clickNext);
   function clickNext(e) {
     e.preventDefault();
@@ -266,7 +263,7 @@ function createLightVid(id, image, video, title, likes, date, description, index
   let lightNextIcon = document.createElement("img");
   lightNextIcon.src = "Images/Icone-fleche-droite.png";
   lightNextIcon.className = "lightbox-icon";
-  lightNextIcon.setAttribute("alt", "Next icon");
+  lightNextIcon.setAttribute("alt", "Next image");
   
   lightNextLink.appendChild(lightNextIcon);
   lightboxMain.appendChild(lightNextLink);
@@ -275,7 +272,6 @@ function createLightVid(id, image, video, title, likes, date, description, index
   lightboxClose.href = "";
   lightboxClose.className = "lightbox-icons";
   lightboxClose.id = "lightbox_close";
-  lightboxClose.setAttribute("aria-label", "Close dialog");
   lightboxClose.addEventListener("click", clickClose);
   function clickClose(e) {
     e.preventDefault();
@@ -287,7 +283,7 @@ function createLightVid(id, image, video, title, likes, date, description, index
   };
   lightboxClose.addEventListener("keydown", keyDownClose);
   function keyDownClose(e) {
-    if (e.key == "Enter") {
+    if (e.keyCode == 27) {
       clickClose(e);
     }
   };
@@ -295,7 +291,7 @@ function createLightVid(id, image, video, title, likes, date, description, index
   let lightCloseIcon = document.createElement("img");
   lightCloseIcon.src = "Images/Icone-croix.png";
   lightCloseIcon.className = "lightbox-icon";
-  lightCloseIcon.setAttribute("alt", "Close button");
+  lightCloseIcon.setAttribute("alt", "Close dialog");
 
   lightboxClose.appendChild(lightCloseIcon);
   lightboxMain.appendChild(lightboxClose);

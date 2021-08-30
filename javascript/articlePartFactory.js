@@ -30,18 +30,14 @@ class ArticleLink {
         let link = document.createElement("a");
         link.href = "photographer-page.html?id=" + id;
         link.className = "dyn_home_photoLink";
-        //link.setAttribute("aria-label", name);
-        //link.setAttribute("aria-labelledby", "dyn_home_h2");
+        link.setAttribute("aria-label", name);
         let linkImg = document.createElement("img");
         linkImg.src = "Images/ID_Photos/" + portrait;
         linkImg.className = "dyn_round_img";
         linkImg.setAttribute("alt", name);
-        //linkImg.setAttribute("aria-label", name);
-        //linkImg.setAttribute("aria-labelledby", "dyn_home_h2");
         let linkH2 = document.createElement("h2");
         linkH2.innerText = name;
         linkH2.className = "dyn_home_h2";
-        linkH2.id = "dyn_home_h2";                                               // SUPPRIMER ?
         link.appendChild(linkImg);
         link.appendChild(linkH2);
         return link;

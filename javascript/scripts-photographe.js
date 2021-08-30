@@ -76,11 +76,19 @@ function contactButton() {
   buttonLink.href = "#";
   buttonLink.id = "dyn_photo_contact_link";
   buttonLink.setAttribute("aria-label", "Contact Me");
-  buttonLink.onclick = function(event) {
-    event.preventDefault();
+  buttonLink.addEventListener("click", clickOpenForm);
+  function clickOpenForm(e) {
+    e.preventDefault();
     formModal.style.display = "block";
-    showForm();                       // Voir à la ligne 430.
+    showForm();                       // Voir à la ligne 436.
   }
+  buttonLink.addEventListener("keydown", keyDownOpenForm);
+  function keyDownOpenForm(e) {
+    if (e.key == "Enter") {
+      clickOpenForm(e);
+    }
+  };
+
   let buttonSpan = document.createElement("span");
   buttonSpan.innerText = "Contactez-moi";
   buttonLink.appendChild(buttonSpan);
@@ -94,8 +102,8 @@ function showLeftPart(photographer) {
   let contact = contactButton();
   sectionleft.appendChild(leftPart);
   sectionleft.appendChild(contact);
-  showMobileContact(photographer.id);                       // Voir à la ligne 244.
-  showLikesNPrice(photographer.id, photographer.price);     // Voir à la ligne 283.
+  showMobileContact(photographer.id);                       // Voir à la ligne 252.
+  showLikesNPrice(photographer.id, photographer.price);     // Voir à la ligne 291.
 }
 
 // Partie droite de la présentation : Récupère dynamiquement le nom de l'image.
@@ -104,7 +112,7 @@ function photoImg(photographerPortrait, photographerName) {
   image.src = "Images/ID_Photos/" + photographerPortrait;
   image.className = "dyn_round_img";
   image.id="dyn_photo_round_img";
-  image.setAttribute("aria-label", photographerName);
+  image.setAttribute("alt", photographerName);
   return image;
 }
 
@@ -232,7 +240,7 @@ function mobileContactButton() {
   buttonLink.onclick = function(event) {
     event.preventDefault();
     formModal.style.display = "block";
-    showForm();                       // Voir à la ligne 430.
+    showForm();                       // Voir à la ligne 436.
   }
   let buttonSpan = document.createElement("span");
   buttonSpan.innerText = "Contactez-moi";
@@ -243,7 +251,7 @@ function mobileContactButton() {
 // Montre la section remplie dynamiquement.
 function showMobileContact() {
   let section = document.querySelector("#mobile_contact_parent");
-  let mobileContact = mobileContactButton();                     // Voir à la ligne 227.
+  let mobileContact = mobileContactButton();                     // Voir à la ligne 235.
   section.appendChild(mobileContact);
 }
 
@@ -282,7 +290,7 @@ async function bottomRight(id, photographerPrice) {
 // Montre la section remplie dynamiquement.
 async function showLikesNPrice(id, photographerPrice) {
   let section = document.querySelector("#likes_prix");
-  let likesNPrice = await bottomRight(id, photographerPrice);     // Voir à la ligne 252.
+  let likesNPrice = await bottomRight(id, photographerPrice);     // Voir à la ligne 260.
   section.appendChild(likesNPrice);
 }
 
@@ -402,11 +410,10 @@ function createForm() {
   let closeLink = document.createElement("a");
   closeLink.id = "form_close";
   closeLink.href = "";
-  closeLink.setAttribute("aria-label", "Close Contact form");
   let closeLinkImg = document.createElement("img");
   closeLinkImg.id = "form_close_icon";
   closeLinkImg.src = "Images/Icone-croix-blanche.png";
-  closeLinkImg.setAttribute("alt", "Close button");
+  closeLinkImg.setAttribute("alt", "Close Contact form");
   closeLink.addEventListener("click", clickCloseForm);
   function clickCloseForm(e) {
     e.preventDefault();
@@ -414,9 +421,8 @@ function createForm() {
   };
   closeLink.addEventListener("keydown", keyDownCloseForm);
   function keyDownCloseForm(e) {
-    if (e.key == "Enter") {
-      e.preventDefault();
-      formModal.style.display = "none";
+    if (e.keyCode == 27) {
+      clickCloseForm(e);
     }
   };
 
@@ -430,6 +436,8 @@ function createForm() {
 function showForm() {
   let section = document.querySelector("#form_section");
   section.innerText = "";
-  let formulaire = createForm();                        // Voir à la ligne 291.
+  section.setAttribute("role", "dialog");
+  section.setAttribute("aria-labelledby", "form_h1");
+  let formulaire = createForm();                        // Voir à la ligne 299.
   section.appendChild(formulaire);
 }
