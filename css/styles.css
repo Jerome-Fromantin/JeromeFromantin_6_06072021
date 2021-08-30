@@ -70,12 +70,19 @@ body {
   color: white;
 }
 
-/* Tags de navigation. */
+/* Barre de navigation en version desktop et ligne de tags dans chaque carte photographe. */
 .barnav {
+  line-height: 24px;
+  text-align: center;
   margin-top: 15px;
 }
 
-/* Ensemble des tags du haut en version mobile. */
+/* Barre de navigation en version desktop seule. */
+#barnav_desktop {
+  margin: 0 auto;
+}
+
+/* Barre de navigation en version mobile. */
 #banner_mobile {
   display: none;
 }
@@ -157,6 +164,7 @@ et dans la présentation de chaque page de photographe. */
 .dyn_round_img {
   box-shadow: 0 4px 4px #bbb;
   width: 180px;
+  font-size: 16px;
   border-radius: 90px;
 }
 
@@ -304,6 +312,7 @@ et dans la présentation de chaque page de photographe. */
 
 /* Image ronde. */
 #dyn_photo_round_img {
+  text-align: center;
   margin: 50px 40px;
 }
 
@@ -333,6 +342,7 @@ et dans la présentation de chaque page de photographe. */
 /* Icône "coeur noir" du bloc. */
 #icone {
   cursor: auto;
+  width: 24px;
 }
 
 /* "Trier par" et sa liste déroulante. */
@@ -395,13 +405,19 @@ et dans la présentation de chaque page de photographe. */
   justify-content: space-between;
   color: #901C1C;
   font-size: 24px;
-  width: 100%;
+  width: 300px;
   margin: 5px 0 0 0;
 }
 
 /* Titre seul. */
 .dyn_title {
-  margin-left: 45px;
+  margin-left: 0
+}
+
+.dyn_likes {
+  display: flex;
+  align-items: flex-start;
+  margin-right: 0;
 }
 
 /* Lien de l'icône "coeur" cliquable. */
@@ -449,7 +465,7 @@ et dans la présentation de chaque page de photographe. */
   margin: auto;
 }
 
-/* Icônes "précédent", "suivant" et "fermeture". */
+/* Liens des icônes "précédent", "suivant" et "fermeture". */
 .lightbox-icons {
   padding: 0;
   border: 2px transparent solid;
@@ -460,7 +476,6 @@ et dans la présentation de chaque page de photographe. */
   outline: none;
   border: 2px #901C1C solid;
 }
-
 
 /* Bloc image et titre. */
 #lightbox-imgAndTitle {
@@ -510,7 +525,7 @@ et dans la présentation de chaque page de photographe. */
 #form_main {
   position: relative;
   background: #D3573C;
-  width: 48%;
+  width: 700px;
   padding-bottom: 20px;
   border-radius: 5px;
   margin: 0 auto;
@@ -574,8 +589,16 @@ input {
   border-color: #901C1C;
 }
 
-/***** TOUTES LES MEDIA QUERIES POUR MOBILES *****/
-@media all and (max-width: 600px) {
+/***** TOUTES LES MEDIA QUERIES POUR RESOLUTIONS DE 1100 PX ET MOINS *****/
+/* 1100 pixels. */
+@media all and (max-width: 1100px) {
+  #barnav_desktop {
+    padding: 0 50px;
+  }
+}
+
+/* 1000 pixels. */
+@media all and (max-width: 1000px) {
   #logo_link {
     width: 210px;
     margin: 30px 0 0 -40px;
@@ -584,38 +607,6 @@ input {
   #logo {
     width: 230px;
     margin: 0px 0 -5px -20px;
-  }
-
-  #home_h1 {
-    font-size: 14px;
-    margin: 44px -20px 50px 0;
-  }
-
-  #banner {
-    display: none;
-  }
-
-  #banner_mobile {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-  }
-
-  .barnav_mobile {
-    line-height: 24px;
-    text-align: center;
-    margin-top: 0;
-  }
-
-  .main_section {
-    flex-direction: column;
-    padding-top: 10px;
-    margin-top: 0;
-  }
-  
-  .home_card, .photo_card {
-    width: 100%;
-    margin-top: 30px;
   }
 
   #photo_pres, #photo_pres_text {
@@ -628,12 +619,8 @@ input {
     margin: 0;
   }
 
-  #likes_prix {
-    display: none;
-  }
-
   #dyn_photo_h1 {
-    font-size: 36px;
+    font-size: 51px;
     padding: 0;
     margin: 0 0 0 -5px;
   }
@@ -659,20 +646,127 @@ input {
     display: none;
   }
 
+  #mobile_contact_parent {
+    display: flex;
+    justify-content: center;
+  }
+
   #dyn_photo_contact_link_mobile {
     display: block;
     position: fixed;
     bottom: 35px;
-    left: 30%;
-    width: 40%;
+    width: 150px;
     text-align: center;
     padding: 5px 10px;
   }
 
   #dyn_photo_round_img {
+    margin: -10px 0 0 -20px;
+  }
+
+  #liste_tris {
+    display: none;
+  }
+  
+  .photo_card {
+    width: 100%;
+    margin-top: 30px;
+  }
+
+  .photo_card_titleLikes {
+    width: 300px;
+    font-size: 16px;
+    margin: 5px 0 0 0;
+  }
+
+  .dyn_title {
+    margin-left: 0;
+  }
+  
+  .dyn_likes {
+    display: flex;
+    align-items: flex-start;
+    margin-right: 0;
+  }
+
+  .icone {
+    width: 16px;
+  }
+  
+  .lightbox-icon {
+    width: 39px;
+  }
+}
+
+/* 950 pixels. */
+@media all and (max-width: 950px) {
+  #banner {
+    display: none;
+  }
+
+  #banner_mobile {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .barnav_mobile {
+    line-height: 24px;
+    text-align: center;
+    margin-top: 0;
+  }
+}
+
+/* 900 pixels. */
+@media all and (max-width: 900px) {
+  #dyn_photo_h1 {
+    font-size: 46px;
+  }
+
+  #likes_prix {
+    display: none;
+  }
+  
+  .lightbox-icon {
+    width: 30px;
+  }
+}
+
+/* 800 pixels. */
+@media all and (max-width: 800px) {
+  #dyn_photo_h1 {
+    font-size: 41px;
+  }
+  
+  .lightbox-icon {
+    width: 21px;
+  }
+}
+
+/* 700 pixels. */
+@media all and (max-width: 700px) {
+  #home_h1 {
+    margin: 44px -20px 50px 0;
+  }
+
+  .main_section {
+    flex-direction: column;
+    padding-top: 10px;
+    margin-top: 0;
+  }
+  
+  .home_card {
+    width: 100%;
+    margin-top: 30px;
+  }
+
+  #dyn_photo_h1 {
+    font-size: 36px;
+  }
+
+  #dyn_photo_round_img {
     width: 100px;
     border-radius: 50px;
-    margin: -10px 0 0 -20px;
   }
 
   .dyn_photo_photoLink {
@@ -688,26 +782,7 @@ input {
   }
 
   .photo_card_titleLikes {
-    font-size: 16px;
-    margin: 5px 0 0 0;
-  }
-
-  .dyn_title {
-    margin-left: -20px;
-  }
-  
-  .dyn_likes {
-    display: flex;
-    align-items: flex-start;
-    margin-right: -20px;
-  }
-
-  .icone {
-    width: 16px;
-  }
-
-  #liste_tris {
-    display: none;
+    width: 335px;
   }
 
   #lightbox-img {
@@ -734,13 +809,103 @@ input {
   }
 
   #form_h1 {
-    font-size: 32px;
+    font-size: 53px;
     padding: 15px 0 0 2%;
   }
 
   #form_close {
     top: 20px;
     right: 20px;
+  }
+
+  #form_close_icon {
+    width: 39px;
+  }
+
+  label {
+    font-size: 29px;
+  }
+
+  input, textarea {
+    font-size: 29px;
+  }
+  
+  input {
+    height: 45px;
+  }
+
+  #form_submit {
+    text-align: center;
+  }
+
+  #submit_button {
+    font-size: 16px;
+    padding: 8px 44px;
+  }
+}
+
+/* 600 pixels. */
+@media all and (max-width: 600px) {
+  #home_h1 {
+    font-size: 26px;
+  }
+
+  #form_h1 {
+    font-size: 46px;
+  }
+
+  #form_close_icon {
+    width: 30px;
+  }
+
+  label {
+    font-size: 26px;
+  }
+
+  input, textarea {
+    font-size: 26px;
+  }
+  
+  input {
+    height: 40px;
+  }
+}
+
+/* 500 pixels. */
+@media all and (max-width: 500px) {
+  #home_h1 {
+    font-size: 20px;
+  }
+
+  #form_h1 {
+    font-size: 39px;
+  }
+
+  #form_close_icon {
+    width: 21px;
+  }
+
+  label {
+    font-size: 23px;
+  }
+
+  input, textarea {
+    font-size: 23px;
+  }
+  
+  input {
+    height: 35px;
+  }
+}
+
+/* 400 pixels. */
+@media all and (max-width: 400px) {
+  #home_h1 {
+    font-size: 14px;
+  }
+
+  #form_h1 {
+    font-size: 32px;
   }
 
   #form_close_icon {
@@ -758,15 +923,4 @@ input {
   input {
     height: 30px;
   }
-
-  #form_submit {
-    text-align: center;
-  }
-
-  #submit_button {
-    font-size: 16px;
-    padding: 8px 44px;
-  }
-  
-  /* Inclure d'autres règles ? */
 }
