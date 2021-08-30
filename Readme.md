@@ -46,6 +46,8 @@ Travail réalisé :
 - Correction d'erreurs, améliorations pour NVDA et début d'ajout de tri par tag de cartes,
 - Réduction du poids des images les plus lourdes,
 - Améliorations diverses : apparence mobile, navigation au clavier, utilisation NVDA,
-- Fin de mise en place du tri par tags de cartes.
+- Fin de mise en place du tri par tags de cartes,
+- Ajout de media queries pour les résolutions "tablettes",
+- Dernières améliorations pour l'accessibilité.
 
 Ce projet est désormais terminé mais peut éventuellement être amélioré.
