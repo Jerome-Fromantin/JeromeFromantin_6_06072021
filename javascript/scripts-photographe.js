@@ -72,9 +72,6 @@ function fillLeftPart(photographerName, photographerCity, photographerCountry,
 }
 
 // FENETRE FORM-MODAL
-// Récupère le formulaire caché.
-const formModal = document.getElementById('form_section');
-
 // Crée dynamiquement le formulaire pour chaque photographe.
 let photographer = null;
 function createForm() {
@@ -170,48 +167,48 @@ function createForm() {
   submitLink.href = '';
   submitLink.innerText = 'Envoyer';
   submitLink.setAttribute('aria-label', 'Send');
+  submitLink.addEventListener('click', clickSubmitForm);
   function clickSubmitForm(e) {
     e.preventDefault();
     console.log(inputPrenom.value);
     console.log(inputNom.value);
     console.log(inputEmail.value);
     console.log(inputMessage.value);
-  }
-  submitLink.addEventListener('click', clickSubmitForm);
+  };
+  submitLink.addEventListener('keydown', keyDownSubmitForm);
   function keyDownSubmitForm(e) {
-    if (e.key === 'Enter') {
+    if (e.key == 'Enter') {
       clickSubmitForm(e);
     }
-  }
-  submitLink.addEventListener('keydown', keyDownSubmitForm);
+  };
 
   divSubmit.appendChild(submitLink);
   formMain.appendChild(divSubmit);
 
-  const closeLink = document.createElement('a');
+  let closeLink = document.createElement('a');
   closeLink.id = 'form_close';
   closeLink.href = '';
-  const closeLinkImg = document.createElement('img');
+  let closeLinkImg = document.createElement('img');
   closeLinkImg.id = 'form_close_icon';
   closeLinkImg.src = 'Images/Icone-croix-blanche.png';
   closeLinkImg.setAttribute('alt', 'Close Contact form');
+  closeLink.addEventListener('click', clickCloseForm);
   function clickCloseForm(e) {
     e.preventDefault();
     formModal.style.display = 'none';
-  }
-  closeLink.addEventListener('click', clickCloseForm);
+  };
+  closeLink.addEventListener('keydown', keyDownCloseForm);
   function keyDownCloseForm(e) {
-    if (e.keyCode === 27) {
+    if (e.keyCode == 27) {
       clickCloseForm(e);
     }
-  }
-  closeLink.addEventListener('keydown', keyDownCloseForm);
+  };
 
   closeLink.appendChild(closeLinkImg);
   formMain.appendChild(closeLink);
 
   return formMain;
-}
+};
 
 // Montre le formulaire rempli dynamiquement.
 function showForm() {
@@ -219,10 +216,12 @@ function showForm() {
   section.innerText = '';
   section.setAttribute('role', 'dialog');
   section.setAttribute('aria-labelledby', 'form_h1');
-  const formulaire = createForm();
-  // createForm() se trouve en ligne 80.
+  const formulaire = createForm();                        // Voir à la ligne 299.
   section.appendChild(formulaire);
 }
+
+// Récupère le formulaire caché pour la fonction suivante.
+const formModal = document.getElementById('form_section');
 
 // Partie gauche de la présentation : Le bouton de contact ouvre le formulaire.
 function contactButton() {
@@ -233,16 +232,15 @@ function contactButton() {
   function clickOpenForm(e) {
     e.preventDefault();
     formModal.style.display = 'block';
-    showForm();
-    // showForm() se trouve en ligne 217.
+    showForm();                       // Voir à la ligne 436.
   }
   buttonLink.addEventListener('click', clickOpenForm);
+  buttonLink.addEventListener('keydown', keyDownOpenForm);
   function keyDownOpenForm(e) {
-    if (e.key === 'Enter') {
+    if (e.key == 'Enter') {
       clickOpenForm(e);
     }
-  }
-  buttonLink.addEventListener('keydown', keyDownOpenForm);
+  };
 
   const buttonSpan = document.createElement('span');
   buttonSpan.innerText = 'Contactez-moi';
@@ -250,21 +248,152 @@ function contactButton() {
   return buttonLink;
 }
 
+// Montre la partie gauche de la présentation (texte et bouton) remplie dynamiquement.
+function showLeftPart(photographer) {
+  let sectionleft = document.querySelector('#photo_pres_text');
+  let leftPart = fillLeftPart(photographer.name, photographer.city, photographer.country, photographer.tagline, photographer.tags);
+  let contact = contactButton();
+  sectionleft.appendChild(leftPart);
+  sectionleft.appendChild(contact);
+  showMobileContact(photographer.id);                       // Voir à la ligne 252.
+  showLikesNPrice(photographer.id, photographer.price);     // Voir à la ligne 291.
+}
+
+// Partie droite de la présentation : Récupère dynamiquement le nom de l'image.
+function photoImg(photographerPortrait, photographerName) {
+  let image = document.createElement('img');
+  image.src = 'Images/ID_Photos/' + photographerPortrait;
+  image.className = 'dyn_round_img';
+  image.id='dyn_photo_round_img';
+  image.setAttribute('alt', photographerName);
+  return image;
+}
+
+// Montre la présentation entière remplie dynamiquement.
+async function showPresent(id) {
+  photographer = await getPhotographer(id);
+  let presentation = document.querySelector('#photo_pres');
+  showLeftPart(photographer);
+  let imgPart = photoImg(photographer.portrait, photographer.name);
+  presentation.appendChild(imgPart);
+}
+showPresent(thePhotographerId);
+
+// PARTIE GALERIE DE PHOTOGRAPHIES
+// Variable globale utilisée pour contenir les médias.
+let pictures = [];
+
+// Montre toutes les cartes remplies dynamiquement, triées par défaut par "Popularité".
+async function showPhotos(id) {
+  pictures = await getMediasByPhotographers(id);
+  pictures.sort((a, b) => {return b.likes - a.likes});
+  let section = document.querySelector('.photo_gallery');
+  for (let picture of pictures) {
+    let index = pictures.indexOf(picture);
+    let mediaType = picture.video ? 'vid' : 'pic';
+    let article = new MediaFactory(mediaType, picture, index);
+    section.appendChild(article.toHTML());
+  }
+}
+showPhotos(thePhotographerId);
+
+// LISTE DEROULANTE DE TRIS (POPULARITE, DATE, TITRE)
+// Réalise les tris en fonction de chacune des 3 options.
+async function showSortedPhotos(id) {
+  pictures = await getMediasByPhotographers(id);
+  let menuSort = document.getElementById('menuTri');
+  menuSort.addEventListener('focus', function(event) {
+    if (this.value == 'likes') {
+      event.preventDefault();
+      pictures.sort((a, b) => {return b.likes - a.likes});
+      let section = document.querySelector('.photo_gallery');
+      section.innerText = '';
+      for (let picture of pictures) {
+        let index = pictures.indexOf(picture);
+        let mediaType = picture.video ? 'vid' : 'pic';
+        let article = new MediaFactory(mediaType, picture, index);
+        section.appendChild(article.toHTML());
+      }
+    }
+    if (this.value == 'date') {
+      event.preventDefault();
+      pictures.sort((a, b) => {return a.date > b.date ? 1 : -1});
+      let section = document.querySelector('.photo_gallery');
+      section.innerText = '';
+      for (let picture of pictures) {
+        let index = pictures.indexOf(picture);
+        let mediaType = picture.video ? 'vid' : 'pic';
+        let article = new MediaFactory(mediaType, picture, index);
+        section.appendChild(article.toHTML());
+      }
+    }
+    if (this.value == 'title') {
+      event.preventDefault();
+      pictures.sort((a, b) => {return a.title > b.title ? 1 : -1});
+      let section = document.querySelector('.photo_gallery');
+      section.innerText = '';
+      for (let picture of pictures) {
+        let index = pictures.indexOf(picture);
+        let mediaType = picture.video ? 'vid' : 'pic';
+        let article = new MediaFactory(mediaType, picture, index);
+        section.appendChild(article.toHTML());
+      }
+    }
+  });
+  menuSort.addEventListener('change', function(event) {
+    if (this.value == 'likes') {
+      event.preventDefault();
+      pictures.sort((a, b) => {return b.likes - a.likes});
+      let section = document.querySelector('.photo_gallery');
+      section.innerText = '';
+      for (let picture of pictures) {
+        let index = pictures.indexOf(picture);
+        let mediaType = picture.video ? 'vid' : 'pic';
+        let article = new MediaFactory(mediaType, picture, index);
+        section.appendChild(article.toHTML());
+      }
+    }
+    if (this.value == 'date') {
+      event.preventDefault();
+      pictures.sort((a, b) => {return a.date > b.date ? 1 : -1});
+      let section = document.querySelector('.photo_gallery');
+      section.innerText = '';
+      for (let picture of pictures) {
+        let index = pictures.indexOf(picture);
+        let mediaType = picture.video ? 'vid' : 'pic';
+        let article = new MediaFactory(mediaType, picture, index);
+        section.appendChild(article.toHTML());
+      }
+    }
+    if (this.value == 'title') {
+      event.preventDefault();
+      pictures.sort((a, b) => {return a.title > b.title ? 1 : -1});
+      let section = document.querySelector('.photo_gallery');
+      section.innerText = '';
+      for (let picture of pictures) {
+        let index = pictures.indexOf(picture);
+        let mediaType = picture.video ? 'vid' : 'pic';
+        let article = new MediaFactory(mediaType, picture, index);
+        section.appendChild(article.toHTML());
+      }
+    }
+  });
+}
+showSortedPhotos(thePhotographerId);
+
 // BOUTON DE CONTACT EN BAS EN VERSION MOBILE
 // Récupère dynamiquement le lien de contact pour le bouton en version mobile.
 function mobileContactButton() {
-  const buttonLink = document.createElement('a');
+  let buttonLink = document.createElement('a');
   buttonLink.href = '#';
   buttonLink.id = 'dyn_photo_contact_link_mobile';
   buttonLink.setAttribute('aria-label', 'Contact Me');
-  // eslint-disable-next-line func-names
-  buttonLink.onclick = function (event) {
+  buttonLink.onclick = function(event) {
     event.preventDefault();
     formModal.style.display = 'block';
-    showForm();
-    // showForm() se trouve en ligne 217.
-  };
-  const buttonSpan = document.createElement('span');
+    showForm();                       // Voir à la ligne 436.
+  }
+  let buttonSpan = document.createElement('span');
   buttonSpan.innerText = 'Contactez-moi';
   buttonLink.appendChild(buttonSpan);
   return buttonLink;
@@ -272,39 +401,34 @@ function mobileContactButton() {
 
 // Montre la section remplie dynamiquement.
 function showMobileContact() {
-  const section = document.querySelector('#mobile_contact_parent');
-  const mobileContact = mobileContactButton();
-  // mobileContactButton() se trouve en ligne 255.
+  let section = document.querySelector('#mobile_contact_parent');
+  let mobileContact = mobileContactButton();                     // Voir à la ligne 235.
   section.appendChild(mobileContact);
 }
-
-// Variable globale utilisée pour contenir les médias.
-let pictures = [];
 
 // PARTIE "LIKES ET PRIX" EN BAS A DROITE
 // Likes et prix : Récupère dynamiquement le nombre total de likes et le prix du photographe.
 async function bottomRight(id, photographerPrice) {
   pictures = await getMediasByPhotographers(id);
-  const valeurInitiale = 0;
-  const totalLikes = pictures.reduce((accumulateur, valeurCourante) => accumulateur
-    + valeurCourante.likes, valeurInitiale);
+  let valeurInitiale = 0;
+  let totalLikes = pictures.reduce((accumulateur, valeurCourante) => accumulateur + valeurCourante.likes, valeurInitiale);
 
-  const bottomRightDiv = document.createElement('div');
+  let bottomRightDiv = document.createElement('div');
   bottomRightDiv.id = 'likes_prix_child';
-  const bottomRightLikes = document.createElement('span');
+  let bottomRightLikes = document.createElement('span');
   bottomRightLikes.id = 'dyn_likes';
   bottomRightLikes.setAttribute('aria-label', 'Total des likes');
-  const bottomRightLikesNumber = document.createElement('span');
+  let bottomRightLikesNumber = document.createElement('span');
   bottomRightLikesNumber.id = 'dyn_likes_number';
   bottomRightLikesNumber.innerText = totalLikes;
   bottomRightLikesNumber.setAttribute('aria-label', 'Nombre total des likes');
-  const bottomRightLikesIcon = document.createElement('img');
+  let bottomRightLikesIcon = document.createElement('img');
   bottomRightLikesIcon.src = 'Images/Icone-coeur-noir.png';
   bottomRightLikesIcon.className = 'icone';
   bottomRightLikesIcon.id = 'icone';
   bottomRightLikesIcon.setAttribute('alt', 'Likes');
-  const bottomRightPrice = document.createElement('span');
-  bottomRightPrice.innerText = `${photographerPrice}€ / jour`;
+  let bottomRightPrice = document.createElement('span');
+  bottomRightPrice.innerText = photographerPrice + '€ / jour';
   bottomRightPrice.className = 'dyn_prix';
   bottomRightPrice.setAttribute('aria-label', 'Prix du photographe');
   bottomRightLikes.appendChild(bottomRightLikesNumber);
@@ -316,151 +440,7 @@ async function bottomRight(id, photographerPrice) {
 
 // Montre la section remplie dynamiquement.
 async function showLikesNPrice(id, photographerPrice) {
-  const section = document.querySelector('#likes_prix');
-  const likesNPrice = await bottomRight(id, photographerPrice);
-  // bottomRight() se trouve en ligne 286.
+  let section = document.querySelector('#likes_prix');
+  let likesNPrice = await bottomRight(id, photographerPrice);     // Voir à la ligne 260.
   section.appendChild(likesNPrice);
 }
-
-// Montre la partie gauche de la présentation (texte et bouton) remplie dynamiquement.
-// eslint-disable-next-line no-shadow
-function showLeftPart(photographer) {
-  const sectionleft = document.querySelector('#photo_pres_text');
-  const leftPart = fillLeftPart(photographer.name, photographer.city, photographer.country,
-    photographer.tagline, photographer.tags);
-  const contact = contactButton();
-  sectionleft.appendChild(leftPart);
-  sectionleft.appendChild(contact);
-  showMobileContact(photographer.id);
-  showLikesNPrice(photographer.id, photographer.price);
-  // showMobileContact() se trouve en ligne 274.
-  // showLikesNPrice() se trouve en ligne 318.
-}
-
-// Partie droite de la présentation : Récupère dynamiquement le nom de l'image.
-function photoImg(photographerPortrait, photographerName) {
-  const image = document.createElement('img');
-  image.src = `Images/ID_Photos/${photographerPortrait}`;
-  image.className = 'dyn_round_img';
-  image.id = 'dyn_photo_round_img';
-  image.setAttribute('alt', photographerName);
-  return image;
-}
-
-// Montre la présentation entière remplie dynamiquement.
-async function showPresent(id) {
-  photographer = await getPhotographer(id);
-  const presentation = document.querySelector('#photo_pres');
-  showLeftPart(photographer);
-  const imgPart = photoImg(photographer.portrait, photographer.name);
-  presentation.appendChild(imgPart);
-}
-showPresent(thePhotographerId);
-
-// PARTIE GALERIE DE PHOTOGRAPHIES
-// Montre toutes les cartes remplies dynamiquement, triées par défaut par "Popularité".
-async function showPhotos(id) {
-  pictures = await getMediasByPhotographers(id);
-  pictures.sort((a, b) => b.likes - a.likes);
-  const section = document.querySelector('.photo_gallery');
-  // eslint-disable-next-line no-restricted-syntax
-  for (const picture of pictures) {
-    const index = pictures.indexOf(picture);
-    const mediaType = picture.video ? 'vid' : 'pic';
-    const article = new MediaFactory(mediaType, picture, index);
-    section.appendChild(article.toHTML());
-  }
-}
-showPhotos(thePhotographerId);
-
-// LISTE DEROULANTE DE TRIS (POPULARITE, DATE, TITRE)
-// Réalise les tris en fonction de chacune des 3 options.
-async function showSortedPhotos(id) {
-  pictures = await getMediasByPhotographers(id);
-  const menuSort = document.getElementById('menuTri');
-  // eslint-disable-next-line func-names
-  menuSort.addEventListener('focus', function (event) {
-    if (this.value === 'likes') {
-      event.preventDefault();
-      pictures.sort((a, b) => b.likes - a.likes);
-      const section = document.querySelector('.photo_gallery');
-      section.innerText = '';
-      // eslint-disable-next-line no-restricted-syntax
-      for (const picture of pictures) {
-        const index = pictures.indexOf(picture);
-        const mediaType = picture.video ? 'vid' : 'pic';
-        const article = new MediaFactory(mediaType, picture, index);
-        section.appendChild(article.toHTML());
-      }
-    }
-    if (this.value === 'date') {
-      event.preventDefault();
-      pictures.sort((a, b) => (a.date > b.date ? 1 : -1));
-      const section = document.querySelector('.photo_gallery');
-      section.innerText = '';
-      // eslint-disable-next-line no-restricted-syntax
-      for (const picture of pictures) {
-        const index = pictures.indexOf(picture);
-        const mediaType = picture.video ? 'vid' : 'pic';
-        const article = new MediaFactory(mediaType, picture, index);
-        section.appendChild(article.toHTML());
-      }
-    }
-    if (this.value === 'title') {
-      event.preventDefault();
-      pictures.sort((a, b) => (a.title > b.title ? 1 : -1));
-      const section = document.querySelector('.photo_gallery');
-      section.innerText = '';
-      // eslint-disable-next-line no-restricted-syntax
-      for (const picture of pictures) {
-        const index = pictures.indexOf(picture);
-        const mediaType = picture.video ? 'vid' : 'pic';
-        const article = new MediaFactory(mediaType, picture, index);
-        section.appendChild(article.toHTML());
-      }
-    }
-  });
-  // eslint-disable-next-line func-names
-  menuSort.addEventListener('change', function (event) {
-    if (this.value === 'likes') {
-      event.preventDefault();
-      pictures.sort((a, b) => b.likes - a.likes);
-      const section = document.querySelector('.photo_gallery');
-      section.innerText = '';
-      // eslint-disable-next-line no-restricted-syntax
-      for (const picture of pictures) {
-        const index = pictures.indexOf(picture);
-        const mediaType = picture.video ? 'vid' : 'pic';
-        const article = new MediaFactory(mediaType, picture, index);
-        section.appendChild(article.toHTML());
-      }
-    }
-    if (this.value === 'date') {
-      event.preventDefault();
-      pictures.sort((a, b) => (a.date > b.date ? 1 : -1));
-      const section = document.querySelector('.photo_gallery');
-      section.innerText = '';
-      // eslint-disable-next-line no-restricted-syntax
-      for (const picture of pictures) {
-        const index = pictures.indexOf(picture);
-        const mediaType = picture.video ? 'vid' : 'pic';
-        const article = new MediaFactory(mediaType, picture, index);
-        section.appendChild(article.toHTML());
-      }
-    }
-    if (this.value === 'title') {
-      event.preventDefault();
-      pictures.sort((a, b) => (a.title > b.title ? 1 : -1));
-      const section = document.querySelector('.photo_gallery');
-      section.innerText = '';
-      // eslint-disable-next-line no-restricted-syntax
-      for (const picture of pictures) {
-        const index = pictures.indexOf(picture);
-        const mediaType = picture.video ? 'vid' : 'pic';
-        const article = new MediaFactory(mediaType, picture, index);
-        section.appendChild(article.toHTML());
-      }
-    }
-  });
-}
-showSortedPhotos(thePhotographerId);
