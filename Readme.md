@@ -48,6 +48,8 @@ Travail réalisé :
 - Améliorations diverses : apparence mobile, navigation au clavier, utilisation NVDA,
 - Fin de mise en place du tri par tags de cartes,
 - Ajout de media queries pour les résolutions "tablettes",
-- Dernières améliorations pour l'accessibilité.
+- Dernières améliorations pour l'accessibilité,
+- Installation de ESLint et Prettier dans VSCode,
+- Correction du code des fichiers JS en fonction de ESLint.
 
 Ce projet est désormais terminé mais peut éventuellement être amélioré.
